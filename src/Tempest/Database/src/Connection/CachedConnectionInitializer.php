@@ -15,7 +15,7 @@ use Tempest\Container\Singleton;
  */
 final class CachedConnectionInitializer implements Initializer
 {
-    private static Connection|null $instance = null;
+    private static ?Connection $instance = null;
 
     public function __construct(private readonly ConnectionInitializer $initializer)
     {

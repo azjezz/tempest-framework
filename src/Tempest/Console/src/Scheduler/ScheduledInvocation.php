@@ -21,11 +21,9 @@ final readonly class ScheduledInvocation
     public function getCommandName(): string
     {
         if ($this->handler instanceof MethodReflector) {
-            return ScheduleTaskCommand::NAME
-                . ' '
-                . str_replace('\\', '\\\\', $this->handler->getDeclaringClass()->getName())
-                . '::'
-                . $this->handler->getName();
+            return (
+                ScheduleTaskCommand::NAME . ' ' . str_replace('\\', '\\\\', $this->handler->getDeclaringClass()->getName()) . '::' . $this->handler->getName()
+            );
         }
 
         return $this->handler->getName();
@@ -39,6 +37,6 @@ final readonly class ScheduledInvocation
 
         $secondsInterval = $this->schedule->interval->inSeconds();
 
-        return $date->getTimestamp() - $lastRunTimestamp >= $secondsInterval;
+        return ($date->getTimestamp() - $lastRunTimestamp) >= $secondsInterval;
     }
 }

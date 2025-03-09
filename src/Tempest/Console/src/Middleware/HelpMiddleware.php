@@ -38,7 +38,7 @@ final readonly class HelpMiddleware implements ConsoleMiddleware
         );
 
         $this->console->header('Usage');
-        new RenderConsoleCommand($this->console, renderArguments: true, renderDescription: false)($consoleCommand);
+        (new RenderConsoleCommand($this->console, renderArguments: true, renderDescription: false))($consoleCommand);
 
         if ($consoleCommand->help) {
             $this->console->writeln();
@@ -55,7 +55,9 @@ final readonly class HelpMiddleware implements ConsoleMiddleware
                 ->write("<style=\"underline\">{$argumentDefinition->name}</style>")
                 ->when($argumentDefinition->aliases !== [], fn (Console $console) => $console->write(' (' . implode(', ', $argumentDefinition->aliases) . ')'))
                 ->when($argumentDefinition->description, fn (Console $console) => $console->writeln()->writeln($argumentDefinition->description))
-                ->when($argumentDefinition->help, fn (Console $console) => $console->writeln()->writeln('<style="fg-gray">' . $argumentDefinition->help . '</style>'));
+                ->when($argumentDefinition->help, fn (Console $console) => $console
+                    ->writeln()
+                    ->writeln('<style="fg-gray">' . $argumentDefinition->help . '</style>'));
         }
 
         $this->console->writeln();

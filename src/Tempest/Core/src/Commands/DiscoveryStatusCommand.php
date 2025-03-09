@@ -10,6 +10,7 @@ use Tempest\Console\ConsoleArgument;
 use Tempest\Console\ConsoleCommand;
 use Tempest\Core\DiscoveryCache;
 use Tempest\Core\Kernel;
+
 use function Tempest\root_path;
 use function Tempest\Support\str;
 
@@ -48,7 +49,10 @@ final readonly class DiscoveryStatusCommand
         });
 
         if ($showClasses) {
-            $this->console->header('Discovery classes', subheader: 'These classes are used by Tempest to determine which classes to discover and how to handle them.');
+            $this->console->header(
+                'Discovery classes',
+                subheader: 'These classes are used by Tempest to determine which classes to discover and how to handle them.',
+            );
             $this->console->writeln();
 
             foreach ($this->kernel->discoveryClasses as $discoveryClass) {

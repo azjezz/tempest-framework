@@ -11,6 +11,7 @@ use Tempest\Auth\CanAuthorize;
 use Tempest\Database\DatabaseModel;
 use Tempest\Database\IsDatabaseModel;
 use UnitEnum;
+
 use function Tempest\Support\arr;
 
 final class User implements DatabaseModel, CanAuthenticate, CanAuthorize
@@ -63,8 +64,7 @@ final class User implements DatabaseModel, CanAuthenticate, CanAuthorize
 
     public function getPermission(string|UnitEnum|Permission $permission): ?UserPermission
     {
-        return arr($this->userPermissions)
-            ->first(fn (UserPermission $userPermission) => $userPermission->permission->matches($permission));
+        return arr($this->userPermissions)->first(fn (UserPermission $userPermission) => $userPermission->permission->matches($permission));
     }
 
     private function resolvePermission(string|UnitEnum|Permission $permission): Permission

@@ -6,6 +6,7 @@ namespace Tempest\Validation\Exceptions;
 
 use Exception;
 use Tempest\Validation\Rule;
+
 use function Tempest\Support\arr;
 
 final class ValidationException extends Exception

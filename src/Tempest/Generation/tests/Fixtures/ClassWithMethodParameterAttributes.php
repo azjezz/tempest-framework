@@ -8,9 +8,7 @@ use Tempest\Generation\Tests\Fixtures\SampleNamespace\SampleParameterAttribute;
 
 final class ClassWithMethodParameterAttributes
 {
-    public function example(
-        #[SampleParameterAttribute]
-        string $parameter,
-    ): void {
+    public function example(#[SampleParameterAttribute] string $parameter): void
+    {
     }
 }

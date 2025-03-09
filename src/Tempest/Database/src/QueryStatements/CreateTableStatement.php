@@ -10,6 +10,7 @@ use Tempest\Database\Config\DatabaseDialect;
 use Tempest\Database\QueryStatement;
 use Tempest\Support\Str\ImmutableString;
 use UnitEnum;
+
 use function Tempest\Support\arr;
 use function Tempest\Support\str;
 
@@ -275,7 +276,9 @@ final class CreateTableStatement implements QueryStatement
         );
 
         if ($this->indexStatements !== []) {
-            $createIndices = PHP_EOL . arr($this->indexStatements)
+            $createIndices =
+                PHP_EOL .
+                arr($this->indexStatements)
                     ->map(fn (QueryStatement $queryStatement) => str($queryStatement->compile($dialect))->trim()->replace('  ', ' '))
                     ->implode(';' . PHP_EOL)
                     ->append(';');

@@ -7,5 +7,6 @@ use Tempest\EventBus\EventBusConfig;
 return new EventBusConfig(
     middleware: [
         // Add your event bus middleware here.
+
     ],
 );

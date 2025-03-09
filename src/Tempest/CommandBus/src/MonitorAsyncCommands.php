@@ -10,6 +10,7 @@ use Tempest\Console\Console;
 use Tempest\Console\ConsoleCommand;
 use Tempest\Console\HasConsole;
 use Tempest\Console\Input\ConsoleArgumentBag;
+
 use function Tempest\Support\arr;
 
 final readonly class MonitorAsyncCommands
@@ -32,7 +33,8 @@ final readonly class MonitorAsyncCommands
         /** @var \Symfony\Component\Process\Process[] $processes */
         $processes = [];
 
-        while (true) { // @phpstan-ignore-line
+        while (true) {
+            // @phpstan-ignore-line
             foreach ($processes as $uuid => $process) {
                 if ($process->isTerminated()) {
                     if ($process->isSuccessful()) {

@@ -27,7 +27,7 @@ final class ViteTagsComponent implements ViewComponent
         };
 
         return <<<HTML
-                <?= \Tempest\\vite_tags({$entrypoints}) ?>
-            HTML;
+            <?= \Tempest\\vite_tags({$entrypoints}) ?>
+        HTML;
     }
 }

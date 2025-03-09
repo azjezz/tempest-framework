@@ -13,6 +13,7 @@ use Tempest\Console\ConsoleMiddlewareCallable;
 use Tempest\Console\ExitCode;
 use Tempest\Console\Initializers\Invocation;
 use Tempest\Core\DiscoveryCache;
+
 use function Tempest\Support\arr;
 use function Tempest\Support\str;
 
@@ -67,12 +68,13 @@ final readonly class OverviewMiddleware implements ConsoleMiddleware
 
         ksort($commands);
 
-        $longestCommandName = max(
-            arr($commands)
-                ->flatMap(fn (array $group) => $group)
-                ->map(fn (ConsoleCommand $command) => mb_strlen($command->getName()))
-                ->toArray(),
-        ) + 4;
+        $longestCommandName =
+            max(
+                arr($commands)
+                    ->flatMap(fn (array $group) => $group)
+                    ->map(fn (ConsoleCommand $command) => mb_strlen($command->getName()))
+                    ->toArray(),
+            ) + 4;
 
         foreach ($commands as $group => $commandsForGroup) {
             $title = str(mb_strtoupper($group))
@@ -85,7 +87,7 @@ final readonly class OverviewMiddleware implements ConsoleMiddleware
                 ->writeln($title);
 
             foreach ($commandsForGroup as $consoleCommand) {
-                new RenderConsoleCommand($this->console, $longestCommandName)($consoleCommand);
+                (new RenderConsoleCommand($this->console, $longestCommandName))($consoleCommand);
             }
         }
 

@@ -47,7 +47,9 @@ final class GenericRouteMatcherTest extends TestCase
                 ],
             ],
             [
-                'GET' => new MatchingRegex(['#^(?|/dynamic(?|/([^/]++)(?|/view\/?$(*MARK:d)|/([^/]++)(?|/([^/]++)(?|/([^/]++)\/?$(*MARK:e)))|\/?$(*MARK:b))))#']),
+                'GET' => new MatchingRegex([
+                    '#^(?|/dynamic(?|/([^/]++)(?|/view\/?$(*MARK:d)|/([^/]++)(?|/([^/]++)(?|/([^/]++)\/?$(*MARK:e)))|\/?$(*MARK:b))))#',
+                ]),
                 'PATCH' => new MatchingRegex(['#^(?|/dynamic(?|/([^/]++)\/?$(*MARK:c)))#']),
             ],
         );
@@ -90,7 +92,7 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertEquals([ 'id' => '5' ], $matchedRoute->params);
+        $this->assertEquals(['id' => '5'], $matchedRoute->params);
         $this->assertTrue($matchedRoute->route->isDynamic);
         $this->assertEquals('/dynamic/{id}', $matchedRoute->route->uri);
     }
@@ -101,7 +103,7 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertEquals([ 'id' => '6', 'tag' => 'brendt', 'name' => 'brent' ], $matchedRoute->params);
+        $this->assertEquals(['id' => '6', 'tag' => 'brendt', 'name' => 'brent'], $matchedRoute->params);
         $this->assertTrue($matchedRoute->route->isDynamic);
         $this->assertEquals('/dynamic/{id}/{tag}/{name}/{id}', $matchedRoute->route->uri);
     }

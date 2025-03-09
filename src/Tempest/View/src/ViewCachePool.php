@@ -10,8 +10,9 @@ use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\CacheItem;
 use Tempest\Support\Arr\ImmutableArray;
-use function Tempest\Support\path;
+
 use function Tempest\Support\arr;
+use function Tempest\Support\path;
 
 final readonly class ViewCachePool implements CacheItemPoolInterface
 {

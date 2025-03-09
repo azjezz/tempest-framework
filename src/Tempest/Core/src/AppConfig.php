@@ -19,6 +19,7 @@ final class AppConfig
         /** @var \Tempest\Core\ErrorHandler[] */
         public array $errorHandlers = [
             // …,
+
         ],
     ) {
         $this->environment = $environment ?? Environment::fromEnv();

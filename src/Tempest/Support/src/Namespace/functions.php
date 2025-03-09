@@ -6,6 +6,7 @@ namespace Tempest\Support\Namespace {
     use Tempest\Core\Composer;
     use Tempest\Core\Kernel;
     use Tempest\Support\Str\ImmutableString;
+
     use function Tempest\get;
     use function Tempest\src_namespace;
     use function Tempest\src_path;
@@ -23,8 +24,7 @@ namespace Tempest\Support\Namespace {
      */
     function to_namespace(string $path, string $root = ''): string
     {
-        $path = prepare_namespace($path, $root)
-            ->replaceEnd('\\', '');
+        $path = prepare_namespace($path, $root)->replaceEnd('\\', '');
 
         return arr(explode('\\', (string) $path))
             ->map(fn (string $segment) => (string) str($segment)->pascal())
@@ -45,10 +45,12 @@ namespace Tempest\Support\Namespace {
     function to_main_namespace(string $path): string
     {
         return to_namespace(
-            src_namespace() . '/' . str($path)
-                ->replaceStart(src_path(), '')
-                ->trim('/')
-                ->toString(),
+            src_namespace() .
+                '/' .
+                str($path)
+                    ->replaceStart(src_path(), '')
+                    ->trim('/')
+                    ->toString(),
         );
     }
 

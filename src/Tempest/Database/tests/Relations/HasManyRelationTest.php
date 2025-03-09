@@ -31,7 +31,7 @@ final class HasManyRelationTest extends TestCase
         $this->assertSame('belongs_to_related.inferred[]', $inferredRelation[0]->getRelationName());
         $this->assertEquals(
             'LEFT JOIN `belongs_to_parent_model` AS `belongs_to_related.inferred[]`' .
-            ' ON `belongs_to_related`.`id` = `belongs_to_related.inferred[]`.`relatedModel_id`',
+                ' ON `belongs_to_related`.`id` = `belongs_to_related.inferred[]`.`relatedModel_id`',
             $inferredRelation[0]->getStatement(),
         );
     }
@@ -45,7 +45,7 @@ final class HasManyRelationTest extends TestCase
         $this->assertSame('belongs_to_related.attribute[]', $relation[0]->getRelationName());
         $this->assertEquals(
             'LEFT JOIN `belongs_to_parent_model` AS `belongs_to_related.attribute[]`' .
-            ' ON `belongs_to_related`.`id` = `belongs_to_related.attribute[]`.`other_id`',
+                ' ON `belongs_to_related`.`id` = `belongs_to_related.attribute[]`.`other_id`',
             $relation[0]->getStatement(),
         );
     }
@@ -59,7 +59,7 @@ final class HasManyRelationTest extends TestCase
         $this->assertSame('belongs_to_related.full[]', $relation[0]->getRelationName());
         $this->assertEquals(
             'LEFT JOIN `belongs_to_parent_model` AS `belongs_to_related.full[]`' .
-            ' ON `belongs_to_related`.`other_id` = `belongs_to_related.full[]`.`other_id`',
+                ' ON `belongs_to_related`.`other_id` = `belongs_to_related.full[]`.`other_id`',
             $relation[0]->getStatement(),
         );
     }

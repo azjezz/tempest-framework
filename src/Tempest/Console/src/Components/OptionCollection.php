@@ -9,6 +9,7 @@ use Iterator;
 use Stringable;
 use Tempest\Support\Arr\ImmutableArray;
 use UnitEnum;
+
 use function Tempest\Support\arr;
 
 final class OptionCollection implements Iterator, Countable
@@ -75,7 +76,7 @@ final class OptionCollection implements Iterator, Countable
     {
         $this->activeOption += 1;
 
-        if ($this->activeOption > $this->count() - 1) {
+        if ($this->activeOption > ($this->count() - 1)) {
             $this->activeOption = 0;
         }
     }
@@ -137,8 +138,8 @@ final class OptionCollection implements Iterator, Countable
         }
 
         return $this->isList()
-             ? $option->value
-             : $option->key;
+            ? $option->value
+            : $option->key;
     }
 
     /** @return array<Option> */
