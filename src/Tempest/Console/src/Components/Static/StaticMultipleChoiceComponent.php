@@ -25,6 +25,7 @@ final readonly class StaticMultipleChoiceComponent implements StaticConsoleCompo
         $this->options = new OptionCollection($options);
     }
 
+    #[\Override]
     public function render(Console $console): array
     {
         if (! $console->supportsPrompting()) {

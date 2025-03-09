@@ -15,6 +15,7 @@ final readonly class GenericRouteMatcher implements RouteMatcher
     {
     }
 
+    #[\Override]
     public function match(PsrRequest $request): ?MatchedRoute
     {
         // Try to match routes without any parameters

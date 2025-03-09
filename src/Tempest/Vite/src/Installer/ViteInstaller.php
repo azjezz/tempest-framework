@@ -39,6 +39,7 @@ final class ViteInstaller implements Installer
         return (bool) $argument->value;
     }
 
+    #[\Override]
     public function install(): void
     {
         $shouldInstallTailwind = $this->shouldInstallTailwind();

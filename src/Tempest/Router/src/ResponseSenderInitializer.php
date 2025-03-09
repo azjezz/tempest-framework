@@ -11,6 +11,7 @@ use Tempest\View\ViewRenderer;
 
 final class ResponseSenderInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): ResponseSender
     {

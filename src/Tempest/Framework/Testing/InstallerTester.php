@@ -135,10 +135,10 @@ final class InstallerTester
 
         foreach ($files as $file) {
             $file->isDir()
-                ? @rmdir($file->getRealPath())
-                : @unlink($file->getRealPath());
+                ? rmdir($file->getRealPath())
+                : unlink($file->getRealPath());
         }
 
-        @rmdir($this->root);
+        rmdir($this->root);
     }
 }

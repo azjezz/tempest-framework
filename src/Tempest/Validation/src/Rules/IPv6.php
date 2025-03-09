@@ -29,11 +29,13 @@ final readonly class IPv6 implements Rule
         $this->options = $options;
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return boolval(filter_var($value, FILTER_VALIDATE_IP, $this->options));
     }
 
+    #[\Override]
     public function message(): string
     {
         if ($this->options & FILTER_FLAG_NO_PRIV_RANGE) {

@@ -15,11 +15,13 @@ final readonly class EndsWith implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return str_ends_with($value, $this->needle);
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should end with {$this->needle}";

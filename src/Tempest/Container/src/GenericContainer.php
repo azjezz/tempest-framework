@@ -74,6 +74,7 @@ final class GenericContainer implements Container
         return $this->dynamicInitializers->getArrayCopy();
     }
 
+    #[\Override]
     public function register(string $className, callable $definition): self
     {
         $this->definitions[$className] = $definition;
@@ -81,6 +82,7 @@ final class GenericContainer implements Container
         return $this;
     }
 
+    #[\Override]
     public function unregister(string $className): self
     {
         unset($this->definitions[$className], $this->singletons[$className]);
@@ -88,11 +90,13 @@ final class GenericContainer implements Container
         return $this;
     }
 
+    #[\Override]
     public function has(string $className, ?string $tag = null): bool
     {
         return isset($this->definitions[$className]) || isset($this->singletons[$this->resolveTaggedName($className, $tag)]);
     }
 
+    #[\Override]
     public function singleton(string $className, mixed $definition, ?string $tag = null): self
     {
         $className = $this->resolveTaggedName($className, $tag);
@@ -102,6 +106,7 @@ final class GenericContainer implements Container
         return $this;
     }
 
+    #[\Override]
     public function config(object $config): self
     {
         $this->singleton($config::class, $config);
@@ -113,6 +118,7 @@ final class GenericContainer implements Container
         return $this;
     }
 
+    #[\Override]
     public function get(string $className, ?string $tag = null, mixed ...$params): ?object
     {
         $this->resolveChain();
@@ -128,6 +134,7 @@ final class GenericContainer implements Container
         return $dependency;
     }
 
+    #[\Override]
     public function invoke(MethodReflector|FunctionReflector|callable|string $callable, mixed ...$params): mixed
     {
         if ($callable instanceof MethodReflector) {
@@ -199,6 +206,7 @@ final class GenericContainer implements Container
         return $reflector->invokeArgs($parameters);
     }
 
+    #[\Override]
     public function addInitializer(ClassReflector|string $initializerClass): Container
     {
         if (! ($initializerClass instanceof ClassReflector)) {

@@ -9,6 +9,7 @@ use Psr\Clock\ClockInterface;
 
 interface Clock extends ClockInterface
 {
+    #[\Override]
     public function now(): DateTimeImmutable;
 
     public function time(): int;

@@ -13,6 +13,7 @@ use function Tempest\Support\str;
 
 final readonly class DynamicInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $pattern = '/(?<match>\<style=(?<quote>[\"\'])(?<styles>(?:[a-z-]+\s*)+)\k<quote>\>(?:(?!\<style).|\n)*?\<\/style\>)/';

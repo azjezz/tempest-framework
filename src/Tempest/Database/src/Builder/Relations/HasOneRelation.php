@@ -37,6 +37,7 @@ final readonly class HasOneRelation implements Relation
         $this->joinField = new FieldName($joinTable, $inverseProperty->getName() . '_id');
     }
 
+    #[\Override]
     public function getStatement(): string
     {
         return sprintf(
@@ -47,11 +48,13 @@ final readonly class HasOneRelation implements Relation
         );
     }
 
+    #[\Override]
     public function getRelationName(): string
     {
         return $this->joinField->tableName->as;
     }
 
+    #[\Override]
     public function getFieldNames(): array
     {
         return FieldName::make($this->relationModelClass, $this->joinField->tableName);

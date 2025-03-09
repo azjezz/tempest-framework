@@ -24,6 +24,7 @@ final readonly class AfterDate implements Rule
             : new DateTimeImmutable($date);
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         /**
@@ -48,6 +49,7 @@ final readonly class AfterDate implements Rule
         return $this->date->getTimestamp() < $value->getTimestamp();
     }
 
+    #[\Override]
     public function message(): string
     {
         $message[] = 'Value must be a date after';

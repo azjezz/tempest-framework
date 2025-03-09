@@ -14,11 +14,13 @@ enum ConsoleTokenType implements TokenType
     case MARK;
     case CODE;
 
+    #[\Override]
     public function getValue(): string
     {
         return $this->name;
     }
 
+    #[\Override]
     public function canContain(TokenType $other): bool
     {
         return false;

@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final readonly class PluralizerInitializer implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): Pluralizer
     {
         return new InflectorPluralizer();

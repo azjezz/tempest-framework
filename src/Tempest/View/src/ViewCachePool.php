@@ -20,6 +20,7 @@ final readonly class ViewCachePool implements CacheItemPoolInterface
     {
     }
 
+    #[\Override]
     public function getItem(string $key): CacheItemInterface
     {
         $createCacheItem = Closure::bind(
@@ -42,16 +43,19 @@ final readonly class ViewCachePool implements CacheItemPoolInterface
     /**
      * @return ImmutableArray<array-key, \Psr\Cache\CacheItemInterface>
      */
+    #[\Override]
     public function getItems(array $keys = []): ImmutableArray
     {
         return arr($keys)->map(fn (string $key) => $this->getItem($key));
     }
 
+    #[\Override]
     public function hasItem(string $key): bool
     {
         return file_exists($this->makePath($key));
     }
 
+    #[\Override]
     public function clear(): bool
     {
         $path = path($this->directory);
@@ -66,13 +70,15 @@ final readonly class ViewCachePool implements CacheItemPoolInterface
         return true;
     }
 
+    #[\Override]
     public function deleteItem(string $key): bool
     {
-        @unlink($this->makePath($key));
+        unlink($this->makePath($key));
 
         return true;
     }
 
+    #[\Override]
     public function deleteItems(array $keys): bool
     {
         foreach ($keys as $key) {
@@ -82,6 +88,7 @@ final readonly class ViewCachePool implements CacheItemPoolInterface
         return true;
     }
 
+    #[\Override]
     public function save(CacheItemInterface $item): bool
     {
         $path = $this->makePath($item);
@@ -95,11 +102,13 @@ final readonly class ViewCachePool implements CacheItemPoolInterface
         return true;
     }
 
+    #[\Override]
     public function saveDeferred(CacheItemInterface $item): bool
     {
         throw new Exception('Not supported');
     }
 
+    #[\Override]
     public function commit(): bool
     {
         throw new Exception('Not supported');

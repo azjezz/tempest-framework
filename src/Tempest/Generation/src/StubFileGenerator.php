@@ -77,7 +77,7 @@ final class StubFileGenerator
             );
 
             if (file_exists($targetPath) && $shouldOverride) {
-                @unlink($targetPath);
+                unlink($targetPath);
             }
 
             $classManipulator->save($targetPath);
@@ -134,7 +134,7 @@ final class StubFileGenerator
             );
 
             if (file_exists($targetPath) && $shouldOverride) {
-                @unlink($targetPath);
+                unlink($targetPath);
             }
 
             file_put_contents($targetPath, $fileContent);

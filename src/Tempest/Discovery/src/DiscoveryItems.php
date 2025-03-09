@@ -45,11 +45,13 @@ final class DiscoveryItems implements IteratorAggregate, Countable
         );
     }
 
+    #[\Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator(arr($this->items)->flatten(1)->toArray());
     }
 
+    #[\Override]
     public function count(): int
     {
         return iterator_count($this->getIterator());

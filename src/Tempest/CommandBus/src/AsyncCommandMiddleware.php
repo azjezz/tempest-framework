@@ -23,6 +23,7 @@ final readonly class AsyncCommandMiddleware implements CommandBusMiddleware
         $this->commandBusConfig->addMiddleware(self::class);
     }
 
+    #[\Override]
     public function __invoke(object $command, CommandBusMiddlewareCallable $next): void
     {
         $reflector = new ClassReflector($command);

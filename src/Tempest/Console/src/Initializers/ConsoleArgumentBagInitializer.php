@@ -11,6 +11,7 @@ use Tempest\Container\Singleton;
 
 final readonly class ConsoleArgumentBagInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): ConsoleArgumentBag
     {

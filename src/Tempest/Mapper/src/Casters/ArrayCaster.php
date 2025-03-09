@@ -9,6 +9,7 @@ use Tempest\Mapper\Exceptions\CannotSerializeValue;
 
 final class ArrayCaster implements Caster
 {
+    #[\Override]
     public function cast(mixed $input): array
     {
         if (is_array($input)) {
@@ -18,6 +19,7 @@ final class ArrayCaster implements Caster
         return json_decode($input, associative: true);
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if (! is_array($input)) {

@@ -76,6 +76,7 @@ final class ViewComponentElement implements Element
         return null;
     }
 
+    #[\Override]
     public function compile(): string
     {
         /** @var Slot[] $slots */

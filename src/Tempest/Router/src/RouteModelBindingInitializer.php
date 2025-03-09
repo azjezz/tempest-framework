@@ -13,11 +13,13 @@ use Tempest\Router\Exceptions\NotFoundException;
 
 final class RouteModelBindingInitializer implements DynamicInitializer
 {
+    #[\Override]
     public function canInitialize(ClassReflector $class): bool
     {
         return $class->getType()->matches(DatabaseModel::class);
     }
 
+    #[\Override]
     public function initialize(ClassReflector $class, Container $container): object
     {
         $matchedRoute = $container->get(MatchedRoute::class);

@@ -18,6 +18,7 @@ final class DiscoveryDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if ($class->getName() === self::class) {
@@ -31,6 +32,7 @@ final class DiscoveryDiscovery implements Discovery
         $this->discoveryItems->add($location, $class->getName());
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as $className) {

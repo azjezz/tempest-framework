@@ -17,11 +17,13 @@ final readonly class QueryToModelMapper implements Mapper
     {
     }
 
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return $from instanceof Query;
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): array
     {
         /** @var \Tempest\Database\Query $from */

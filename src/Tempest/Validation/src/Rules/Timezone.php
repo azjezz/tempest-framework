@@ -15,6 +15,7 @@ final readonly class Timezone implements Rule
     {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $timezones = timezone_identifiers_list($this->timezoneGroup, $this->countryCode);
@@ -22,6 +23,7 @@ final readonly class Timezone implements Rule
         return in_array($value, $timezones, true);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a valid timezone';

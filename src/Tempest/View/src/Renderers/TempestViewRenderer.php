@@ -37,6 +37,7 @@ final class TempestViewRenderer implements ViewRenderer
         return $this->currentView?->{$name}(...$arguments);
     }
 
+    #[\Override]
     public function render(string|View $view): string
     {
         $view = is_string($view) ? new GenericView($view) : $view;

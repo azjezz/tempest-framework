@@ -30,6 +30,7 @@ final readonly class ConfigCache implements Cache
         return $this->pool;
     }
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return (bool) (env('CACHE') ?? env('CONFIG_CACHE', false));

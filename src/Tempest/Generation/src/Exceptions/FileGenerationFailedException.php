@@ -9,6 +9,7 @@ use Tempest\Console\Exceptions\ConsoleException;
 
 final class FileGenerationFailedException extends ConsoleException
 {
+    #[\Override]
     public function render(Console $console): void
     {
         $console->error($this->getMessage());

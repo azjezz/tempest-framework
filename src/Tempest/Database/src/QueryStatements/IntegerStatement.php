@@ -17,6 +17,7 @@ final readonly class IntegerStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return sprintf(

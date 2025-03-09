@@ -15,6 +15,7 @@ use function Tempest\Support\path;
 
 final readonly class LogOutputBufferInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): LogOutputBuffer
     {

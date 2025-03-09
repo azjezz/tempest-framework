@@ -55,6 +55,7 @@ final class GenericConsole implements Console
     ) {
     }
 
+    #[\Override]
     public function call(string|array $command, string|array $arguments = []): ExitCode|int
     {
         return ($this->executeConsoleCommand)($command, $arguments);
@@ -74,6 +75,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function disablePrompting(): self
     {
         $this->supportsPrompting = false;
@@ -81,6 +83,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function read(int $bytes): string
     {
         if (! $this->supportsPrompting()) {
@@ -90,6 +93,7 @@ final class GenericConsole implements Console
         return $this->input->read($bytes);
     }
 
+    #[\Override]
     public function readln(): string
     {
         if (! $this->supportsPrompting()) {
@@ -99,6 +103,7 @@ final class GenericConsole implements Console
         return $this->input->readln();
     }
 
+    #[\Override]
     public function write(string $contents): static
     {
         $this->writeWithLanguage($contents, new TempestConsoleLanguage());
@@ -106,6 +111,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function header(string $header, ?string $subheader = null): static
     {
         $this->writeln();
@@ -118,6 +124,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function instructions(array|string $lines): static
     {
         $this->writeln(new InstructionsRenderer()->render(wrap($lines)));
@@ -125,6 +132,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function writeln(string $line = ''): static
     {
         $this->write($line . PHP_EOL);
@@ -132,6 +140,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function writeWithLanguage(string $contents, Language $language): self
     {
         if ($this->label) {
@@ -143,6 +152,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function writeRaw(string $contents): self
     {
         $this->output->write($contents);
@@ -150,6 +160,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function info(string $contents, ?string $title = null): self
     {
         $this->writeln(new MessageRenderer('𝓲', 'blue')->render($contents));
@@ -157,6 +168,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function error(string $contents, ?string $title = null): self
     {
         $this->writeln(new MessageRenderer('×', 'red')->render($contents, $title));
@@ -164,6 +176,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function warning(string $contents, ?string $title = null): self
     {
         $this->writeln(new MessageRenderer('⚠', 'yellow')->render($contents, $title));
@@ -171,6 +184,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function success(string $contents, ?string $title = null): self
     {
         $this->writeln(new MessageRenderer('✓', 'green')->render($contents, $title));
@@ -178,6 +192,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function withLabel(string $label): self
     {
         $clone = clone $this;
@@ -187,6 +202,7 @@ final class GenericConsole implements Console
         return $clone;
     }
 
+    #[\Override]
     public function keyValue(string $key, ?string $value = null): self
     {
         $this->writeln(new KeyValueRenderer()->render($key, $value));
@@ -194,6 +210,7 @@ final class GenericConsole implements Console
         return $this;
     }
 
+    #[\Override]
     public function component(InteractiveConsoleComponent $component, array $validation = []): mixed
     {
         if ($this->componentRenderer !== null && $this->supportsPrompting() && $this->componentRenderer->isComponentSupported($this, $component)) {
@@ -207,6 +224,7 @@ final class GenericConsole implements Console
         throw new UnsupportedComponent($component);
     }
 
+    #[\Override]
     public function ask(
         string $question,
         null|iterable|string $options = null,
@@ -260,6 +278,7 @@ final class GenericConsole implements Console
         return $this->component($component, $validation);
     }
 
+    #[\Override]
     public function confirm(string $question, bool $default = false, ?string $yes = null, ?string $no = null): bool
     {
         if ($this->isForced) {
@@ -269,6 +288,7 @@ final class GenericConsole implements Console
         return $this->component(new ConfirmComponent($question, $default, $yes, $no));
     }
 
+    #[\Override]
     public function password(string $label = 'Password', bool $confirm = false, array $validation = []): ?string
     {
         if (! $confirm) {
@@ -290,21 +310,25 @@ final class GenericConsole implements Console
         return $password;
     }
 
+    #[\Override]
     public function progressBar(iterable $data, Closure $handler): array
     {
         return $this->component(new ProgressBarComponent($data, $handler));
     }
 
+    #[\Override]
     public function task(string $label, null|Process|Closure $handler = null): bool
     {
         return $this->component(new TaskComponent($label, $handler));
     }
 
+    #[\Override]
     public function search(string $label, Closure $search, bool $multiple = false, null|string|array $default = null): mixed
     {
         return $this->component(new SearchComponent($label, $search, $multiple, $default));
     }
 
+    #[\Override]
     public function supportsPrompting(): bool
     {
         if ($this->supportsPrompting === false) {

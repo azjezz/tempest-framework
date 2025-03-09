@@ -18,6 +18,7 @@ final readonly class LogTimestampPattern implements Pattern
         return '/^(?<match>\[.*?\])/';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return new DynamicTokenType('fg-blue');

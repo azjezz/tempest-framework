@@ -22,6 +22,7 @@ final readonly class Enum implements Rule
         }
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         if ($value instanceof $this->enum) {
@@ -63,6 +64,7 @@ final readonly class Enum implements Rule
         );
     }
 
+    #[\Override]
     public function message(): string
     {
         return "The value must be a valid enumeration [{$this->enum}] case";

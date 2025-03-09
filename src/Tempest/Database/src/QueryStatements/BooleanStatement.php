@@ -16,6 +16,7 @@ final readonly class BooleanStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return sprintf(

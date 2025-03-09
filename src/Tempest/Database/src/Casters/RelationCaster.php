@@ -8,11 +8,13 @@ use Tempest\Mapper\Caster;
 
 final class RelationCaster implements Caster
 {
+    #[\Override]
     public function cast(mixed $input): mixed
     {
         return $input;
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         return $input;

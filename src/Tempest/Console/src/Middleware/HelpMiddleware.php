@@ -19,6 +19,7 @@ final readonly class HelpMiddleware implements ConsoleMiddleware
     ) {
     }
 
+    #[\Override]
     public function __invoke(Invocation $invocation, ConsoleMiddlewareCallable $next): ExitCode|int
     {
         if ($invocation->argumentBag->get('-h') || $invocation->argumentBag->get('help')) {

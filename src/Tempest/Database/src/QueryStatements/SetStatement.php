@@ -19,6 +19,7 @@ final readonly class SetStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         if (empty($this->values)) {

@@ -15,6 +15,7 @@ final readonly class SetCookieMiddleware implements HttpMiddleware
     {
     }
 
+    #[\Override]
     public function __invoke(Request $request, HttpMiddlewareCallable $next): Response
     {
         $response = $next($request);

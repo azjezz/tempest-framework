@@ -21,6 +21,7 @@ final class CollectionElement implements Element
         return $this->elements;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $compiled = [];

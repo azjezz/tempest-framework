@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class Uuid implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return boolval(preg_match('/^[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}$/i', $value));
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should contain a valid UUID';

@@ -43,6 +43,7 @@ final class ConfirmComponent implements InteractiveConsoleComponent, HasStaticCo
         );
     }
 
+    #[\Override]
     public function render(Terminal $terminal): string
     {
         return $this->renderer->render(

@@ -20,6 +20,7 @@ final class RawElement implements Element
         $this->attributes = $attributes;
     }
 
+    #[\Override]
     public function compile(): string
     {
         if ($this->tag === null) {

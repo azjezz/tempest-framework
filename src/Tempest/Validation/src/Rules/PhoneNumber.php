@@ -16,6 +16,7 @@ final readonly class PhoneNumber implements Rule
     {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         try {
@@ -28,6 +29,7 @@ final readonly class PhoneNumber implements Rule
         }
     }
 
+    #[\Override]
     public function message(): string
     {
         if (! $this->defaultRegion) {

@@ -17,6 +17,7 @@ final readonly class GenericResponseSender implements ResponseSender
     ) {
     }
 
+    #[\Override]
     public function send(Response $response): Response
     {
         ob_start();

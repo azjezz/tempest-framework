@@ -24,6 +24,7 @@ final readonly class StaticSingleChoiceComponent implements StaticConsoleCompone
         $this->options = new OptionCollection($options);
     }
 
+    #[\Override]
     public function render(Console $console): null|int|UnitEnum|string
     {
         if (! $console->supportsPrompting()) {

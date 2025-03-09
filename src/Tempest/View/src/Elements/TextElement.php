@@ -17,6 +17,7 @@ final class TextElement implements Element
     ) {
     }
 
+    #[\Override]
     public function compile(): string
     {
         return str($this->text)

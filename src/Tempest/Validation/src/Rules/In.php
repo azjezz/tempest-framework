@@ -17,6 +17,7 @@ final readonly class In implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $isPartOf = in_array($value, $this->values, true);
@@ -24,6 +25,7 @@ final readonly class In implements Rule
         return $this->not ? ! $isPartOf : $isPartOf;
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be one of: ' . implode(', ', $this->values);

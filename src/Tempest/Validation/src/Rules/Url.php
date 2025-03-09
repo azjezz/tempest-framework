@@ -17,6 +17,7 @@ final readonly class Url implements Rule
     {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         if (! is_string($value)) {
@@ -66,6 +67,7 @@ final readonly class Url implements Rule
         return preg_match(sprintf($pattern, $protocolList), $value) === 1;
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a valid URL';

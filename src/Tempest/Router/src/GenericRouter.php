@@ -40,6 +40,7 @@ final class GenericRouter implements Router
     ) {
     }
 
+    #[\Override]
     public function dispatch(Request|PsrRequest $request): Response
     {
         if (! ($request instanceof PsrRequest)) {
@@ -104,6 +105,7 @@ final class GenericRouter implements Router
         return $callable;
     }
 
+    #[\Override]
     public function toUri(array|string $action, ...$params): string
     {
         try {
@@ -199,6 +201,7 @@ final class GenericRouter implements Router
         return $request;
     }
 
+    #[\Override]
     public function addMiddleware(string $middlewareClass): void
     {
         $this->middleware[] = $middlewareClass;

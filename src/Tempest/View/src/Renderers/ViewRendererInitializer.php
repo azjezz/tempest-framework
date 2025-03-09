@@ -12,6 +12,7 @@ use Tempest\View\ViewRenderer;
 
 final readonly class ViewRendererInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): ViewRenderer
     {

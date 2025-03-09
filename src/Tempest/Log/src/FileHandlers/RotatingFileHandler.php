@@ -12,6 +12,7 @@ final class RotatingFileHandler extends MonoRotatingFileHandler
 {
     public const string FILE_PER_WEEK = 'Y-W';
 
+    #[\Override]
     protected function setDateFormat(string $dateFormat): void
     {
         if (preg_match('{^[Yy](([/_.-]?m([/_.-]?d)?)|([/_.-]?W))?$}', $dateFormat) === 0) {
@@ -26,6 +27,7 @@ final class RotatingFileHandler extends MonoRotatingFileHandler
         $this->dateFormat = $dateFormat;
     }
 
+    #[\Override]
     protected function getNextRotation(): DateTimeImmutable
     {
         return match (str_replace(['/', '_', '.'], '-', $this->dateFormat)) {

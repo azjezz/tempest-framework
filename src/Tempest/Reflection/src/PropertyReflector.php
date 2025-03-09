@@ -137,6 +137,7 @@ final readonly class PropertyReflector implements Reflector
         }
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->reflectionProperty->getName();

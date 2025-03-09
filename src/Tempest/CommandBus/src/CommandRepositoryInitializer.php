@@ -10,6 +10,7 @@ use Tempest\Container\Singleton;
 
 final readonly class CommandRepositoryInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): CommandRepository
     {

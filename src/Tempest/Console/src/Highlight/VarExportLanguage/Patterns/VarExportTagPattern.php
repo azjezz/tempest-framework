@@ -18,6 +18,7 @@ final readonly class VarExportTagPattern implements Pattern
         return '/^(?<match>.*?)\s/';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return ConsoleTokenType::STRONG;

@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final readonly class ClockInitializer implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): Clock
     {
         return new GenericClock();

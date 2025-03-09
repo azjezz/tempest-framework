@@ -14,6 +14,7 @@ final class CreatePermissionsTable implements DatabaseMigration
 {
     private(set) string $name = '0000-00-01_create_permissions_table';
 
+    #[\Override]
     public function up(): CreateTableStatement
     {
         return new CreateTableStatement('permissions')
@@ -21,6 +22,7 @@ final class CreatePermissionsTable implements DatabaseMigration
             ->varchar('name');
     }
 
+    #[\Override]
     public function down(): DropTableStatement
     {
         return DropTableStatement::forModel(Permission::class);

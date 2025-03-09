@@ -10,6 +10,7 @@ use Tempest\View\Elements\PhpForeachElement;
 
 final readonly class ForeachAttribute implements Attribute
 {
+    #[\Override]
     public function apply(Element $element): Element
     {
         return new PhpForeachElement($element);

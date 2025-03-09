@@ -45,6 +45,7 @@ final readonly class BelongsToRelation implements Relation
         return new self($relationModelClass, $localField, $joinField);
     }
 
+    #[\Override]
     public function getStatement(): string
     {
         return sprintf(
@@ -55,11 +56,13 @@ final readonly class BelongsToRelation implements Relation
         );
     }
 
+    #[\Override]
     public function getRelationName(): string
     {
         return $this->joinField->tableName->as;
     }
 
+    #[\Override]
     public function getFieldNames(): array
     {
         return FieldName::make($this->relationModelClass, $this->joinField->tableName);

@@ -12,6 +12,7 @@ use function Tempest\map;
 
 final readonly class JsonToObjectMapper implements Mapper
 {
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         if (! is_string($from)) {
@@ -31,6 +32,7 @@ final readonly class JsonToObjectMapper implements Mapper
         }
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): object
     {
         return map(map($from)->toArray())->to($to);

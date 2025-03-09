@@ -262,6 +262,7 @@ final class CreateTableStatement implements QueryStatement
         return $this;
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         $createTable = sprintf(

@@ -15,6 +15,7 @@ final class GenericTransactionManager implements TransactionManager
     {
     }
 
+    #[\Override]
     public function begin(): void
     {
         $transactionBegun = $this->connection->beginTransaction();
@@ -24,6 +25,7 @@ final class GenericTransactionManager implements TransactionManager
         }
     }
 
+    #[\Override]
     public function commit(): void
     {
         $transactionCommitted = $this->connection->commit();
@@ -33,6 +35,7 @@ final class GenericTransactionManager implements TransactionManager
         }
     }
 
+    #[\Override]
     public function rollback(): void
     {
         $transactionRolledBack = $this->connection->rollBack();

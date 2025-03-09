@@ -30,11 +30,13 @@ final class MemoryInputBuffer implements InputBuffer
         $this->fiber?->resume();
     }
 
+    #[\Override]
     public function read(int $bytes): string
     {
         return $this->consumeBuffer();
     }
 
+    #[\Override]
     public function readln(): string
     {
         return $this->consumeBuffer();

@@ -22,6 +22,7 @@ final class SlotElement implements Element
         return $this->name === $name;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $rendered = [];

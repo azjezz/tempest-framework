@@ -30,6 +30,7 @@ final readonly class DateTimeCaster implements Caster
         };
     }
 
+    #[\Override]
     public function cast(mixed $input): ?DateTimeInterface
     {
         if (! $input) {
@@ -51,6 +52,7 @@ final readonly class DateTimeCaster implements Caster
         return $date;
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if (! ($input instanceof DateTimeInterface)) {

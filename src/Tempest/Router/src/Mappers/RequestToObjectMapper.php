@@ -11,11 +11,13 @@ use function Tempest\map;
 
 final readonly class RequestToObjectMapper implements Mapper
 {
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return $from instanceof Request;
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): array|object
     {
         /** @var Request $from */

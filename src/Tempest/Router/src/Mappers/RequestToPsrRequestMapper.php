@@ -11,11 +11,13 @@ use Tempest\Router\Request;
 
 final readonly class RequestToPsrRequestMapper implements Mapper
 {
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return $from instanceof Request && is_a($to, PsrRequest::class, true);
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): PsrRequest
     {
         /** @var Request $from */

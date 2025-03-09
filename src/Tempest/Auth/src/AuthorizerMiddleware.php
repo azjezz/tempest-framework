@@ -21,6 +21,7 @@ final readonly class AuthorizerMiddleware implements HttpMiddleware
     ) {
     }
 
+    #[\Override]
     public function __invoke(Request $request, HttpMiddlewareCallable $next): Response
     {
         $attribute = $this->matchedRoute

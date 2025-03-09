@@ -11,6 +11,7 @@ use function Tempest\Support\path;
 
 final readonly class JsonFileToObjectMapper implements Mapper
 {
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         if (! is_string($from)) {
@@ -22,6 +23,7 @@ final readonly class JsonFileToObjectMapper implements Mapper
         return $path->exists() && $path->extension() === 'json';
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): array
     {
         return map(json_decode(file_get_contents($from), associative: true))->collection()->to($to);

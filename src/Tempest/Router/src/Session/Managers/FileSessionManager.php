@@ -23,21 +23,25 @@ final readonly class FileSessionManager implements SessionManager
     ) {
     }
 
+    #[\Override]
     public function create(SessionId $id): Session
     {
         return $this->persist($id);
     }
 
+    #[\Override]
     public function set(SessionId $id, string $key, mixed $value): void
     {
         $this->persist($id, [...$this->getData($id), ...[$key => $value]]);
     }
 
+    #[\Override]
     public function get(SessionId $id, string $key, mixed $default = null): mixed
     {
         return $this->getData($id)[$key] ?? $default;
     }
 
+    #[\Override]
     public function remove(SessionId $id, string $key): void
     {
         $data = $this->getData($id);
@@ -47,6 +51,7 @@ final readonly class FileSessionManager implements SessionManager
         $this->persist($id, $data);
     }
 
+    #[\Override]
     public function destroy(SessionId $id): void
     {
         unlink($this->getPath($id));
@@ -54,6 +59,7 @@ final readonly class FileSessionManager implements SessionManager
         event(new SessionDestroyed($id));
     }
 
+    #[\Override]
     public function isValid(SessionId $id): bool
     {
         $session = $this->resolve($id);
@@ -89,6 +95,7 @@ final readonly class FileSessionManager implements SessionManager
         }
     }
 
+    #[\Override]
     public function all(SessionId $id): array
     {
         return $this->getData($id);
@@ -128,6 +135,7 @@ final readonly class FileSessionManager implements SessionManager
         return $session;
     }
 
+    #[\Override]
     public function cleanup(): void
     {
         $sessionFiles = glob(internal_storage_path($this->sessionConfig->path, '/*'));

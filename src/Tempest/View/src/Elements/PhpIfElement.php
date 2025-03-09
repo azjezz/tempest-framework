@@ -22,6 +22,7 @@ final class PhpIfElement implements Element, WrapsElement
     ) {
     }
 
+    #[\Override]
     public function getWrappingElement(): Element
     {
         return $this->wrappingElement;
@@ -45,6 +46,7 @@ final class PhpIfElement implements Element, WrapsElement
         return $this;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $compiled = sprintf(

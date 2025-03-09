@@ -13,6 +13,7 @@ use Tempest\HttpClient\Driver\Psr18Driver;
 
 final class HttpClientDriverInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): HttpClientDriver|ClientInterface
     {

@@ -11,6 +11,7 @@ use Tempest\Highlight\Highlighter;
 
 final readonly class ConsoleHighlighterInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton(tag: 'console')]
     public function initialize(Container $container): Highlighter
     {

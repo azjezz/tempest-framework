@@ -15,6 +15,7 @@ final readonly class Time implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         if ($this->twentyFourHour) {
@@ -24,6 +25,7 @@ final readonly class Time implements Rule
         return preg_match('/^([0-1]?[0-9]):[0-5][0-9]\s([aApP].[mM].|[aApP][mM])$/', $value) === 1;
     }
 
+    #[\Override]
     public function message(): string
     {
         if ($this->twentyFourHour) {

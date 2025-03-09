@@ -11,6 +11,7 @@ use Tempest\Database\Connection\Connection;
 
 final readonly class TransactionManagerInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): TransactionManager
     {

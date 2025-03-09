@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final class InitializerStub implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): mixed
     {
         return null;

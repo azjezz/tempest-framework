@@ -10,26 +10,31 @@ final class MemoryRepository implements CommandRepository
 {
     private array $commands = [];
 
+    #[\Override]
     public function store(string $uuid, object $command): void
     {
         $this->commands[$uuid] = $command;
     }
 
+    #[\Override]
     public function getPendingCommands(): array
     {
         return $this->commands;
     }
 
+    #[\Override]
     public function findPendingCommand(string $uuid): object
     {
         return $this->commands[$uuid];
     }
 
+    #[\Override]
     public function markAsDone(string $uuid): void
     {
         unset($this->commands[$uuid]);
     }
 
+    #[\Override]
     public function markAsFailed(string $uuid): void
     {
         unset($this->commands[$uuid]);

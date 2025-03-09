@@ -26,6 +26,7 @@ final readonly class ConsoleErrorHandler implements ErrorHandler
     ) {
     }
 
+    #[\Override]
     public function handleException(Throwable $throwable): void
     {
         ll(exception: $throwable->getMessage());
@@ -63,6 +64,7 @@ final readonly class ConsoleErrorHandler implements ErrorHandler
         $this->kernel->shutdown($exitCode->value);
     }
 
+    #[\Override]
     public function handleError(int $errNo, string $errstr, string $errFile, int $errLine): void
     {
         ll(error: $errstr);

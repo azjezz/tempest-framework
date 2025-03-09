@@ -9,6 +9,7 @@ use Tempest\EventBus\EventBusMiddlewareCallable;
 
 final class EventBusMiddlewareStub implements EventBusMiddleware
 {
+    #[\Override]
     public function __invoke(object $event, EventBusMiddlewareCallable $next): void
     {
         $next($event);

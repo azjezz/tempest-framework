@@ -21,47 +21,56 @@ final class GenericLogger implements Logger
     ) {
     }
 
+    #[\Override]
     public function emergency(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::EMERGENCY, $message, $context);
     }
 
+    #[\Override]
     public function alert(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::ALERT, $message, $context);
     }
 
+    #[\Override]
     public function critical(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::CRITICAL, $message, $context);
     }
 
+    #[\Override]
     public function error(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::ERROR, $message, $context);
     }
 
+    #[\Override]
     public function warning(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::WARNING, $message, $context);
     }
 
+    #[\Override]
     public function notice(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::NOTICE, $message, $context);
     }
 
+    #[\Override]
     public function info(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::INFO, $message, $context);
     }
 
+    #[\Override]
     public function debug(Stringable|string $message, array $context = []): void
     {
         $this->log(LogLevel::DEBUG, $message, $context);
     }
 
     /** @param MonologLogLevel|LogLevel|string $level */
+    #[\Override]
     public function log($level, Stringable|string $message, array $context = []): void
     {
         if (! ($level instanceof MonologLogLevel)) {

@@ -18,6 +18,7 @@ final readonly class UniqueStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         $columns = arr($this->columns)->implode('`, `')->wrap('`', '`');

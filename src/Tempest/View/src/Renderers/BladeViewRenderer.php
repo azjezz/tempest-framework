@@ -14,6 +14,7 @@ final readonly class BladeViewRenderer implements ViewRenderer
     {
     }
 
+    #[\Override]
     public function render(View|string|null $view): string
     {
         return $this->blade->render($view->path, $view->data);

@@ -21,6 +21,7 @@ final readonly class GenericDatabase implements Database
     ) {
     }
 
+    #[\Override]
     public function execute(Query $query): void
     {
         $bindings = $this->resolveBindings($query);
@@ -34,11 +35,13 @@ final readonly class GenericDatabase implements Database
         }
     }
 
+    #[\Override]
     public function getLastInsertId(): Id
     {
         return new Id($this->connection->lastInsertId());
     }
 
+    #[\Override]
     public function fetch(Query $query): array
     {
         $pdoQuery = $this->connection->prepare($query->getSql());
@@ -48,11 +51,13 @@ final readonly class GenericDatabase implements Database
         return $pdoQuery->fetchAll(PDO::FETCH_NAMED);
     }
 
+    #[\Override]
     public function fetchFirst(Query $query): ?array
     {
         return $this->fetch($query)[0] ?? null;
     }
 
+    #[\Override]
     public function withinTransaction(callable $callback): bool
     {
         $this->transactionManager->begin();

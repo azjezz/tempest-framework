@@ -37,6 +37,7 @@ final class ProgressBarComponent implements InteractiveConsoleComponent, HasStat
         );
     }
 
+    #[\Override]
     public function render(Terminal $terminal): Generator
     {
         $result = [];

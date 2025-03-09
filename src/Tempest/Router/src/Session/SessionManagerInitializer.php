@@ -10,6 +10,7 @@ use Tempest\Container\Singleton;
 
 final readonly class SessionManagerInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): SessionManager
     {

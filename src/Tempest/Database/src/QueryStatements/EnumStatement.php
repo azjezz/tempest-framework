@@ -23,6 +23,7 @@ final readonly class EnumStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         $cases = arr($this->enumClass::cases())

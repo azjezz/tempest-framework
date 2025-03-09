@@ -68,7 +68,7 @@ final class CacheConfig
             return $current;
         }
 
-        $original = DiscoveryCacheStrategy::make(@file_get_contents(DiscoveryCache::getCurrentDiscoverStrategyCachePath()));
+        $original = DiscoveryCacheStrategy::make(file_get_contents(DiscoveryCache::getCurrentDiscoverStrategyCachePath()));
 
         if ($current !== $original) {
             return DiscoveryCacheStrategy::INVALID;

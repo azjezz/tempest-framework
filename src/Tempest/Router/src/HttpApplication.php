@@ -46,6 +46,7 @@ final readonly class HttpApplication implements Application
         return $application;
     }
 
+    #[\Override]
     public function run(): void
     {
         try {

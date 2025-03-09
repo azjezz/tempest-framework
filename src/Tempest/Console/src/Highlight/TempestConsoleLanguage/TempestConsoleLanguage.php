@@ -16,16 +16,19 @@ use Tempest\Highlight\Language;
 
 final readonly class TempestConsoleLanguage implements Language
 {
+    #[\Override]
     public function getName(): string
     {
         return 'console';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -40,6 +43,7 @@ final readonly class TempestConsoleLanguage implements Language
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [];

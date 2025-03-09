@@ -18,11 +18,13 @@ use function Tempest\Support\arr;
 
 final readonly class PsrRequestToRequestMapper implements Mapper
 {
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return $from instanceof PsrRequest && is_a($to, Request::class, true);
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): array|object
     {
         /** @var PsrRequest $from */

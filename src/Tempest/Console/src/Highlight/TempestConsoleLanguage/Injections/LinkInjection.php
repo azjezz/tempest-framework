@@ -12,6 +12,7 @@ use function Tempest\Support\str;
 
 final readonly class LinkInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         return new ParsedInjection(preg_replace_callback(

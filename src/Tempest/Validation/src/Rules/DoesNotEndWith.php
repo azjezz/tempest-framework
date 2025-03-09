@@ -15,11 +15,13 @@ final readonly class DoesNotEndWith implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return ! str_ends_with($value, $this->needle);
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should not end with {$this->needle}";

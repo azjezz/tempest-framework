@@ -14,6 +14,7 @@ final readonly class PrimaryKeyStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return match ($dialect) {

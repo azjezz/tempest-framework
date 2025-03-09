@@ -18,6 +18,7 @@ final readonly class StaticProgressBarComponent implements StaticConsoleComponen
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): array
     {
         $result = [];

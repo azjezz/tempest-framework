@@ -16,11 +16,13 @@ final readonly class Input implements ViewComponent
     ) {
     }
 
+    #[\Override]
     public static function getName(): string
     {
         return 'x-input';
     }
 
+    #[\Override]
     public function compile(ViewComponentElement $element): string
     {
         $name = $element->getAttribute('name');

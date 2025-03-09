@@ -9,11 +9,13 @@ use Tempest\View\ViewComponent;
 
 final readonly class Submit implements ViewComponent
 {
+    #[\Override]
     public static function getName(): string
     {
         return 'x-submit';
     }
 
+    #[\Override]
     public function compile(ViewComponentElement $element): string
     {
         $label = $element->getAttribute('label') ?? 'Submit';

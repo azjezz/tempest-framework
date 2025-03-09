@@ -8,6 +8,7 @@ use Tempest\Console\Console;
 
 final class InterruptException extends ConsoleException
 {
+    #[\Override]
     public function render(Console $console): void
     {
         $console->error('Interrupted by user.');

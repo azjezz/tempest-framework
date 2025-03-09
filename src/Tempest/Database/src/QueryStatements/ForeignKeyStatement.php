@@ -17,6 +17,7 @@ final readonly class ForeignKeyStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         [, $localKey] = explode('.', $this->local);

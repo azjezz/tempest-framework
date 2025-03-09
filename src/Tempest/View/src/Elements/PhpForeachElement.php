@@ -21,6 +21,7 @@ final class PhpForeachElement implements Element, WrapsElement
     ) {
     }
 
+    #[\Override]
     public function getWrappingElement(): Element
     {
         return $this->wrappingElement;
@@ -37,6 +38,7 @@ final class PhpForeachElement implements Element, WrapsElement
         return $this;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $foreachAttribute = $this->wrappingElement->consumeAttribute('foreach');

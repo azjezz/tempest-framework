@@ -14,6 +14,7 @@ final class ConsoleMiddlewareStub implements ConsoleMiddleware
 {
     use HasConsole;
 
+    #[\Override]
     public function __invoke(Invocation $invocation, ConsoleMiddlewareCallable $next): ExitCode|int
     {
         return $next($invocation);

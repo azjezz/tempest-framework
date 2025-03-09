@@ -11,6 +11,7 @@ use Tempest\Container\Singleton;
 
 final readonly class CookieManagerInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): CookieManager
     {

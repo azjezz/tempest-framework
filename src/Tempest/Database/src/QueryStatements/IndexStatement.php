@@ -18,6 +18,7 @@ final readonly class IndexStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         $columns = arr($this->columns)->implode('`, `')->wrap('`', '`');

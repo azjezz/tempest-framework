@@ -57,6 +57,7 @@ final class User implements DatabaseModel, CanAuthenticate, CanAuthorize
         return $this->load('userPermissions.permission');
     }
 
+    #[\Override]
     public function hasPermission(string|UnitEnum|Permission $permission): bool
     {
         return $this->getPermission($permission) !== null;

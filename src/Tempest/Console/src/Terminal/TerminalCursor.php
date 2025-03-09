@@ -19,11 +19,13 @@ final class TerminalCursor implements Cursor
         $this->position = $this->getActualPosition();
     }
 
+    #[\Override]
     public function getPosition(): Point
     {
         return $this->position;
     }
 
+    #[\Override]
     public function setPosition(Point $position): self
     {
         $this->position = $position;
@@ -31,6 +33,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function moveUp(int $amount = 1): self
     {
         $this->place(new Point(
@@ -41,6 +44,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function moveDown(int $amount = 1): self
     {
         $this->place(new Point(
@@ -51,6 +55,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function moveLeft(int $amount = 1): self
     {
         $this->place(new Point(
@@ -61,6 +66,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function moveRight(int $amount = 1): self
     {
         $this->place(new Point(
@@ -71,6 +77,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function place(Point $position): self
     {
         $position = new Point(
@@ -91,6 +98,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function clearLine(): self
     {
         $this->console->write("\e[2K");
@@ -98,6 +106,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function clearAfter(): self
     {
         $this->console->write("\e[0J");
@@ -105,6 +114,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function startOfLine(): self
     {
         $this->console->writeln("\e[1G");
@@ -112,6 +122,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function hide(): self
     {
         $this->console->write("\e[?25l");
@@ -119,6 +130,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function show(): self
     {
         $this->console->write("\e[?25h");
@@ -126,6 +138,7 @@ final class TerminalCursor implements Cursor
         return $this;
     }
 
+    #[\Override]
     public function placeToEnd(): self
     {
         $this->place(new Point(

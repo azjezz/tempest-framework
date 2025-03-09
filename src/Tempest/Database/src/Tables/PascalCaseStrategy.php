@@ -8,6 +8,7 @@ use function Tempest\Support\str;
 
 final class PascalCaseStrategy implements NamingStrategy
 {
+    #[\Override]
     public function getName(string $model): string
     {
         return (string) str($model)

@@ -23,11 +23,13 @@ final class ValidationExceptionTest extends TestCase
         throw new ValidationException(new stdClass(), [
             'email' => [
                 new class() implements Rule {
+                    #[\Override]
                     public function isValid(mixed $value): bool
                     {
                         return false;
                     }
 
+                    #[\Override]
                     public function message(): string
                     {
                         return 'Value should be a valid email address';
@@ -47,23 +49,27 @@ final class ValidationExceptionTest extends TestCase
         throw new ValidationException(new stdClass(), [
             'email' => [
                 new class() implements Rule {
+                    #[\Override]
                     public function isValid(mixed $value): bool
                     {
                         return false;
                     }
 
+                    #[\Override]
                     public function message(): string
                     {
                         return 'Value should be a valid email address';
                     }
                 },
                 new class() implements Rule {
+                    #[\Override]
                     public function isValid(mixed $value): bool
                     {
                         return false;
                     }
 
                     /** @return string[] */
+                    #[\Override]
                     public function message(): array
                     {
                         return [

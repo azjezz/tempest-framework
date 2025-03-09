@@ -25,6 +25,7 @@ final class Cookie implements Stringable
     ) {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         $parts = [

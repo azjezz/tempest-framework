@@ -10,6 +10,7 @@ use Tempest\Console\Input\ConsoleArgumentBag;
 
 final readonly class CompleteConsoleCommandArguments implements CompletesConsoleCommand
 {
+    #[\Override]
     public function complete(
         ConsoleCommand $command,
         ConsoleArgumentBag $argumentBag,

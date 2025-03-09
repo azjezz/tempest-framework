@@ -15,6 +15,7 @@ use Tempest\Core\ShellExecutors\NullShellExecutor;
 
 final readonly class InvocationExecutorInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): ShellExecutor
     {

@@ -9,16 +9,19 @@ use Tempest\Highlight\Tokens\TokenType;
 
 final readonly class TextTerminalTheme implements TerminalTheme
 {
+    #[\Override]
     public function before(TokenType $tokenType): string
     {
         return '';
     }
 
+    #[\Override]
     public function after(TokenType $tokenType): string
     {
         return '';
     }
 
+    #[\Override]
     public function escape(string $content): string
     {
         return $content;

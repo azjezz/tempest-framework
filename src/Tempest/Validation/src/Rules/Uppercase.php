@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class Uppercase implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return $value === mb_strtoupper($value);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be an uppercase string';

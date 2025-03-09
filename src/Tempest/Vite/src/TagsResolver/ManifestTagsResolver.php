@@ -24,6 +24,7 @@ final readonly class ManifestTagsResolver implements TagsResolver
     ) {
     }
 
+    #[\Override]
     public function resolveTags(array $entrypoints): array
     {
         return arr($entrypoints)

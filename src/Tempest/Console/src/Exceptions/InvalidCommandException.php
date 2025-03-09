@@ -19,6 +19,7 @@ final class InvalidCommandException extends ConsoleException
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): void
     {
         $console->error('Invalid command usage:');

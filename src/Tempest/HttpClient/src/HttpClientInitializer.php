@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final class HttpClientInitializer implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): HttpClient|GenericHttpClient
     {
         return new GenericHttpClient(

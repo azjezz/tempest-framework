@@ -33,6 +33,7 @@ final class GenericElement implements Element
         return $this;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $content = [];

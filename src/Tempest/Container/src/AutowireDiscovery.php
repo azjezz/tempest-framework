@@ -21,6 +21,7 @@ final class AutowireDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         $autowire = $class->getAttribute(Autowire::class);
@@ -32,6 +33,7 @@ final class AutowireDiscovery implements Discovery
         $this->discoveryItems->add($location, [$class, $autowire]);
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as [$class, $autowire]) {

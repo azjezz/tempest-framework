@@ -9,6 +9,7 @@ use Tempest\View\Element;
 
 final readonly class DefaultAttribute implements Attribute
 {
+    #[\Override]
     public function apply(Element $element): Element
     {
         return $element;

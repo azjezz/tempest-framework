@@ -111,6 +111,7 @@ final readonly class Path implements Stringable
         return $this->path === ((string) $other);
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->path;

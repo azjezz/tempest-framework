@@ -16,11 +16,13 @@ final readonly class Between implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return $value >= $this->min && $value <= $this->max;
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should be between {$this->min} and {$this->max}";

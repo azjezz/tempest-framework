@@ -12,6 +12,7 @@ final readonly class SessionId implements Stringable
     {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->id;

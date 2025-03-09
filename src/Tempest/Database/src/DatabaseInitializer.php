@@ -12,6 +12,7 @@ use Tempest\Database\Transactions\TransactionManager;
 
 final readonly class DatabaseInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Database
     {

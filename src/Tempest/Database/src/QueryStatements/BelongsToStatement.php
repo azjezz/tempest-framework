@@ -17,6 +17,7 @@ final readonly class BelongsToStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         [$localTable, $localKey] = explode('.', $this->local);

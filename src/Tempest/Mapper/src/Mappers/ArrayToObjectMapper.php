@@ -25,6 +25,7 @@ final readonly class ArrayToObjectMapper implements Mapper
     ) {
     }
 
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         if (! is_array($from)) {
@@ -40,6 +41,7 @@ final readonly class ArrayToObjectMapper implements Mapper
         }
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): object
     {
         $class = new ClassReflector($to);

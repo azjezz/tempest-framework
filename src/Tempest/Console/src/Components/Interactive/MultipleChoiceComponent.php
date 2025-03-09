@@ -52,6 +52,7 @@ final class MultipleChoiceComponent implements InteractiveConsoleComponent, HasC
         );
     }
 
+    #[\Override]
     public function render(Terminal $terminal): string
     {
         $this->updateQuery();
@@ -93,11 +94,13 @@ final class MultipleChoiceComponent implements InteractiveConsoleComponent, HasC
         $this->options->filter($this->buffer->text);
     }
 
+    #[\Override]
     public function getCursorPosition(Terminal $terminal): Point
     {
         return $this->renderer->getCursorPosition($terminal, $this->buffer);
     }
 
+    #[\Override]
     public function cursorVisible(): bool
     {
         return $this->bufferEnabled;

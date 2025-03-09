@@ -47,6 +47,7 @@ final class ViewCache implements Cache
         return $this->cachePool;
     }
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return $this->cacheConfig->enable ?? $this->cacheConfig->viewCache;

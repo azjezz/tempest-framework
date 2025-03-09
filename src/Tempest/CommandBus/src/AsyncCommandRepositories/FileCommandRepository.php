@@ -11,6 +11,7 @@ use function Tempest\Support\arr;
 
 final readonly class FileCommandRepository implements CommandRepository
 {
+    #[\Override]
     public function store(string $uuid, object $command): void
     {
         $payload = serialize($command);
@@ -18,6 +19,7 @@ final readonly class FileCommandRepository implements CommandRepository
         file_put_contents(__DIR__ . "/../stored-commands/{$uuid}.pending.txt", $payload);
     }
 
+    #[\Override]
     public function findPendingCommand(string $uuid): object
     {
         $path = __DIR__ . "/../stored-commands/{$uuid}.pending.txt";
@@ -31,6 +33,7 @@ final readonly class FileCommandRepository implements CommandRepository
         return unserialize($payload);
     }
 
+    #[\Override]
     public function markAsDone(string $uuid): void
     {
         $path = __DIR__ . "/../stored-commands/{$uuid}.pending.txt";
@@ -38,6 +41,7 @@ final readonly class FileCommandRepository implements CommandRepository
         unlink($path);
     }
 
+    #[\Override]
     public function markAsFailed(string $uuid): void
     {
         if (! is_file(__DIR__ . "/../stored-commands/{$uuid}.pending.txt")) {
@@ -50,6 +54,7 @@ final readonly class FileCommandRepository implements CommandRepository
         );
     }
 
+    #[\Override]
     public function getPendingCommands(): array
     {
         return arr(glob(__DIR__ . '/../stored-commands/*.pending.txt'))

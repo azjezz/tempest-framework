@@ -23,11 +23,13 @@ final readonly class BeforeDate implements Rule
             : new DateTimeImmutable($date);
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return ! new AfterDate($this->date, $this->inclusive)->isValid($value);
     }
 
+    #[\Override]
     public function message(): string
     {
         $message[] = 'Value must be a date before';

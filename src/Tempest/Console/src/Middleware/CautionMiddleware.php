@@ -19,6 +19,7 @@ final readonly class CautionMiddleware implements ConsoleMiddleware
     ) {
     }
 
+    #[\Override]
     public function __invoke(Invocation $invocation, ConsoleMiddlewareCallable $next): ExitCode|int
     {
         $environment = $this->appConfig->environment;

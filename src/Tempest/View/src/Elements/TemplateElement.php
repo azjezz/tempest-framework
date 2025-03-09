@@ -13,6 +13,7 @@ final class TemplateElement implements Element
         $this->attributes = $attributes;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $content = [];

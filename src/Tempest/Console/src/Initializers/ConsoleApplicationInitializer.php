@@ -14,6 +14,7 @@ use Tempest\Core\Application;
 
 final readonly class ConsoleApplicationInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): ConsoleApplication
     {

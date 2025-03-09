@@ -35,6 +35,7 @@ final class FrameworkKernel implements Kernel
         $this->container = $container ?? $this->createContainer();
     }
 
+    #[\Override]
     public static function boot(
         string $root,
         array $discoveryLocations = [],
@@ -62,6 +63,7 @@ final class FrameworkKernel implements Kernel
             ->event(KernelEvent::BOOTED);
     }
 
+    #[\Override]
     public function shutdown(int|string $status = ''): never
     {
         $this->finishDeferredTasks()

@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final class TagCompilerInitializer implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): TagCompiler
     {
         return $container->get(GenericTagCompiler::class);

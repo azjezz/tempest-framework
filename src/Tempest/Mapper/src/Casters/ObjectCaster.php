@@ -17,6 +17,7 @@ final readonly class ObjectCaster implements Caster
     ) {
     }
 
+    #[\Override]
     public function cast(mixed $input): mixed
     {
         try {
@@ -26,6 +27,7 @@ final readonly class ObjectCaster implements Caster
         }
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if (! is_object($input)) {

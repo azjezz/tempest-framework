@@ -16,11 +16,13 @@ final readonly class NotIn implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return new In($this->values, true)->isValid($value);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value cannot be any of: ' . implode(', ', $this->values);

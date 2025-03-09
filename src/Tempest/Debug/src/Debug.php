@@ -67,7 +67,7 @@ final readonly class Debug
             mkdir(directory: $directory, recursive: true);
         }
 
-        $handle = @fopen($this->logConfig->debugLogPath, 'a');
+        $handle = fopen($this->logConfig->debugLogPath, 'a');
 
         if (! $handle) {
             return;

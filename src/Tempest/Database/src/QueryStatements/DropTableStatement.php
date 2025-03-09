@@ -31,6 +31,7 @@ final class DropTableStatement implements QueryStatement
         return new self($modelClass::table()->tableName);
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         $statements = [];

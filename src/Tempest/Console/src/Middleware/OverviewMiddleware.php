@@ -26,6 +26,7 @@ final readonly class OverviewMiddleware implements ConsoleMiddleware
     ) {
     }
 
+    #[\Override]
     public function __invoke(Invocation $invocation, ConsoleMiddlewareCallable $next): ExitCode|int
     {
         if (! $invocation->argumentBag->getCommandName()) {

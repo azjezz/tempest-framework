@@ -29,6 +29,7 @@ final readonly class TableName implements Stringable
         return new self($this->tableName, $as);
     }
 
+    #[\Override]
     public function __toString(): string
     {
         $string = "`{$this->tableName}`";

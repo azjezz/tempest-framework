@@ -10,6 +10,7 @@ use Tempest\Container\Singleton;
 
 final readonly class CacheInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Cache|ProjectCache
     {

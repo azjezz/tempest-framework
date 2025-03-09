@@ -6,6 +6,7 @@ namespace Tempest\Vite\TagsResolver;
 
 final class NullTagsResolver implements TagsResolver
 {
+    #[\Override]
     public function resolveTags(array $entrypoints): array
     {
         return [];

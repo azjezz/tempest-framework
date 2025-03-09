@@ -15,6 +15,7 @@ final class ConsoleInstaller implements Installer
 
     private(set) string $name = 'console';
 
+    #[\Override]
     public function install(): void
     {
         $this->installMainNamespace();

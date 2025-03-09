@@ -9,6 +9,7 @@ use Tempest\Container\Initializer;
 
 final readonly class SessionIdResolverInitializer implements Initializer
 {
+    #[\Override]
     public function initialize(Container $container): SessionIdResolver
     {
         $config = $container->get(SessionConfig::class);

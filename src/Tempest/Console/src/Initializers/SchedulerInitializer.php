@@ -18,6 +18,7 @@ use Tempest\Core\ShellExecutor;
 
 final readonly class SchedulerInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Scheduler
     {

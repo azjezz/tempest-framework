@@ -21,11 +21,13 @@ final class PhpDataElement implements Element, WrapsElement
     ) {
     }
 
+    #[\Override]
     public function getWrappingElement(): Element
     {
         return $this->wrappingElement;
     }
 
+    #[\Override]
     public function compile(): string
     {
         $name = ltrim($this->name, ':');

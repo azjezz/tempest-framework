@@ -14,6 +14,7 @@ final class MemoryOutputBuffer implements OutputBuffer
     {
     }
 
+    #[\Override]
     public function write(string $contents): void
     {
         $this->buffer[] = $contents;

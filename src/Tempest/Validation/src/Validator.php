@@ -78,11 +78,13 @@ final readonly class Validator
             ) {
             }
 
+            #[\Override]
             public function isValid(mixed $value): bool
             {
                 return $this->isValid;
             }
 
+            #[\Override]
             public function message(): string
             {
                 return $this->message;

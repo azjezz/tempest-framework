@@ -12,6 +12,7 @@ use Tempest\EventBus\EventBus;
 
 final readonly class LoggerInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): LoggerInterface|Logger
     {

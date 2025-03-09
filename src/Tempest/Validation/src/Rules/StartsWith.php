@@ -15,11 +15,13 @@ final readonly class StartsWith implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return str_starts_with($value, $this->needle);
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should start with {$this->needle}";

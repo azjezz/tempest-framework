@@ -155,7 +155,7 @@ namespace Tempest\Support\Regex {
     function call_preg(string $function, Closure $closure): mixed
     {
         error_clear_last();
-        $result = @$closure();
+        $result = $closure();
 
         if ($error = get_preg_error($function)) {
             if ($error['pattern_message'] !== null) {

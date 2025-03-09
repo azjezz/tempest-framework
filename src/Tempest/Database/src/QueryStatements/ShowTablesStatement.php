@@ -20,6 +20,7 @@ final readonly class ShowTablesStatement implements QueryStatement
         return new Query($this->compile($dialect))->fetch();
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return match ($dialect) {

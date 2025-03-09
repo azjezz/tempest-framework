@@ -50,6 +50,7 @@ final readonly class ConsoleApplication implements Application
         return $application;
     }
 
+    #[\Override]
     public function run(): void
     {
         try {

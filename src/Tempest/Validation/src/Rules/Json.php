@@ -16,6 +16,7 @@ final readonly class Json implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $arguments = ['json' => $value];
@@ -31,6 +32,7 @@ final readonly class Json implements Rule
         return json_validate(...$arguments);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a valid JSON string';

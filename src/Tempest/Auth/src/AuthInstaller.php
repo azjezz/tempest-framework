@@ -15,6 +15,7 @@ final class AuthInstaller implements Installer
 
     private(set) string $name = 'auth';
 
+    #[\Override]
     public function install(): void
     {
         $publishFiles = [

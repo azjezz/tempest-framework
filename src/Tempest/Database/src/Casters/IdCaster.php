@@ -10,6 +10,7 @@ use Tempest\Mapper\Exceptions\CannotSerializeValue;
 
 final readonly class IdCaster implements Caster
 {
+    #[\Override]
     public function cast(mixed $input): Id
     {
         if ($input instanceof Id) {
@@ -19,6 +20,7 @@ final readonly class IdCaster implements Caster
         return new Id($input);
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if (! ($input instanceof Id)) {

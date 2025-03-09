@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class MACAddress implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return boolval(filter_var($value, FILTER_VALIDATE_MAC));
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a valid MAC Address';

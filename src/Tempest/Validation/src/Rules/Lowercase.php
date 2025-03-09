@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class Lowercase implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return $value === mb_strtolower($value);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a lowercase string';

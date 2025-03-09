@@ -14,6 +14,7 @@ final readonly class TempestTerminalTheme implements TerminalTheme
 {
     use EscapesTerminalTheme;
 
+    #[\Override]
     public function before(TokenType $tokenType): string
     {
         if ($tokenType instanceof DynamicTokenType) {
@@ -36,6 +37,7 @@ final readonly class TempestTerminalTheme implements TerminalTheme
         };
     }
 
+    #[\Override]
     public function after(TokenType $tokenType): string
     {
         if ($tokenType instanceof DynamicTokenType) {

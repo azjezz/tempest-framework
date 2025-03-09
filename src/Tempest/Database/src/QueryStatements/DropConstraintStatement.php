@@ -15,6 +15,7 @@ final readonly class DropConstraintStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         [$foreignTable] = explode('.', $this->foreign);

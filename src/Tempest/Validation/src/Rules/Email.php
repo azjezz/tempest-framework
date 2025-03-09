@@ -18,6 +18,7 @@ final readonly class Email implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $emailValidator = new EmailValidator();
@@ -25,6 +26,7 @@ final readonly class Email implements Rule
         return $emailValidator->isValid($value, $this->validationMethod);
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a valid email address';

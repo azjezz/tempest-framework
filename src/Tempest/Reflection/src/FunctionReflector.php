@@ -32,6 +32,7 @@ final readonly class FunctionReflector implements Reflector
         }
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->reflectionFunction->getName();

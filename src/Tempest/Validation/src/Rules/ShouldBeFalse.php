@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class ShouldBeFalse implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return $value === false || $value === 'false' || $value === 0 || $value === '0';
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should represent a boolean false value.';

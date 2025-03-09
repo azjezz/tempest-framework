@@ -13,6 +13,7 @@ use Twig\Loader\FilesystemLoader;
 
 final readonly class TwigInitializer implements DynamicInitializer
 {
+    #[\Override]
     public function canInitialize(ClassReflector $class): bool
     {
         if (! class_exists(Environment::class)) {
@@ -22,6 +23,7 @@ final readonly class TwigInitializer implements DynamicInitializer
         return $class->getName() === Environment::class;
     }
 
+    #[\Override]
     #[Singleton]
     public function initialize(ClassReflector $class, Container $container): object
     {

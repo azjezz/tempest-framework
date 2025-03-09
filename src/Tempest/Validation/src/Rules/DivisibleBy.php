@@ -15,6 +15,7 @@ final readonly class DivisibleBy implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         if (! is_numeric($value) || $value === 0) {
@@ -24,6 +25,7 @@ final readonly class DivisibleBy implements Rule
         return new MultipleOf($this->divisor)->isValid($value);
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should be divisible by {$this->divisor}";

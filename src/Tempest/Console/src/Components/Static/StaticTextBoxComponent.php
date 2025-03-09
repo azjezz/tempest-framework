@@ -15,6 +15,7 @@ final readonly class StaticTextBoxComponent implements StaticConsoleComponent
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): ?string
     {
         if (! $console->supportsPrompting()) {

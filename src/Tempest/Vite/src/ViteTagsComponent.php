@@ -7,17 +7,19 @@ namespace Tempest\Vite;
 use Tempest\View\Elements\ViewComponentElement;
 use Tempest\View\ViewComponent;
 
-final class ViteTagsComponent implements ViewComponent
+final readonly class ViteTagsComponent implements ViewComponent
 {
-    public function __construct(private readonly ViteConfig $viteConfig)
+    public function __construct(private  ViteConfig $viteConfig)
     {
     }
 
+    #[\Override]
     public static function getName(): string
     {
         return 'x-vite-tags';
     }
 
+    #[\Override]
     public function compile(ViewComponentElement $element): string
     {
         $entrypoints = match (true) {

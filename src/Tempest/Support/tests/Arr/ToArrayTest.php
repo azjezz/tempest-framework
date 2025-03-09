@@ -55,16 +55,19 @@ final class ToArrayTest extends TestCase
                 2 => 'two',
             ];
 
+            #[\Override]
             public function offsetExists($offset): bool
             {
                 return isset($this->data[$offset]);
             }
 
+            #[\Override]
             public function offsetGet($offset): mixed
             {
                 return $this->data[$offset] ?? null;
             }
 
+            #[\Override]
             public function offsetSet($offset, $value): void
             {
                 if (is_null($offset)) {
@@ -74,11 +77,13 @@ final class ToArrayTest extends TestCase
                 }
             }
 
+            #[\Override]
             public function offsetUnset($offset): void
             {
                 unset($this->data[$offset]);
             }
 
+            #[\Override]
             public function count(): int
             {
                 return count($this->data);
@@ -95,16 +100,19 @@ final class ToArrayTest extends TestCase
                 'key' => 'value',
             ];
 
+            #[\Override]
             public function offsetExists($offset): bool
             {
                 return isset($this->data[$offset]);
             }
 
+            #[\Override]
             public function offsetGet($offset): mixed
             {
                 return $this->data[$offset] ?? null;
             }
 
+            #[\Override]
             public function offsetSet($offset, $value): void
             {
                 if (is_null($offset)) {
@@ -114,6 +122,7 @@ final class ToArrayTest extends TestCase
                 }
             }
 
+            #[\Override]
             public function offsetUnset($offset): void
             {
                 unset($this->data[$offset]);

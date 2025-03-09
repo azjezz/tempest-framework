@@ -12,6 +12,7 @@ use Tempest\Highlight\Themes\CssTheme;
 
 final readonly class WebHighlighterInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton(tag: 'web')]
     public function initialize(Container $container): Highlighter
     {

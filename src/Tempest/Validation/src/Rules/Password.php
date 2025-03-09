@@ -22,6 +22,7 @@ final readonly class Password implements Rule
         $this->min = max(1, $min);
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         if (! is_string($value)) {
@@ -54,6 +55,7 @@ final readonly class Password implements Rule
     /**
      * @return string[]
      */
+    #[\Override]
     public function message(): array
     {
         $messages = ["Value should contain at least {$this->min} characters"];

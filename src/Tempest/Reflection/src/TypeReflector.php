@@ -110,6 +110,7 @@ final readonly class TypeReflector implements Reflector
         return is_a($this->cleanDefinition, $className, true);
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->definition;

@@ -87,11 +87,13 @@ final readonly class DynamicTokenType implements TokenType
         };
     }
 
+    #[\Override]
     public function getValue(): string
     {
         return '';
     }
 
+    #[\Override]
     public function canContain(TokenType $other): bool
     {
         return false;

@@ -11,6 +11,7 @@ use Tempest\Router\Response;
 
 final class HttpMiddlewareStub implements HttpMiddleware
 {
+    #[\Override]
     public function __invoke(Request $request, HttpMiddlewareCallable $next): Response
     {
         return $next($request);

@@ -15,11 +15,13 @@ final readonly class MultipleOf implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return is_int($value) && ($value % $this->divisor) === 0;
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be a multiple of ' . $this->divisor;

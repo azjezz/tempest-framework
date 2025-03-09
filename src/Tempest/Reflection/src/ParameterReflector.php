@@ -20,6 +20,7 @@ final readonly class ParameterReflector implements Reflector
         return $this->reflectionParameter;
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->reflectionParameter->getName();

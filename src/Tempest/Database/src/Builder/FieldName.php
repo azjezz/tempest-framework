@@ -68,6 +68,7 @@ final class FieldName implements Stringable
         return $this->as($tableName . '.' . $this->fieldName);
     }
 
+    #[\Override]
     public function __toString(): string
     {
         $tableName = $this->tableName->as ?? $this->tableName->tableName;

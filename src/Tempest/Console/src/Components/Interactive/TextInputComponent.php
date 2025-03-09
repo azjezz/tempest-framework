@@ -47,6 +47,7 @@ final class TextInputComponent implements InteractiveConsoleComponent, HasCursor
         );
     }
 
+    #[\Override]
     public function render(Terminal $terminal): string
     {
         return $this->renderer->render(
@@ -69,11 +70,13 @@ final class TextInputComponent implements InteractiveConsoleComponent, HasCursor
         ];
     }
 
+    #[\Override]
     public function getCursorPosition(Terminal $terminal): Point
     {
         return $this->renderer->getCursorPosition($terminal, $this->buffer);
     }
 
+    #[\Override]
     public function cursorVisible(): bool
     {
         return true;

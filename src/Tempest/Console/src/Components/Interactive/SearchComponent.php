@@ -64,6 +64,7 @@ final class SearchComponent implements InteractiveConsoleComponent, HasCursor, H
         );
     }
 
+    #[\Override]
     public function render(Terminal $terminal): string
     {
         $this->updateQuery();
@@ -110,11 +111,13 @@ final class SearchComponent implements InteractiveConsoleComponent, HasCursor, H
         ];
     }
 
+    #[\Override]
     public function getCursorPosition(Terminal $terminal): Point
     {
         return $this->renderer->getCursorPosition($terminal, $this->buffer);
     }
 
+    #[\Override]
     public function cursorVisible(): bool
     {
         return $this->bufferEnabled;

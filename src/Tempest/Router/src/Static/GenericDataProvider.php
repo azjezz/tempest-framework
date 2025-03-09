@@ -9,6 +9,7 @@ use Tempest\Router\DataProvider;
 
 final readonly class GenericDataProvider implements DataProvider
 {
+    #[\Override]
     public function provide(): Generator
     {
         yield [];

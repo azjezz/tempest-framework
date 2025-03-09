@@ -18,6 +18,7 @@ final class InstallerDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if ($class->implements(Installer::class)) {
@@ -25,6 +26,7 @@ final class InstallerDiscovery implements Discovery
         }
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as $className) {

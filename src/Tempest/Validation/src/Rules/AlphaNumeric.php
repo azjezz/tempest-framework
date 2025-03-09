@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class AlphaNumeric implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return boolval(preg_match('/^[A-Za-z0-9]+$/', $value));
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should only contain alphanumeric characters';

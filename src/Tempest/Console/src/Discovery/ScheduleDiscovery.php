@@ -21,6 +21,7 @@ final class ScheduleDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         foreach ($class->getPublicMethods() as $method) {
@@ -36,6 +37,7 @@ final class ScheduleDiscovery implements Discovery
         }
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as [$method, $command, $schedule]) {

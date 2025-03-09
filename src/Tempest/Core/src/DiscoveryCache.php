@@ -56,6 +56,7 @@ final class DiscoveryCache implements Cache
         return $this->pool;
     }
 
+    #[\Override]
     public function isEnabled(): bool
     {
         if (! $this->isValid()) {
@@ -74,6 +75,7 @@ final class DiscoveryCache implements Cache
         return $this->cacheConfig->discoveryCache->isValid();
     }
 
+    #[\Override]
     public function clear(): void
     {
         $this->parentClear();

@@ -89,6 +89,7 @@ final class AlterTableStatement implements QueryStatement
         return $this;
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         if ($this->statements !== []) {

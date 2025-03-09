@@ -14,6 +14,7 @@ final readonly class TwigViewRenderer implements ViewRenderer
     {
     }
 
+    #[\Override]
     public function render(View|string|null $view): string
     {
         if ($view === null) {

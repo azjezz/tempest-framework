@@ -9,6 +9,7 @@ use Throwable;
 
 final class HttpProductionErrorHandler implements ErrorHandler
 {
+    #[\Override]
     public function handleException(Throwable $throwable): void
     {
         ll($throwable);
@@ -16,6 +17,7 @@ final class HttpProductionErrorHandler implements ErrorHandler
         $this->showErrorPage();
     }
 
+    #[\Override]
     public function handleError(int $errNo, string $errstr, string $errFile, int $errLine): void
     {
         ll("{$errFile}:{$errLine} {$errstr} ({$errNo})");

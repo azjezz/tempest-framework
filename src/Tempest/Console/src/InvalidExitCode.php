@@ -13,6 +13,7 @@ final class InvalidExitCode extends Exception implements HasExitCode
         parent::__construct("An exit code should be between 0 and 255. Instead got {$original}");
     }
 
+    #[\Override]
     public function getExitCode(): ExitCode
     {
         return ExitCode::INVALID_EXIT_CODE;

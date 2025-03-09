@@ -20,6 +20,7 @@ final class ViewComponentDiscovery implements Discovery, DiscoversPath
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if (! $class->implements(ViewComponent::class)) {
@@ -32,6 +33,7 @@ final class ViewComponentDiscovery implements Discovery, DiscoversPath
         ]);
     }
 
+    #[\Override]
     public function discoverPath(DiscoveryLocation $location, string $path): void
     {
         if (! str_ends_with($path, '.view.php')) {
@@ -67,6 +69,7 @@ final class ViewComponentDiscovery implements Discovery, DiscoversPath
         ]);
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as [$name, $viewComponent]) {

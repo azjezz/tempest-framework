@@ -19,6 +19,7 @@ final readonly class DataAttribute implements Attribute
     ) {
     }
 
+    #[\Override]
     public function apply(Element $element): Element
     {
         $value = str($element->getAttribute($this->name));

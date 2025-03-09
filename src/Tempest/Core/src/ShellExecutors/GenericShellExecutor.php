@@ -8,6 +8,7 @@ use Tempest\Core\ShellExecutor;
 
 final class GenericShellExecutor implements ShellExecutor
 {
+    #[\Override]
     public function execute(string $command): void
     {
         shell_exec($command);

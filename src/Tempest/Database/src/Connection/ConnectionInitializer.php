@@ -11,6 +11,7 @@ use Tempest\Database\Config\DatabaseConfig;
 
 final class ConnectionInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Connection
     {

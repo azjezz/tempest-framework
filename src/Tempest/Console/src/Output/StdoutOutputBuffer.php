@@ -8,6 +8,7 @@ use Tempest\Console\OutputBuffer;
 
 final readonly class StdoutOutputBuffer implements OutputBuffer
 {
+    #[\Override]
     public function write(string $contents): void
     {
         // Writing to php://stdout will truncate the output at some point,

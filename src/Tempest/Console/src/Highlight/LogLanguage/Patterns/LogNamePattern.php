@@ -18,6 +18,7 @@ final readonly class LogNamePattern implements Pattern
         return '/^(\[.*?\]) (?<match>[\w\.]+)/';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return new DynamicTokenType('underline');

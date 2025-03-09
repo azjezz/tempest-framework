@@ -10,6 +10,7 @@ use Tempest\Container\Singleton;
 
 final readonly class AuthenticatorInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Authenticator
     {

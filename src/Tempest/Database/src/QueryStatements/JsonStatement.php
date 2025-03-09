@@ -17,6 +17,7 @@ final readonly class JsonStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         if ($this->default && json_validate($this->default) === false) {

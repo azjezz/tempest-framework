@@ -18,6 +18,7 @@ final class MapperDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if (! $class->implements(Mapper::class)) {
@@ -27,6 +28,7 @@ final class MapperDiscovery implements Discovery
         $this->discoveryItems->add($location, $class->getName());
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as $className) {

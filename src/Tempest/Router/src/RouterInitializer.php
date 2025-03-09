@@ -11,6 +11,7 @@ use Tempest\Router\Cookie\SetCookieMiddleware;
 
 final readonly class RouterInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Router
     {

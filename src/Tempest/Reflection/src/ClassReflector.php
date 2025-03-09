@@ -91,6 +91,7 @@ final readonly class ClassReflector implements Reflector
     /**
      * @return class-string<TClassName>
      */
+    #[\Override]
     public function getName(): string
     {
         return $this->reflectionClass->getName();

@@ -15,6 +15,7 @@ final class FrameworkInstaller implements Installer
 
     private(set) string $name = 'framework';
 
+    #[\Override]
     public function install(): void
     {
         $this->installMainNamespace();

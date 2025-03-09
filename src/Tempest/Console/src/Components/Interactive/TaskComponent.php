@@ -56,6 +56,7 @@ final class TaskComponent implements InteractiveConsoleComponent, HasStaticCompo
         $this->renderer = new TaskRenderer(new SpinnerRenderer(), $label);
     }
 
+    #[\Override]
     public function render(Terminal $terminal): bool|Generator
     {
         // If there is no task handler, we don't need to fork the process, as
@@ -140,7 +141,7 @@ final class TaskComponent implements InteractiveConsoleComponent, HasStaticCompo
     {
         foreach ($this->sockets as $socket) {
             if (is_resource($socket)) {
-                @fclose($socket);
+                fclose($socket);
             }
         }
 
@@ -189,6 +190,7 @@ final class TaskComponent implements InteractiveConsoleComponent, HasStaticCompo
         return $handler;
     }
 
+    #[\Override]
     public function renderFooter(Terminal $terminal): ?string
     {
         return null;

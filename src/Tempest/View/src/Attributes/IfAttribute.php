@@ -10,6 +10,7 @@ use Tempest\View\Elements\PhpIfElement;
 
 final readonly class IfAttribute implements Attribute
 {
+    #[\Override]
     public function apply(Element $element): Element
     {
         return new PhpIfElement($element);

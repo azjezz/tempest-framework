@@ -18,12 +18,14 @@ final readonly class ModelToQueryMapper implements Mapper
     {
     }
 
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return $to === Query::class && $from instanceof DatabaseModel;
     }
 
     // TODO: refactor to ModelQueryBuilder
+    #[\Override]
     public function map(mixed $from, mixed $to): Query
     {
         /** @var DatabaseModel $model */

@@ -21,6 +21,7 @@ final class RunnableMigrations implements IteratorAggregate
         usort($this->migrations, static fn (DatabaseMigration $a, DatabaseMigration $b) => $a->name <=> $b->name);
     }
 
+    #[\Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->migrations);

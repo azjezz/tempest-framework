@@ -16,6 +16,7 @@ final readonly class DateTimeFormat implements Rule
     {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $value = match ($value instanceof DateTimeInterface) {
@@ -32,6 +33,7 @@ final readonly class DateTimeFormat implements Rule
         return $date && $date->format($this->format) === $value;
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should be a valid datetime in the format {$this->format}";

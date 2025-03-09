@@ -15,11 +15,13 @@ final readonly class AnonymousViewComponent implements ViewComponent
     ) {
     }
 
+    #[\Override]
     public static function getName(): string
     {
         return 'x-component';
     }
 
+    #[\Override]
     public function compile(ViewComponentElement $element): string
     {
         return $this->contents;

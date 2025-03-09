@@ -14,6 +14,7 @@ final readonly class RawStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return $this->statement;

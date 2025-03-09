@@ -15,6 +15,7 @@ final class CommentElement implements Element
     ) {
     }
 
+    #[\Override]
     public function compile(): string
     {
         return sprintf('<!--%s-->', $this->content);

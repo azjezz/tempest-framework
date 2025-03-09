@@ -19,6 +19,7 @@ final readonly class AppendLogChannel implements LogChannel
     ) {
     }
 
+    #[\Override]
     public function getHandlers(Level $level): array
     {
         return [
@@ -32,6 +33,7 @@ final readonly class AppendLogChannel implements LogChannel
         ];
     }
 
+    #[\Override]
     public function getProcessors(): array
     {
         return [

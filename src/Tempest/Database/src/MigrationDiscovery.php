@@ -21,6 +21,7 @@ final class MigrationDiscovery implements Discovery, DiscoversPath
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if (! $class->implements(DatabaseMigration::class)) {
@@ -34,6 +35,7 @@ final class MigrationDiscovery implements Discovery, DiscoversPath
         $this->discoveryItems->add($location, $class->getName());
     }
 
+    #[\Override]
     public function discoverPath(DiscoveryLocation $location, string $path): void
     {
         if (! str_ends_with($path, '.sql')) {
@@ -58,6 +60,7 @@ final class MigrationDiscovery implements Discovery, DiscoversPath
         }
     }
 
+    #[\Override]
     public function apply(): void
     {
         /** @var DatabaseMigration[] $resolved */

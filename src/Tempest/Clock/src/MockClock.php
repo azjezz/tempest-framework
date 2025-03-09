@@ -20,16 +20,19 @@ final class MockClock implements Clock
             : new DateTimeImmutable($now);
     }
 
+    #[\Override]
     public function now(): DateTimeImmutable
     {
         return $this->now;
     }
 
+    #[\Override]
     public function time(): int
     {
         return $this->now->getTimestamp();
     }
 
+    #[\Override]
     public function sleep(int $seconds): void
     {
         $this->now = $this->now->add(

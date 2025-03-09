@@ -17,11 +17,13 @@ final readonly class GenericEventBus implements EventBus
     ) {
     }
 
+    #[\Override]
     public function listen(string|object $event, Closure $handler): void
     {
         $this->eventBusConfig->addClosureHandler($event, $handler);
     }
 
+    #[\Override]
     public function dispatch(string|object $event): void
     {
         $eventHandlers = $this->resolveHandlers($event);

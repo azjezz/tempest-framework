@@ -15,11 +15,13 @@ final readonly class DoesNotStartWith implements Rule
     ) {
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return ! str_starts_with($value, $this->needle);
     }
 
+    #[\Override]
     public function message(): string
     {
         return "Value should not start with {$this->needle}";

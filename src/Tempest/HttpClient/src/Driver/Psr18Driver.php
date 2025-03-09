@@ -26,6 +26,7 @@ final class Psr18Driver implements ClientInterface, HttpClientDriver
     ) {
     }
 
+    #[\Override]
     public function send(Request $request): Response
     {
         $psrRequest = $this->convertTempestRequestToPsrRequest($request);
@@ -35,6 +36,7 @@ final class Psr18Driver implements ClientInterface, HttpClientDriver
         );
     }
 
+    #[\Override]
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
         return $this->client->sendRequest($request);

@@ -16,6 +16,7 @@ enum Alter: string implements QueryStatement
     case REPLACE = 'REPLACE';
     case RENAME = 'RENAME';
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return match ($dialect) {

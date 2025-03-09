@@ -21,6 +21,7 @@ final readonly class CookieSessionIdResolver implements SessionIdResolver
     ) {
     }
 
+    #[\Override]
     public function resolve(): SessionId
     {
         $id = $this->cookies->get(Session::ID)->value ?? null;

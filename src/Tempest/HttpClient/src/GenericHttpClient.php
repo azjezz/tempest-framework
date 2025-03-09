@@ -15,11 +15,13 @@ final class GenericHttpClient implements HttpClient
     {
     }
 
+    #[\Override]
     public function sendRequest(Request $request): Response
     {
         return $this->driver->send($request);
     }
 
+    #[\Override]
     public function get(string $uri, array $headers = []): Response
     {
         return $this->send(
@@ -29,6 +31,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function head(string $uri, array $headers = []): Response
     {
         return $this->send(
@@ -38,6 +41,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function post(string $uri, array $headers = [], ?string $body = null): Response
     {
         return $this->send(
@@ -48,6 +52,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function trace(string $uri, array $headers = []): Response
     {
         return $this->send(
@@ -57,6 +62,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function put(string $uri, array $headers = [], ?string $body = null): Response
     {
         return $this->send(
@@ -67,6 +73,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function patch(string $uri, array $headers = [], ?string $body = null): Response
     {
         return $this->send(
@@ -77,6 +84,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function delete(string $uri, array $headers = [], ?string $body = null): Response
     {
         return $this->send(
@@ -87,6 +95,7 @@ final class GenericHttpClient implements HttpClient
         );
     }
 
+    #[\Override]
     public function options(string $uri, array $headers = [], ?string $body = null): Response
     {
         return $this->send(

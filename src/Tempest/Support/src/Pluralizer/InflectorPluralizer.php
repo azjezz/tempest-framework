@@ -18,6 +18,7 @@ final class InflectorPluralizer implements Pluralizer
         $this->inflector = InflectorFactory::createForLanguage($language)->build();
     }
 
+    #[\Override]
     public function pluralize(Stringable|string $value, int|array|Countable $count = 2): string
     {
         if (is_countable($count)) {
@@ -31,6 +32,7 @@ final class InflectorPluralizer implements Pluralizer
         return $this->matchCase($this->inflector->pluralize((string) $value), $value);
     }
 
+    #[\Override]
     public function singularize(Stringable|string $value): string
     {
         return $this->matchCase($this->inflector->singularize((string) $value), $value);

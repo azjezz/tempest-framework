@@ -55,6 +55,6 @@ final readonly class VarExportPhpFile
 
     public function destroy(): void
     {
-        @unlink($this->filename);
+        unlink($this->filename);
     }
 }

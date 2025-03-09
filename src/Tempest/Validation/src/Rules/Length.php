@@ -20,6 +20,7 @@ final readonly class Length implements Rule
         }
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $length = strlen($value);
@@ -30,6 +31,7 @@ final readonly class Length implements Rule
         return $length >= $min && $length <= $max;
     }
 
+    #[\Override]
     public function message(): string
     {
         if ($this->min && $this->max) {

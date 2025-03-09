@@ -21,6 +21,7 @@ final class InitializerDiscovery implements Discovery
     ) {
     }
 
+    #[\Override]
     public function discover(DiscoveryLocation $location, ClassReflector $class): void
     {
         if (! $class->implements(Initializer::class) && ! $class->implements(DynamicInitializer::class)) {
@@ -30,6 +31,7 @@ final class InitializerDiscovery implements Discovery
         $this->discoveryItems->add($location, $class->getName());
     }
 
+    #[\Override]
     public function apply(): void
     {
         foreach ($this->discoveryItems as $className) {

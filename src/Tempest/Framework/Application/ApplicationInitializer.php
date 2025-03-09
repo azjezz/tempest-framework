@@ -15,6 +15,7 @@ use Tempest\Router\HttpApplication;
 
 final readonly class ApplicationInitializer implements Initializer
 {
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Application
     {

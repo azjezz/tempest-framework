@@ -24,6 +24,7 @@ final class InvalidEnumArgument extends ConsoleException
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): void
     {
         if (is_string($this->value) || is_numeric($this->value)) {

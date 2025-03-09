@@ -19,6 +19,7 @@ final class Point implements Stringable
         return $this->x === $other->x && $this->y === $other->y;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return "[{$this->x},{$this->y}]";

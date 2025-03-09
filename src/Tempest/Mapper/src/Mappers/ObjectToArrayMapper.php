@@ -21,11 +21,13 @@ final readonly class ObjectToArrayMapper implements Mapper
     ) {
     }
 
+    #[\Override]
     public function canMap(mixed $from, mixed $to): bool
     {
         return false;
     }
 
+    #[\Override]
     public function map(mixed $from, mixed $to): array
     {
         $properties = $this->resolveProperties($from);

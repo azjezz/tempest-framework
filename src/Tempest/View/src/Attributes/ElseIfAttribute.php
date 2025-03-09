@@ -13,6 +13,7 @@ use Tempest\View\Exceptions\InvalidElement;
 
 final readonly class ElseIfAttribute implements Attribute
 {
+    #[\Override]
     public function apply(Element $element): ?Element
     {
         $previous = $element->getPrevious()?->unwrap(PhpIfElement::class);

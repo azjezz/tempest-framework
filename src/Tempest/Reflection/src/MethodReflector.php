@@ -49,6 +49,7 @@ final readonly class MethodReflector implements Reflector
         return new ClassReflector($this->reflectionMethod->getDeclaringClass());
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->reflectionMethod->getName();

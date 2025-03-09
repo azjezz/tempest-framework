@@ -15,6 +15,7 @@ final readonly class GenericTagCompiler implements TagCompiler
     ) {
     }
 
+    #[\Override]
     public function compileScriptTag(string $url, ?Chunk $chunk = null): string
     {
         if ($chunk?->isLegacyEntry) {
@@ -27,11 +28,13 @@ final readonly class GenericTagCompiler implements TagCompiler
         ]);
     }
 
+    #[\Override]
     public function compilePrefetchTag(string $script, ?Chunk $chunk = null): string
     {
         return $this->createTag($chunk, tag: 'script', content: $script);
     }
 
+    #[\Override]
     public function compileStyleTag(string $url, ?Chunk $chunk = null): string
     {
         return $this->createTag($chunk, tag: 'link', attributes: [
@@ -40,6 +43,7 @@ final readonly class GenericTagCompiler implements TagCompiler
         ]);
     }
 
+    #[\Override]
     public function compilePreloadTag(string $url, ?Chunk $chunk = null): string
     {
         return $this->createTag($chunk, tag: 'link', attributes: [

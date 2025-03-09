@@ -58,6 +58,7 @@ final class OptionCollection implements Iterator, Countable
         $this->activeOption = array_search($previouslyActiveOption ?? $this->filteredOptions[0] ?? '', $this->filteredOptions, strict: true) ?: 0;
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->filteredOptions);
@@ -72,6 +73,7 @@ final class OptionCollection implements Iterator, Countable
         }
     }
 
+    #[\Override]
     public function next(): void
     {
         $this->activeOption += 1;
@@ -192,21 +194,25 @@ final class OptionCollection implements Iterator, Countable
         ) ?: 0;
     }
 
+    #[\Override]
     public function current(): ?Option
     {
         return $this->getActive();
     }
 
+    #[\Override]
     public function key(): int
     {
         return $this->activeOption;
     }
 
+    #[\Override]
     public function valid(): bool
     {
         return isset($this->filteredOptions[$this->activeOption]);
     }
 
+    #[\Override]
     public function rewind(): void
     {
         $this->activeOption = 0;

@@ -26,6 +26,7 @@ final readonly class GenericScheduler implements Scheduler
         return internal_storage_path('scheduler', 'last-schedule-run.cache.php');
     }
 
+    #[\Override]
     public function run(?DateTime $date = null): void
     {
         $date ??= new DateTime();

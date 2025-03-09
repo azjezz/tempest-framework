@@ -20,6 +20,7 @@ final readonly class DailyLogChannel implements LogChannel
     ) {
     }
 
+    #[\Override]
     public function getHandlers(Level $level): array
     {
         return [
@@ -35,6 +36,7 @@ final readonly class DailyLogChannel implements LogChannel
         ];
     }
 
+    #[\Override]
     public function getProcessors(): array
     {
         return [

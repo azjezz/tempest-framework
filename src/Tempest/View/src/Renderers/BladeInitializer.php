@@ -12,6 +12,7 @@ use Tempest\Reflection\ClassReflector;
 
 final readonly class BladeInitializer implements DynamicInitializer
 {
+    #[\Override]
     public function canInitialize(ClassReflector $class): bool
     {
         if (! class_exists(Blade::class)) {
@@ -21,6 +22,7 @@ final readonly class BladeInitializer implements DynamicInitializer
         return $class->getName() === Blade::class;
     }
 
+    #[\Override]
     #[Singleton]
     public function initialize(ClassReflector $class, Container $container): object
     {

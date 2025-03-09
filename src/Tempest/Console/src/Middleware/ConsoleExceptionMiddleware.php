@@ -18,6 +18,7 @@ final readonly class ConsoleExceptionMiddleware implements ConsoleMiddleware
     ) {
     }
 
+    #[\Override]
     public function __invoke(Invocation $invocation, ConsoleMiddlewareCallable $next): ExitCode|int
     {
         try {

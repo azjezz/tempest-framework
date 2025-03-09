@@ -17,17 +17,20 @@ final readonly class SessionAuthenticator implements Authenticator
     ) {
     }
 
+    #[\Override]
     public function login(CanAuthenticate $user): void
     {
         $this->session->set(self::USER_KEY, $user->getId());
     }
 
+    #[\Override]
     public function logout(): void
     {
         $this->session->remove(self::USER_KEY);
         $this->session->destroy();
     }
 
+    #[\Override]
     public function currentUser(): ?CanAuthenticate
     {
         $id = $this->session->get(self::USER_KEY);

@@ -20,6 +20,7 @@ final readonly class Count implements Rule
         }
     }
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $length = count($value);
@@ -30,6 +31,7 @@ final readonly class Count implements Rule
         return $length >= $min && $length <= $max;
     }
 
+    #[\Override]
     public function message(): string
     {
         if ($this->min && $this->max) {

@@ -9,11 +9,13 @@ use Tempest\View\ViewComponent;
 
 final readonly class Form implements ViewComponent
 {
+    #[\Override]
     public static function getName(): string
     {
         return 'x-form';
     }
 
+    #[\Override]
     public function compile(ViewComponentElement $element): string
     {
         $action = $element->getAttribute('action');

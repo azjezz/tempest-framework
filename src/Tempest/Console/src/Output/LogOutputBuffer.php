@@ -24,6 +24,7 @@ final readonly class LogOutputBuffer implements OutputBuffer
         return file_get_contents($this->path);
     }
 
+    #[\Override]
     public function write(string $contents): void
     {
         $contents = '[' . date('Y-m-d H:i:s') . '] ' . $contents;

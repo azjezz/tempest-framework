@@ -21,6 +21,7 @@ final readonly class FakeCreateTableStatement implements FakeQueryStatement
         return $this;
     }
 
+    #[\Override]
     public function compile(): string
     {
         return '';

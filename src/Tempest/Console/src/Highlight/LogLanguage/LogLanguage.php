@@ -10,21 +10,25 @@ use Tempest\Highlight\Language;
 
 final readonly class LogLanguage implements Language
 {
+    #[\Override]
     public function getName(): string
     {
         return 'log';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

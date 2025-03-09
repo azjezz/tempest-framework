@@ -14,6 +14,7 @@ final class CreateUsersTable implements DatabaseMigration
 {
     private(set) string $name = '0000-00-00_create_users_table';
 
+    #[\Override]
     public function up(): CreateTableStatement
     {
         return new CreateTableStatement('users')
@@ -24,6 +25,7 @@ final class CreateUsersTable implements DatabaseMigration
             ->text('password');
     }
 
+    #[\Override]
     public function down(): DropTableStatement
     {
         return DropTableStatement::forModel(User::class);

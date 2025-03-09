@@ -21,6 +21,7 @@ final class CachedConnectionInitializer implements Initializer
     {
     }
 
+    #[\Override]
     #[Singleton]
     public function initialize(Container $container): Connection
     {

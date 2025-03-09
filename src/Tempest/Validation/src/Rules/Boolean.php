@@ -10,6 +10,7 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class Boolean implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return (
@@ -17,6 +18,7 @@ final readonly class Boolean implements Rule
         );
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should represent a boolean value';

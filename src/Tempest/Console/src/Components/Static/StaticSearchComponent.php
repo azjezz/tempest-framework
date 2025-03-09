@@ -27,6 +27,7 @@ final class StaticSearchComponent implements StaticConsoleComponent
         }
     }
 
+    #[\Override]
     public function render(Console $console): null|array|string
     {
         if (! $console->supportsPrompting()) {

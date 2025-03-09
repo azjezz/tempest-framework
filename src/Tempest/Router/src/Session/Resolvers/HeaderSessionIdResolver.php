@@ -17,6 +17,7 @@ final readonly class HeaderSessionIdResolver implements SessionIdResolver
     ) {
     }
 
+    #[\Override]
     public function resolve(): SessionId
     {
         $id = $this->request->headers[Session::ID] ?? null;

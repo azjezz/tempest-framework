@@ -16,6 +16,7 @@ final readonly class BooleanAttribute implements Attribute
     ) {
     }
 
+    #[\Override]
     public function apply(Element $element): Element
     {
         if (! ($element instanceof GenericElement)) {

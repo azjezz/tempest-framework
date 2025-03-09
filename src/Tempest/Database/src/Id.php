@@ -20,6 +20,7 @@ final readonly class Id implements Stringable
         $this->id = is_numeric($id) ? ((int) $id) : $id;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return "{$this->id}";

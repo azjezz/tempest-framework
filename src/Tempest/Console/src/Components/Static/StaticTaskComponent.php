@@ -19,6 +19,7 @@ final class StaticTaskComponent implements StaticConsoleComponent
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): bool
     {
         $console->keyValue($this->label, new DateTimeImmutable()->format('Y-m-d H:i:s'));

@@ -17,11 +17,13 @@ final class GenericDatabaseMigration implements DatabaseMigration
         $this->name = $this->fileName;
     }
 
+    #[\Override]
     public function up(): QueryStatement
     {
         return new RawStatement($this->content);
     }
 
+    #[\Override]
     public function down(): ?QueryStatement
     {
         return null;

@@ -15,6 +15,7 @@ final readonly class AlterStatement implements QueryStatement
     ) {
     }
 
+    #[\Override]
     public function compile(DatabaseDialect $dialect): string
     {
         return sprintf(

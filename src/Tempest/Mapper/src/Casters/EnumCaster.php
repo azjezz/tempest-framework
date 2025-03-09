@@ -15,6 +15,7 @@ final readonly class EnumCaster implements Caster
     {
     }
 
+    #[\Override]
     public function cast(mixed $input): ?object
     {
         if ($input instanceof $this->enum) {
@@ -28,6 +29,7 @@ final readonly class EnumCaster implements Caster
         return forward_static_call("{$this->enum}::from", $input);
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if ($input instanceof BackedEnum) {

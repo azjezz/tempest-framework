@@ -10,11 +10,13 @@ use Tempest\Validation\Rule;
 #[Attribute]
 final readonly class Even implements Rule
 {
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         return is_int($value) && ($value % 2) === 0;
     }
 
+    #[\Override]
     public function message(): string
     {
         return 'Value should be an even number';

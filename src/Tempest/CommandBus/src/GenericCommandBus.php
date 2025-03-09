@@ -17,6 +17,7 @@ final class GenericCommandBus implements CommandBus
     ) {
     }
 
+    #[\Override]
     public function dispatch(object $command): void
     {
         $commandHandler = $this->getCommandHandler($command);
@@ -57,6 +58,7 @@ final class GenericCommandBus implements CommandBus
         return $this->commandBusConfig->handlers[$command::class] ?? null;
     }
 
+    #[\Override]
     public function getHistory(): array
     {
         return $this->history;

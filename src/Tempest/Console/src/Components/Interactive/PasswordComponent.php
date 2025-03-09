@@ -27,6 +27,7 @@ final class PasswordComponent implements InteractiveConsoleComponent, HasCursor
         $this->renderer = new TextInputRenderer(maximumLines: 1);
     }
 
+    #[\Override]
     public function render(Terminal $terminal): string
     {
         $password = $this->buffer->text;
@@ -46,11 +47,13 @@ final class PasswordComponent implements InteractiveConsoleComponent, HasCursor
         return $render;
     }
 
+    #[\Override]
     public function getCursorPosition(Terminal $terminal): Point
     {
         return $this->renderer->getCursorPosition($terminal, $this->buffer);
     }
 
+    #[\Override]
     public function cursorVisible(): bool
     {
         return true;

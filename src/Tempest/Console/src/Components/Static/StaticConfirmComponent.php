@@ -15,6 +15,7 @@ final readonly class StaticConfirmComponent implements StaticConsoleComponent
     ) {
     }
 
+    #[\Override]
     public function render(Console $console): bool
     {
         if (! $console->supportsPrompting()) {

@@ -9,11 +9,13 @@ use Tempest\Mapper\Exceptions\CannotSerializeValue;
 
 final readonly class BooleanCaster implements Caster
 {
+    #[\Override]
     public function cast(mixed $input): bool
     {
         return boolval($input);
     }
 
+    #[\Override]
     public function serialize(mixed $input): string
     {
         if (! is_bool($input)) {
