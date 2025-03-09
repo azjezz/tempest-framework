@@ -1,0 +1,34 @@
+# Mago configuration file
+# For more information, see https://mago.carthage.software/#/getting-started/configuration
+php_version = "8.4.0"
+
+[source]
+paths = ["src/"]
+includes = ["vendor"]
+excludes = ["**/Fixtures/*"]
+
+[format]
+print_width = 160
+null_type_hint = "question"
+break_promoted_properties_list = false
+space_after_not_operator = true
+space_before_arrow_function_params = true
+always_break_named_arguments_list = false
+preserve_breaking_member_access_chain = true
+preserve_breaking_argument_list = true
+preserve_breaking_array_like = true
+preserve_breaking_parameter_list = true
+preserve_breaking_attribute_list = true
+preserve_breaking_conditional_expression = true
+
+[linter]
+default_plugins = true
+plugins = ["php-unit"]
+
+[[linter.rules]]
+name = "php-unit/strict-assertions"
+level = "off"
+
+[[linter.rules]]
+name = "best-practices/no-unused-parameter"
+level = "off"
