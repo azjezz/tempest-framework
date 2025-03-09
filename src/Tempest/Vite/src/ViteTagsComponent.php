@@ -9,7 +9,7 @@ use Tempest\View\ViewComponent;
 
 final readonly class ViteTagsComponent implements ViewComponent
 {
-    public function __construct(private  ViteConfig $viteConfig)
+    public function __construct(private ViteConfig $viteConfig)
     {
     }
 

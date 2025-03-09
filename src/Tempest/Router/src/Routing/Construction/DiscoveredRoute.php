@@ -28,15 +28,15 @@ final readonly class DiscoveredRoute implements Route
         );
     }
 
-    public  bool $isDynamic;
+    public bool $isDynamic;
 
     private function __construct(
-        public  string $uri,
-        public  Method $method,
-        public  array $parameters,
+        public string $uri,
+        public Method $method,
+        public array $parameters,
         /** @var class-string<HttpMiddleware>[] */
-        public  array $middleware,
-        public  MethodReflector $handler,
+        public array $middleware,
+        public MethodReflector $handler,
     ) {
         $this->isDynamic = $parameters !== [];
     }

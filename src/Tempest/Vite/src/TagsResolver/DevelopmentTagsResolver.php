@@ -17,8 +17,8 @@ final readonly class DevelopmentTagsResolver implements TagsResolver
     public const string CLIENT_SCRIPT_PATH = '@vite/client';
 
     public function __construct(
-        private  ViteBridgeFile $bridgeFile,
-        private  TagCompiler $tagCompiler,
+        private ViteBridgeFile $bridgeFile,
+        private TagCompiler $tagCompiler,
     ) {
     }
 

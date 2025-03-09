@@ -16,7 +16,7 @@ use function Tempest\Support\Arr\wrap;
 final readonly class DependencyInstaller
 {
     public function __construct(
-        private  Console $console,
+        private Console $console,
     ) {
     }
 

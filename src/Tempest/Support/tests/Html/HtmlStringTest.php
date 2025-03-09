@@ -17,7 +17,6 @@ final class HtmlStringTest extends TestCase
 {
     public function test_conversions(): void
     {
-        
         static::assertInstanceOf(MutableString::class, new HtmlString()->toMutableString());
         static::assertInstanceOf(ImmutableString::class, new HtmlString()->toImmutableString());
         static::assertSame('', new HtmlString()->toString());
