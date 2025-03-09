@@ -22,7 +22,7 @@ final class HasConditionsTest extends TestCase
 
         $class->when(true, fn ($c) => $c->value = true); // @phpstan-ignore-line
 
-        $this->assertTrue($class->value);
+        static::assertTrue($class->value);
     }
 
     public function test_when_with_callback(): void
@@ -35,7 +35,7 @@ final class HasConditionsTest extends TestCase
 
         $class->when(fn () => true, fn ($c) => $c->value = true); // @phpstan-ignore-line
 
-        $this->assertTrue($class->value);
+        static::assertTrue($class->value);
     }
 
     public function test_unless(): void
@@ -48,7 +48,7 @@ final class HasConditionsTest extends TestCase
 
         $class->unless(true, fn ($c) => $c->value = true); // @phpstan-ignore-line
 
-        $this->assertFalse($class->value);
+        static::assertFalse($class->value);
     }
 
     public function test_unless_with_callback(): void
@@ -61,7 +61,7 @@ final class HasConditionsTest extends TestCase
 
         $class->unless(fn () => true, fn ($c) => $c->value = true); // @phpstan-ignore-line
 
-        $this->assertFalse($class->value);
+        static::assertFalse($class->value);
     }
 
     public function test_returns_same_instance(): void
@@ -85,6 +85,6 @@ final class HasConditionsTest extends TestCase
             $c->append('bar');
         });
 
-        $this->assertSame('foo', $class->string);
+        static::assertSame('foo', $class->string);
     }
 }

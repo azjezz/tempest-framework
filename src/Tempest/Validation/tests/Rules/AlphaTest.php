@@ -16,9 +16,9 @@ final class AlphaTest extends TestCase
     {
         $rule = new Alpha();
 
-        $this->assertSame('Value should only contain alphabetic characters', $rule->message());
-        $this->assertFalse($rule->isValid('string123'));
-        $this->assertTrue($rule->isValid('string'));
-        $this->assertTrue($rule->isValid('STRING'));
+        static::assertSame('Value should only contain alphabetic characters', $rule->message());
+        static::assertFalse($rule->isValid('string123'));
+        static::assertTrue($rule->isValid('string'));
+        static::assertTrue($rule->isValid('STRING'));
     }
 }

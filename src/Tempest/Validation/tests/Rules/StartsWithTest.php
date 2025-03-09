@@ -16,11 +16,11 @@ final class StartsWithTest extends TestCase
     {
         $rule = new StartsWith(needle: 'ab');
 
-        $this->assertSame('Value should start with ab', $rule->message());
+        static::assertSame('Value should start with ab', $rule->message());
 
-        $this->assertTrue($rule->isValid('ab'));
-        $this->assertTrue($rule->isValid('abc'));
-        $this->assertFalse($rule->isValid('a'));
-        $this->assertFalse($rule->isValid('3434'));
+        static::assertTrue($rule->isValid('ab'));
+        static::assertTrue($rule->isValid('abc'));
+        static::assertFalse($rule->isValid('a'));
+        static::assertFalse($rule->isValid('3434'));
     }
 }

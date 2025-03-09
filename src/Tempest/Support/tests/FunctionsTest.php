@@ -25,7 +25,7 @@ final class FunctionsTest extends TestCase
             $log .= $x->value;
         });
 
-        $this->assertSame($result, $class);
-        $this->assertSame('foo', $log);
+        static::assertSame($result, $class);
+        static::assertSame('foo', $log);
     }
 }

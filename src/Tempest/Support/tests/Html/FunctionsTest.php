@@ -19,51 +19,51 @@ final class FunctionsTest extends TestCase
 {
     public function test_conversions(): void
     {
-        $this->assertInstanceOf(HtmlString::class, create_tag('div'));
-        $this->assertInstanceOf(Stringable::class, create_tag('div'));
-        $this->assertInstanceOf(MutableString::class, create_tag('div')->toMutableString());
-        $this->assertInstanceOf(ImmutableString::class, create_tag('div')->toImmutableString());
-        $this->assertSame('<div></div>', create_tag('div')->toString());
+        static::assertInstanceOf(HtmlString::class, create_tag('div'));
+        static::assertInstanceOf(Stringable::class, create_tag('div'));
+        static::assertInstanceOf(MutableString::class, create_tag('div')->toMutableString());
+        static::assertInstanceOf(ImmutableString::class, create_tag('div')->toImmutableString());
+        static::assertSame('<div></div>', create_tag('div')->toString());
     }
 
     public function test_create_tag(): void
     {
-        $this->assertSame(
+        static::assertSame(
             expected: '<div></div>',
             actual: (string) create_tag('div'),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<button type="submit">OK</button>',
             actual: (string) create_tag('button', ['type' => 'submit'], 'OK'),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<a href="https://example.com">Link</a>',
             actual: (string) create_tag('a', ['href' => 'https://example.com'], 'Link'),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<script src="https://example.com/script.js"></script>',
             actual: (string) create_tag('script', ['src' => 'https://example.com/script.js']),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<link href="https://example.com/style.css" rel="stylesheet" />',
             actual: (string) create_tag('link', ['href' => 'https://example.com/style.css', 'rel' => 'stylesheet']),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<img src="https://example.com/image.jpg" alt="An image" />',
             actual: (string) create_tag('img', ['src' => 'https://example.com/image.jpg', 'alt' => 'An image']),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<input type="checkbox" checked />',
             actual: (string) create_tag('input', ['type' => 'checkbox', 'checked' => true]),
         );
 
-        $this->assertSame(
+        static::assertSame(
             expected: '<input type="checkbox" />',
             actual: (string) create_tag('input', ['type' => 'checkbox', 'checked' => false]),
         );

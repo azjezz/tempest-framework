@@ -40,6 +40,7 @@ abstract class IntegrationTest extends TestCase
 
     protected ViteTester $vite;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -83,6 +84,7 @@ abstract class IntegrationTest extends TestCase
         return $clock;
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         parent::tearDown();

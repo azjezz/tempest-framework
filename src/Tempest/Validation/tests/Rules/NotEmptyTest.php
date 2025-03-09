@@ -16,8 +16,8 @@ final class NotEmptyTest extends TestCase
     {
         $rule = new NotEmpty();
 
-        $this->assertTrue($rule->isValid('t'));
-        $this->assertFalse($rule->isValid(''));
-        $this->assertFalse($rule->isValid(1));
+        static::assertTrue($rule->isValid('t'));
+        static::assertFalse($rule->isValid(''));
+        static::assertFalse($rule->isValid(1));
     }
 }

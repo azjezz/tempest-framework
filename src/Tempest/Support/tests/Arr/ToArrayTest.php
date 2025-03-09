@@ -21,21 +21,21 @@ final class ToArrayTest extends TestCase
     {
         $input = ['a' => 1, 'b' => 2, 'c' => 3];
 
-        $this->assertSame($input, to_array($input));
+        static::assertSame($input, to_array($input));
     }
 
     public function test_null_returns_empty_array(): void
     {
-        $this->assertEquals([], to_array(null));
+        static::assertEquals([], to_array(null));
     }
 
     public function test_scalar_values_are_wrapped_in_array(): void
     {
-        $this->assertEquals(['foo'], to_array(new ImmutableString('foo')));
-        $this->assertEquals([42], to_array(42));
-        $this->assertEquals(['test'], to_array('test'));
-        $this->assertEquals([true], to_array(true));
-        $this->assertEquals([3.14], to_array(3.14));
+        static::assertEquals(['foo'], to_array(new ImmutableString('foo')));
+        static::assertEquals([42], to_array(42));
+        static::assertEquals(['test'], to_array('test'));
+        static::assertEquals([true], to_array(true));
+        static::assertEquals([3.14], to_array(3.14));
     }
 
     public function test_traversable_objects_are_converted_to_arrays(): void
@@ -43,7 +43,7 @@ final class ToArrayTest extends TestCase
         $iterator = new ArrayIterator(['a' => 1, 'b' => 2, 'c' => 3]);
         $expected = ['a' => 1, 'b' => 2, 'c' => 3];
 
-        $this->assertEquals($expected, to_array($iterator));
+        static::assertEquals($expected, to_array($iterator));
     }
 
     public function test_array_access_and_countable_objects_are_converted_to_arrays(): void
@@ -90,7 +90,7 @@ final class ToArrayTest extends TestCase
             }
         };
 
-        $this->assertEquals([0 => 'zero', 1 => 'one', 2 => 'two'], to_array($object));
+        static::assertEquals([0 => 'zero', 1 => 'one', 2 => 'two'], to_array($object));
     }
 
     public function test_array_access_without_traversable_or_countable(): void
@@ -129,7 +129,7 @@ final class ToArrayTest extends TestCase
             }
         };
 
-        $this->assertEquals([$object], to_array($object));
+        static::assertEquals([$object], to_array($object));
     }
 
     public function test_regular_object_is_wrapped(): void
@@ -140,6 +140,6 @@ final class ToArrayTest extends TestCase
             public $baz = 42;
         };
 
-        $this->assertEquals([$object], to_array($object));
+        static::assertEquals([$object], to_array($object));
     }
 }

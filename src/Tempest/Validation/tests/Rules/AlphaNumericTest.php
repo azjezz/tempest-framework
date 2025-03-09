@@ -16,9 +16,9 @@ final class AlphaNumericTest extends TestCase
     {
         $rule = new AlphaNumeric();
 
-        $this->assertSame('Value should only contain alphanumeric characters', $rule->message());
-        $this->assertFalse($rule->isValid('string_123'));
-        $this->assertTrue($rule->isValid('string123'));
-        $this->assertTrue($rule->isValid('STRING123'));
+        static::assertSame('Value should only contain alphanumeric characters', $rule->message());
+        static::assertFalse($rule->isValid('string_123'));
+        static::assertTrue($rule->isValid('string123'));
+        static::assertTrue($rule->isValid('STRING123'));
     }
 }

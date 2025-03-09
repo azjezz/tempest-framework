@@ -16,10 +16,10 @@ final class ArrayListTest extends TestCase
     {
         $rule = new ArrayList();
 
-        $this->assertFalse($rule->isValid(['foo' => 'bar']));
-        $this->assertTrue($rule->isValid([]));
-        $this->assertTrue($rule->isValid(['a', 'b', 'c']));
-        $this->assertFalse($rule->isValid([0 => 'a', 1 => 'b', 3 => 'c']));
-        $this->assertSame('Value must be a list', $rule->message());
+        static::assertFalse($rule->isValid(['foo' => 'bar']));
+        static::assertTrue($rule->isValid([]));
+        static::assertTrue($rule->isValid(['a', 'b', 'c']));
+        static::assertFalse($rule->isValid([0 => 'a', 1 => 'b', 3 => 'c']));
+        static::assertSame('Value must be a list', $rule->message());
     }
 }

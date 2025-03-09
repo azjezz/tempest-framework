@@ -16,13 +16,13 @@ final class JSONTest extends TestCase
     public function test_it_returns_true_for_valid_json_string(): void
     {
         $rule = new Json();
-        $this->assertTrue($rule->isValid('{"test": "test"}'));
+        static::assertTrue($rule->isValid('{"test": "test"}'));
     }
 
     public function test_it_returns_false_for_invalid_json_string(): void
     {
         $rule = new Json();
-        $this->assertFalse($rule->isValid('{"test": test}'));
+        static::assertFalse($rule->isValid('{"test": test}'));
     }
 
     public function test_it_allows_to_specify_depth(): void
@@ -44,6 +44,6 @@ final class JSONTest extends TestCase
     public function test_it_returns_the_proper_message(): void
     {
         $rule = new Json();
-        $this->assertEquals('Value should be a valid JSON string', $rule->message());
+        static::assertEquals('Value should be a valid JSON string', $rule->message());
     }
 }

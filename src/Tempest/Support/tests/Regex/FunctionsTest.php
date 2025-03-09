@@ -31,7 +31,7 @@ final class FunctionsTest extends TestCase
     #[TestWith([false, 'hello', '/[^.]+\.[^.]+$/'])]
     public function test_matches(bool $expected, string $subject, string $pattern, int $offset = 0): void
     {
-        $this->assertSame($expected, matches($subject, $pattern, $offset));
+        static::assertSame($expected, matches($subject, $pattern, $offset));
     }
 
     public function test_matches_with_invalid_pattern(): void
@@ -47,13 +47,13 @@ final class FunctionsTest extends TestCase
     #[TestWith(['Hello, World!', 'Hello, World!', '/foo/', 'bar'])]
     public function test_replace(string $expected, string $subject, string $pattern, string $replacement): void
     {
-        $this->assertSame($expected, replace($subject, $pattern, $replacement));
+        static::assertSame($expected, replace($subject, $pattern, $replacement));
     }
 
     public function test_replace_with_callback(): void
     {
-        $this->assertSame('Hello, Jon!', replace('Hello, World!', '/World/', fn () => 'Jon'));
-        $this->assertSame('Count: 2', replace('Count: 1', '/\d/', fn (array $matches) => $matches[0] + 1));
+        static::assertSame('Hello, Jon!', replace('Hello, World!', '/World/', fn () => 'Jon'));
+        static::assertSame('Count: 2', replace('Count: 1', '/\d/', fn (array $matches) => $matches[0] + 1));
     }
 
     public function test_replace_with_invalid_pattern(): void
@@ -73,7 +73,7 @@ final class FunctionsTest extends TestCase
     #[TestWith(['Hello, World!', 'Hello, World!', ['/foo/' => 'bar']])]
     public function test_replace_every(string $expected, string $subject, array $replacements): void
     {
-        $this->assertSame($expected, replace_every($subject, $replacements));
+        static::assertSame($expected, replace_every($subject, $replacements));
     }
 
     public function test_replace_every_with_invalid_pattern(): void
@@ -87,12 +87,12 @@ final class FunctionsTest extends TestCase
     public function test_get_all_matches(): void
     {
         // simple pattern
-        $this->assertSame([['Hello', 'Hello']], get_all_matches('Hello world, Hello universe', '/Hello/'));
+        static::assertSame([['Hello', 'Hello']], get_all_matches('Hello world, Hello universe', '/Hello/'));
 
         // named capture groups
         $regex = '/(?<adjective>quick|lazy) (?<noun>brown|dog)/';
         $matches = get_all_matches('The quick brown fox, then the lazy dog', $regex);
-        $this->assertSame([
+        static::assertSame([
             [
                 'quick brown',
                 'lazy dog',
@@ -116,10 +116,10 @@ final class FunctionsTest extends TestCase
         ], $matches);
 
         // No matches
-        $this->assertSame([], get_all_matches('The quick brown fox, then the lazy dog', '/cat/'));
+        static::assertSame([], get_all_matches('The quick brown fox, then the lazy dog', '/cat/'));
 
         // Mixed captures
-        $this->assertSame(
+        static::assertSame(
             [
                 [
                     'quick brown ',
@@ -154,7 +154,7 @@ final class FunctionsTest extends TestCase
         );
 
         // Test flags
-        $this->assertSame(
+        static::assertSame(
             [
                 [['foobar', 0]],
                 [['foo', 0]],
@@ -163,13 +163,13 @@ final class FunctionsTest extends TestCase
             get_all_matches('foobarbaz', '/(foo)(bar)/', PREG_OFFSET_CAPTURE),
         );
 
-        $this->assertSame([], get_all_matches('abcdef', '/^def/', offset: 3));
+        static::assertSame([], get_all_matches('abcdef', '/^def/', offset: 3));
     }
 
     public function test_match(): void
     {
         $match = get_first_match('10-abc', '/(?<id>\d+-)/')['id'];
 
-        $this->assertSame('10-', $match);
+        static::assertSame('10-', $match);
     }
 }

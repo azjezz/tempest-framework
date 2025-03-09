@@ -32,8 +32,8 @@ final class GenericCommandBusTest extends TestCase
 
         $this->commandBus->dispatch($command);
 
-        $this->assertCount(1, $this->commandBus->getHistory());
-        $this->assertSame($command, $this->commandBus->getHistory()[0]);
+        static::assertCount(1, $this->commandBus->getHistory());
+        static::assertSame($command, $this->commandBus->getHistory()[0]);
     }
 
     public function test_exception_is_thrown_when_command_handler_doesnt_exist(): void
@@ -62,6 +62,7 @@ final class GenericCommandBusTest extends TestCase
         );
     }
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

@@ -27,51 +27,51 @@ final class StatusTest extends TestCase
     {
         $status = Status::code($code);
 
-        $this->assertSame(
+        static::assertSame(
             self::descriptionToStatus($description),
             $status,
         );
 
-        $this->assertSame($description, $status->description());
+        static::assertSame($description, $status->description());
 
         if ($code >= 100 && $code < 200) {
-            $this->assertTrue($status->isInformational());
-            $this->assertFalse($status->isSuccessful());
-            $this->assertFalse($status->isRedirect());
-            $this->assertFalse($status->isClientError());
-            $this->assertFalse($status->isServerError());
+            static::assertTrue($status->isInformational());
+            static::assertFalse($status->isSuccessful());
+            static::assertFalse($status->isRedirect());
+            static::assertFalse($status->isClientError());
+            static::assertFalse($status->isServerError());
         }
 
         if ($code >= 200 && $code < 300) {
-            $this->assertFalse($status->isInformational());
-            $this->assertTrue($status->isSuccessful());
-            $this->assertFalse($status->isRedirect());
-            $this->assertFalse($status->isClientError());
-            $this->assertFalse($status->isServerError());
+            static::assertFalse($status->isInformational());
+            static::assertTrue($status->isSuccessful());
+            static::assertFalse($status->isRedirect());
+            static::assertFalse($status->isClientError());
+            static::assertFalse($status->isServerError());
         }
 
         if ($code >= 300 && $code < 400) {
-            $this->assertFalse($status->isInformational());
-            $this->assertFalse($status->isSuccessful());
-            $this->assertTrue($status->isRedirect());
-            $this->assertFalse($status->isClientError());
-            $this->assertFalse($status->isServerError());
+            static::assertFalse($status->isInformational());
+            static::assertFalse($status->isSuccessful());
+            static::assertTrue($status->isRedirect());
+            static::assertFalse($status->isClientError());
+            static::assertFalse($status->isServerError());
         }
 
         if ($code >= 400 && $code < 500) {
-            $this->assertFalse($status->isInformational());
-            $this->assertFalse($status->isSuccessful());
-            $this->assertFalse($status->isRedirect());
-            $this->assertTrue($status->isClientError());
-            $this->assertFalse($status->isServerError());
+            static::assertFalse($status->isInformational());
+            static::assertFalse($status->isSuccessful());
+            static::assertFalse($status->isRedirect());
+            static::assertTrue($status->isClientError());
+            static::assertFalse($status->isServerError());
         }
 
         if ($code >= 500 && $code < 600) {
-            $this->assertFalse($status->isInformational());
-            $this->assertFalse($status->isSuccessful());
-            $this->assertFalse($status->isRedirect());
-            $this->assertFalse($status->isClientError());
-            $this->assertTrue($status->isServerError());
+            static::assertFalse($status->isInformational());
+            static::assertFalse($status->isSuccessful());
+            static::assertFalse($status->isRedirect());
+            static::assertFalse($status->isClientError());
+            static::assertTrue($status->isServerError());
         }
     }
 

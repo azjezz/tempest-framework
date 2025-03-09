@@ -17,9 +17,9 @@ final class CreatedResponseTest extends TestCase
     {
         $response = new Created(json_encode(['foo' => 'bar']));
 
-        $this->assertSame(Status::CREATED, $response->status);
-        $this->assertSame([], $response->headers);
-        $this->assertSame('{"foo":"bar"}', $response->body);
-        $this->assertNotSame(Status::OK, $response->status);
+        static::assertSame(Status::CREATED, $response->status);
+        static::assertSame([], $response->headers);
+        static::assertSame('{"foo":"bar"}', $response->body);
+        static::assertNotSame(Status::OK, $response->status);
     }
 }

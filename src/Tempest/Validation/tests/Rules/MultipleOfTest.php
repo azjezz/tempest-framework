@@ -16,14 +16,14 @@ final class MultipleOfTest extends TestCase
     {
         $rule = new MultipleOf(5);
 
-        $this->assertTrue($rule->isValid(10));
-        $this->assertTrue($rule->isValid(5));
-        $this->assertTrue($rule->isValid(0));
+        static::assertTrue($rule->isValid(10));
+        static::assertTrue($rule->isValid(5));
+        static::assertTrue($rule->isValid(0));
 
-        $this->assertFalse($rule->isValid(3));
-        $this->assertFalse($rule->isValid(4));
-        $this->assertFalse($rule->isValid(6));
+        static::assertFalse($rule->isValid(3));
+        static::assertFalse($rule->isValid(4));
+        static::assertFalse($rule->isValid(6));
 
-        $this->assertSame('Value should be a multiple of 5', $rule->message());
+        static::assertSame('Value should be a multiple of 5', $rule->message());
     }
 }

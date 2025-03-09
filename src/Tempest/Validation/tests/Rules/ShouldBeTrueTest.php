@@ -16,20 +16,20 @@ final class ShouldBeTrueTest extends TestCase
     {
         $rule = new ShouldBeTrue();
 
-        $this->assertFalse($rule->isValid(false));
-        $this->assertFalse($rule->isValid('false'));
-        $this->assertFalse($rule->isValid(0));
-        $this->assertFalse($rule->isValid('0'));
-        $this->assertTrue($rule->isValid(true));
-        $this->assertTrue($rule->isValid('true'));
-        $this->assertTrue($rule->isValid(1));
-        $this->assertTrue($rule->isValid('1'));
+        static::assertFalse($rule->isValid(false));
+        static::assertFalse($rule->isValid('false'));
+        static::assertFalse($rule->isValid(0));
+        static::assertFalse($rule->isValid('0'));
+        static::assertTrue($rule->isValid(true));
+        static::assertTrue($rule->isValid('true'));
+        static::assertTrue($rule->isValid(1));
+        static::assertTrue($rule->isValid('1'));
     }
 
     public function test_should_be_true_message(): void
     {
         $rule = new ShouldBeTrue();
 
-        $this->assertSame('Value should represent a boolean true value.', $rule->message());
+        static::assertSame('Value should represent a boolean true value.', $rule->message());
     }
 }

@@ -23,7 +23,7 @@ final class InflectorPluralizerTest extends TestCase
     {
         $pluralizer = new InflectorPluralizer();
 
-        $this->assertEquals($expected, $pluralizer->pluralize($value, $count));
+        static::assertEquals($expected, $pluralizer->pluralize($value, $count));
     }
 
     #[TestWith(['Migrations', 'Migration'])]
@@ -32,6 +32,6 @@ final class InflectorPluralizerTest extends TestCase
     {
         $pluralizer = new InflectorPluralizer();
 
-        $this->assertEquals($expected, $pluralizer->singularize($value));
+        static::assertEquals($expected, $pluralizer->singularize($value));
     }
 }

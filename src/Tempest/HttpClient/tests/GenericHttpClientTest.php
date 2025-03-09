@@ -121,6 +121,7 @@ final class GenericHttpClientTest extends TestCase
             ->assertUri('/test-options');
     }
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

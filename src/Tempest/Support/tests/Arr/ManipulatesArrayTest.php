@@ -20,15 +20,15 @@ final class ManipulatesArrayTest extends TestCase
 {
     public function test_wrap(): void
     {
-        $this->assertTrue(arr()->equals([]));
-        $this->assertTrue(arr('a')->equals(['a']));
-        $this->assertTrue(arr(arr('a'))->equals(['a']));
-        $this->assertTrue(arr(['a'])->equals(['a']));
+        static::assertTrue(arr()->equals([]));
+        static::assertTrue(arr('a')->equals(['a']));
+        static::assertTrue(arr(arr('a'))->equals(['a']));
+        static::assertTrue(arr(['a'])->equals(['a']));
     }
 
     public function test_to_array(): void
     {
-        $this->assertSame(['a'], arr('a')->toArray());
+        static::assertSame(['a'], arr('a')->toArray());
     }
 
     public function test_loop(): void
@@ -39,32 +39,32 @@ final class ManipulatesArrayTest extends TestCase
             $i++;
         }
 
-        $this->assertSame(2, $i);
+        static::assertSame(2, $i);
     }
 
     public function test_count(): void
     {
-        $this->assertSame(2, arr(['a', 'b'])->count());
+        static::assertSame(2, arr(['a', 'b'])->count());
     }
 
     public function test_serialize(): void
     {
         $array = ['a', 'b'];
 
-        $this->assertTrue(arr($array)->equals(unserialize(serialize($array))));
+        static::assertTrue(arr($array)->equals(unserialize(serialize($array))));
     }
 
     public function test_array_access(): void
     {
         $array = arr(['a' => 1, 'b' => 2]);
 
-        $this->assertSame(1, $array['a']);
-        $this->assertSame(2, $array['b']);
-        $this->assertTrue(isset($array['a']));
-        $this->assertFalse(isset($array['x']));
+        static::assertSame(1, $array['a']);
+        static::assertSame(2, $array['b']);
+        static::assertTrue(isset($array['a']));
+        static::assertFalse(isset($array['x']));
 
         unset($array['a']);
-        $this->assertFalse(isset($array['a']));
+        static::assertFalse(isset($array['a']));
     }
 
     public function test_get_dot(): void
@@ -75,10 +75,10 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ];
 
-        $this->assertSame('c', arr($array)->get('a.b'));
-        $this->assertInstanceOf(ImmutableArray::class, arr($array)->get('a'));
-        $this->assertNull(arr($array)->get('a.x'));
-        $this->assertSame('default', arr($array)->get('a.x', 'default'));
+        static::assertSame('c', arr($array)->get('a.b'));
+        static::assertInstanceOf(ImmutableArray::class, arr($array)->get('a'));
+        static::assertNull(arr($array)->get('a.x'));
+        static::assertSame('default', arr($array)->get('a.x', 'default'));
     }
 
     public function test_get(): void
@@ -88,8 +88,8 @@ final class ManipulatesArrayTest extends TestCase
             'a' => 'b',
         ];
 
-        $this->assertSame('d', arr($array)->get('b.c'));
-        $this->assertSame('b', arr($array)->get('a'));
+        static::assertSame('d', arr($array)->get('b.c'));
+        static::assertSame('b', arr($array)->get('a'));
     }
 
     public function test_arr_has(): void
@@ -100,9 +100,9 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ];
 
-        $this->assertTrue(arr($array)->has('a.b'));
-        $this->assertTrue(arr($array)->has('a'));
-        $this->assertFalse(arr($array)->has('a.x'));
+        static::assertTrue(arr($array)->has('a.b'));
+        static::assertTrue(arr($array)->has('a'));
+        static::assertFalse(arr($array)->has('a.x'));
     }
 
     public function test_arr_set(): void
@@ -115,8 +115,8 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ];
 
-        $this->assertTrue(arr()->set('a.b.c', 'c')->equals($array));
-        $this->assertTrue(arr($array)->set('a', 'c')->equals(['a' => 'c']));
+        static::assertTrue(arr()->set('a.b.c', 'c')->equals($array));
+        static::assertTrue(arr($array)->set('a', 'c')->equals(['a' => 'c']));
     }
 
     public function test_arr_put_is_alias_of_set(): void
@@ -129,10 +129,10 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ];
 
-        $this->assertTrue(arr()->set('a.b.c', 'c')->equals($array));
-        $this->assertTrue(arr()->put('a.b.c', 'c')->equals($array));
-        $this->assertTrue(arr($array)->set('a', 'c')->equals(['a' => 'c']));
-        $this->assertTrue(arr($array)->put('a', 'c')->equals(['a' => 'c']));
+        static::assertTrue(arr()->set('a.b.c', 'c')->equals($array));
+        static::assertTrue(arr()->put('a.b.c', 'c')->equals($array));
+        static::assertTrue(arr($array)->set('a', 'c')->equals(['a' => 'c']));
+        static::assertTrue(arr($array)->put('a', 'c')->equals(['a' => 'c']));
     }
 
     public function test_unwrap(): void
@@ -149,19 +149,19 @@ final class ManipulatesArrayTest extends TestCase
             'a.b.c' => 'c',
         ];
 
-        $this->assertTrue(arr($input)->unwrap()->equals($expected));
+        static::assertTrue(arr($input)->unwrap()->equals($expected));
     }
 
     public function test_implode(): void
     {
-        $this->assertEquals(str('a,b,c'), arr(['a', 'b', 'c'])->implode(','));
+        static::assertEquals(str('a,b,c'), arr(['a', 'b', 'c'])->implode(','));
     }
 
     #[TestWith([['Jon', 'Jane'], 'Jon and Jane'])]
     #[TestWith([['Jon', 'Jane', 'Jill'], 'Jon, Jane and Jill'])]
     public function test_join(array $initial, string $expected): void
     {
-        $this->assertEquals($expected, arr($initial)->join());
+        static::assertEquals($expected, arr($initial)->join());
     }
 
     #[TestWith([['Jon', 'Jane'], ', ', ' and maybe ', 'Jon and maybe Jane'])]
@@ -169,64 +169,64 @@ final class ManipulatesArrayTest extends TestCase
     #[TestWith([['Jon', 'Jane', 'Jill'], ' + ', null, 'Jon + Jane + Jill'])]
     public function test_join_with_glues(array $initial, string $glue, ?string $finalGlue, string $expected): void
     {
-        $this->assertTrue(arr($initial)->join($glue, $finalGlue)->equals($expected));
+        static::assertTrue(arr($initial)->join($glue, $finalGlue)->equals($expected));
     }
 
     public function test_pop(): void
     {
         $array = arr(['a', 'b', 'c'])->pop($value);
 
-        $this->assertSame('c', $value);
-        $this->assertTrue($array->equals(['a', 'b']));
+        static::assertSame('c', $value);
+        static::assertTrue($array->equals(['a', 'b']));
 
-        $this->assertTrue(arr(['a', 'b', 'c'])->pop()->equals(['a', 'b']));
-        $this->assertTrue(arr()->pop()->isEmpty());
+        static::assertTrue(arr(['a', 'b', 'c'])->pop()->equals(['a', 'b']));
+        static::assertTrue(arr()->pop()->isEmpty());
 
         arr()->pop($value);
-        $this->assertNull($value);
+        static::assertNull($value);
     }
 
     public function test_unshift(): void
     {
         $array = arr(['a', 'b', 'c'])->unshift($value);
 
-        $this->assertSame('a', $value);
-        $this->assertTrue($array->equals(['b', 'c']));
+        static::assertSame('a', $value);
+        static::assertTrue($array->equals(['b', 'c']));
 
-        $this->assertTrue(arr(['a', 'b', 'c'])->unshift()->equals(['b', 'c']));
-        $this->assertTrue(arr()->unshift()->isEmpty());
+        static::assertTrue(arr(['a', 'b', 'c'])->unshift()->equals(['b', 'c']));
+        static::assertTrue(arr()->unshift()->isEmpty());
 
         arr()->unshift($value);
-        $this->assertNull($value);
+        static::assertNull($value);
     }
 
     public function test_last(): void
     {
-        $this->assertSame(null, arr()->last());
-        $this->assertSame('c', arr(['a', 'b', 'c'])->last());
+        static::assertSame(null, arr()->last());
+        static::assertSame('c', arr(['a', 'b', 'c'])->last());
     }
 
     public function test_first(): void
     {
-        $this->assertSame('a', arr(['a', 'b', 'c'])->first());
-        $this->assertSame(null, arr()->first());
+        static::assertSame('a', arr(['a', 'b', 'c'])->first());
+        static::assertSame(null, arr()->first());
     }
 
     public function test_is_empty(): void
     {
-        $this->assertTrue(arr()->isEmpty());
-        $this->assertFalse(arr(['a'])->isEmpty());
+        static::assertTrue(arr()->isEmpty());
+        static::assertFalse(arr(['a'])->isEmpty());
     }
 
     public function test_map(): void
     {
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b'])
                 ->map(fn (string $value) => $value . 'x')
                 ->equals(['ax', 'bx']),
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b'])
                 ->map(fn (string $value, mixed $key) => $value . $key)
                 ->equals(['a0', 'b1']),
@@ -235,13 +235,13 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_map_with_keys(): void
     {
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b'])
                 ->mapWithKeys(fn (mixed $value, mixed $key) => yield $value => $value)
                 ->equals(['a' => 'a', 'b' => 'b']),
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a' => 'a', 'b' => 'b'])
                 ->mapWithKeys(fn (mixed $value, mixed $key) => yield $value)
                 ->equals(['b']),
@@ -257,7 +257,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_values(): void
     {
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a' => 'a', 'b' => 'b'])
                 ->values()
                 ->equals(['a', 'b']),
@@ -266,7 +266,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_filter(): void
     {
-        $this->assertSame(
+        static::assertSame(
             ['a', 'b', '-1', -1, '0', 0],
             arr(['a', false, 'b', '-1', null, -1, '0', 0])
                 ->filter()
@@ -274,14 +274,14 @@ final class ManipulatesArrayTest extends TestCase
                 ->toArray(),
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b', 'c'])
                 ->filter(fn (mixed $value) => $value === 'b')
                 ->values()
                 ->equals(['b']),
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b', 'c'])
                 ->filter(fn (mixed $value, mixed $key) => $key === 1)
                 ->values()
@@ -291,7 +291,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_reverse(): void
     {
-        $this->assertTrue(
+        static::assertTrue(
             arr(['a', 'b', 'c'])
                 ->reverse()
                 ->equals(['c', 'b', 'a']),
@@ -307,7 +307,7 @@ final class ManipulatesArrayTest extends TestCase
                 $string .= $value;
             });
 
-        $this->assertSame('abc', $string);
+        static::assertSame('abc', $string);
 
         $string = '';
 
@@ -316,22 +316,22 @@ final class ManipulatesArrayTest extends TestCase
                 $string .= $key;
             });
 
-        $this->assertSame('012', $string);
+        static::assertSame('012', $string);
     }
 
     public function test_contains(): void
     {
-        $this->assertTrue(arr(['a', 'b', 'c'])->contains('b'));
-        $this->assertFalse(arr(['a', 'b', 'c'])->contains('d'));
+        static::assertTrue(arr(['a', 'b', 'c'])->contains('b'));
+        static::assertFalse(arr(['a', 'b', 'c'])->contains('d'));
     }
 
     public function test_explode(): void
     {
-        $this->assertEquals(['john', 'doe'], ImmutableArray::explode('john doe')->toArray());
-        $this->assertEquals(['john', 'doe'], ImmutableArray::explode(str('john doe'))->toArray());
-        $this->assertEquals(['john doe'], ImmutableArray::explode('john doe', ',')->toArray());
-        $this->assertEquals(['john', 'doe'], ImmutableArray::explode('john, doe', ', ')->toArray());
-        $this->assertEquals(['john, doe'], ImmutableArray::explode('john, doe', '')->toArray());
+        static::assertEquals(['john', 'doe'], ImmutableArray::explode('john doe')->toArray());
+        static::assertEquals(['john', 'doe'], ImmutableArray::explode(str('john doe'))->toArray());
+        static::assertEquals(['john doe'], ImmutableArray::explode('john doe', ',')->toArray());
+        static::assertEquals(['john', 'doe'], ImmutableArray::explode('john, doe', ', ')->toArray());
+        static::assertEquals(['john, doe'], ImmutableArray::explode('john, doe', '')->toArray());
     }
 
     public function test_combine_with_integers(): void
@@ -346,7 +346,7 @@ final class ManipulatesArrayTest extends TestCase
             3 => 6,
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_combine_with_strings(): void
@@ -366,7 +366,7 @@ final class ManipulatesArrayTest extends TestCase
             'last_name' => 'Doe',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_combine_with_associative_arrays(): void
@@ -389,7 +389,7 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 50,
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_combine_with_collection(): void
@@ -403,7 +403,7 @@ final class ManipulatesArrayTest extends TestCase
             'last_name' => 'Doe',
         ];
 
-        $this->assertSame($expected, $combined);
+        static::assertSame($expected, $combined);
     }
 
     public function test_keys(): void
@@ -422,7 +422,7 @@ final class ManipulatesArrayTest extends TestCase
             'framework',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_merge_array(): void
@@ -444,7 +444,7 @@ final class ManipulatesArrayTest extends TestCase
             'framework' => 'Tempest',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_merge_collection(): void
@@ -466,7 +466,7 @@ final class ManipulatesArrayTest extends TestCase
             'framework' => 'Tempest',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_diff_values(): void
@@ -486,7 +486,7 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 42,
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_diff_keys(): void
@@ -506,7 +506,7 @@ final class ManipulatesArrayTest extends TestCase
             'last_name' => 'Doe',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_intersect(): void
@@ -527,7 +527,7 @@ final class ManipulatesArrayTest extends TestCase
             'last_name' => 'Doe',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_intersect_keys(): void
@@ -548,7 +548,7 @@ final class ManipulatesArrayTest extends TestCase
             'last_name' => 'Doe',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_unique_with_basic_item(): void
@@ -571,7 +571,7 @@ final class ManipulatesArrayTest extends TestCase
             'Jane',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_unique_callback(): void
@@ -595,7 +595,7 @@ final class ManipulatesArrayTest extends TestCase
             'Doe',
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_unique_with_associative_array(): void
@@ -615,7 +615,7 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 42,
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_unique_with_arrays(): void
@@ -637,7 +637,7 @@ final class ManipulatesArrayTest extends TestCase
             [3, 4],
         ];
 
-        $this->assertSame($expected, $current);
+        static::assertSame($expected, $current);
     }
 
     public function test_unique_with_key(): void
@@ -649,7 +649,7 @@ final class ManipulatesArrayTest extends TestCase
             ['id' => 3, 'first_name' => 'Jane', 'last_name' => 'Duplicate'],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->unique('first_name')
                 ->values()
@@ -660,7 +660,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->unique('last_name')
                 ->values()
@@ -671,7 +671,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->unique('id')
                 ->values()
@@ -695,7 +695,7 @@ final class ManipulatesArrayTest extends TestCase
             ['id' => 3, 'first_name' => 'Jane', 'last_name' => 'Duplicate'],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->unique('id')
                 ->values()
@@ -710,7 +710,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_unique_unstrict_check(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([
                 42,
                 '42',
@@ -729,7 +729,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_unique_strict_check(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([
                 42,
                 '42',
@@ -750,7 +750,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_unique_with_key_and_strict_check(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([
                 ['id' => 1, 'first_name' => 'John', 'last_name' => 'Doe'],
                 ['id' => '1', 'first_name' => 'John', 'last_name' => 'Doe'],
@@ -805,7 +805,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->unique('author.id')
                 ->values()
@@ -837,7 +837,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_flip(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([
                 'first_name' => 'John',
                 'last_name' => 'Doe',
@@ -853,28 +853,28 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_pad(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([1, 2, 3])
                 ->pad(4, 0)
                 ->toArray(),
             [1, 2, 3, 0],
         );
 
-        $this->assertSame(
+        static::assertSame(
             arr([1, 2, 3, 4, 5])
                 ->pad(4, 0)
                 ->toArray(),
             [1, 2, 3, 4, 5],
         );
 
-        $this->assertSame(
+        static::assertSame(
             arr([1, 2, 3])
                 ->pad(-4, 0)
                 ->toArray(),
             [0, 1, 2, 3],
         );
 
-        $this->assertSame(
+        static::assertSame(
             arr([1, 2, 3, 4, 5])
                 ->pad(-4, 0)
                 ->toArray(),
@@ -886,7 +886,7 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = new ImmutableArray('a');
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('b')->toArray(),
             ['a', 'b'],
         );
@@ -896,37 +896,37 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = new ImmutableArray();
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(1)->toArray(),
             [1],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(2)->toArray(),
             [2],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('')->toArray(),
             [''],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(null)->toArray(),
             [null],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(false)->toArray(),
             [false],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add([])->toArray(),
             [[]],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->add('name')->toArray(),
             expected: ['name'],
         );
@@ -947,12 +947,12 @@ final class ManipulatesArrayTest extends TestCase
             ->push(false)
             ->push(null);
 
-        $this->assertTrue($first_collection->equals($second_collection));
+        static::assertTrue($first_collection->equals($second_collection));
     }
 
     public function test_pluck_without_arrays(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr([
                 'name' => 'John',
                 'age' => 42,
@@ -971,21 +971,21 @@ final class ManipulatesArrayTest extends TestCase
             ['name' => 'Alice', 'age' => 28],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('name')
                 ->toArray(),
             ['John', 'Jane', 'Alice'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('age')
                 ->toArray(),
             [42, 35, 28],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('name', 'age')
                 ->toArray(),
@@ -996,7 +996,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('age', 'name')
                 ->toArray(),
@@ -1043,7 +1043,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('author.name')
                 ->toArray(),
@@ -1057,7 +1057,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('author.name', 'id')
                 ->toArray(),
@@ -1071,7 +1071,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->pluck('author.name', 'author.id')
                 ->toArray(),
@@ -1089,16 +1089,16 @@ final class ManipulatesArrayTest extends TestCase
         $collection = arr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
         $random = $collection->random();
-        $this->assertIsInt($random);
-        $this->assertContains($random, $collection->toArray());
+        static::assertIsInt($random);
+        static::assertContains($random, $collection->toArray());
 
         $randoms = $collection->random(3);
         foreach ($randoms as $value) {
-            $this->assertIsInt($value);
-            $this->assertContains($value, $collection->toArray());
+            static::assertIsInt($value);
+            static::assertContains($value, $collection->toArray());
         }
 
-        $this->assertCount(3, $randoms);
+        static::assertCount(3, $randoms);
     }
 
     public function test_random_with_preserve_keys(): void
@@ -1111,14 +1111,14 @@ final class ManipulatesArrayTest extends TestCase
 
         $randoms = $collection->random(3, preserveKey: true);
 
-        $this->assertCount(3, $randoms);
-        $this->assertArrayHasKey('id', $randoms);
-        $this->assertArrayHasKey('title', $randoms);
-        $this->assertArrayHasKey('author', $randoms);
+        static::assertCount(3, $randoms);
+        static::assertArrayHasKey('id', $randoms);
+        static::assertArrayHasKey('title', $randoms);
+        static::assertArrayHasKey('author', $randoms);
 
         $randoms = $collection->random(2, preserveKey: true);
 
-        $this->assertCount(2, array_intersect_key($collection->toArray(), $randoms->toArray()));
+        static::assertCount(2, array_intersect_key($collection->toArray(), $randoms->toArray()));
     }
 
     public function test_random_on_empty_array(): void
@@ -1150,43 +1150,43 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_is_list(): void
     {
-        $this->assertTrue(arr()->isList());
-        $this->assertTrue(arr(['a', 2, 3])->isList());
-        $this->assertTrue(arr([0 => 'a', 'b'])->isList());
+        static::assertTrue(arr()->isList());
+        static::assertTrue(arr(['a', 2, 3])->isList());
+        static::assertTrue(arr([0 => 'a', 'b'])->isList());
 
-        $this->assertFalse(arr([1 => 'a', 'b'])->isList());
-        $this->assertFalse(arr([1 => 'a', 0 => 'b'])->isList());
-        $this->assertFalse(arr([0 => 'a', 'foo' => 'b'])->isList());
-        $this->assertFalse(arr([0 => 'a', 2 => 'b'])->isList());
+        static::assertFalse(arr([1 => 'a', 'b'])->isList());
+        static::assertFalse(arr([1 => 'a', 0 => 'b'])->isList());
+        static::assertFalse(arr([0 => 'a', 'foo' => 'b'])->isList());
+        static::assertFalse(arr([0 => 'a', 2 => 'b'])->isList());
     }
 
     public function test_is_assoc(): void
     {
-        $this->assertTrue(arr([1 => 'a', 'b'])->isAssociative());
-        $this->assertTrue(arr([1 => 'a', 0 => 'b'])->isAssociative());
-        $this->assertTrue(arr([0 => 'a', 'foo' => 'b'])->isAssociative());
-        $this->assertTrue(arr([0 => 'a', 2 => 'b'])->isAssociative());
+        static::assertTrue(arr([1 => 'a', 'b'])->isAssociative());
+        static::assertTrue(arr([1 => 'a', 0 => 'b'])->isAssociative());
+        static::assertTrue(arr([0 => 'a', 'foo' => 'b'])->isAssociative());
+        static::assertTrue(arr([0 => 'a', 2 => 'b'])->isAssociative());
 
-        $this->assertFalse(arr()->isAssociative());
-        $this->assertFalse(arr([1, 2, 3])->isAssociative());
-        $this->assertFalse(arr(['a', 2, 3])->isAssociative());
-        $this->assertFalse(arr([0 => 'a', 'b'])->isAssociative());
+        static::assertFalse(arr()->isAssociative());
+        static::assertFalse(arr([1, 2, 3])->isAssociative());
+        static::assertFalse(arr(['a', 2, 3])->isAssociative());
+        static::assertFalse(arr([0 => 'a', 'b'])->isAssociative());
 
-        $this->assertTrue(arr([0 => 'a', 'foo' => 'b'])->isAssociative());
-        $this->assertTrue(arr([0 => 'a', 2 => 'b'])->isAssociative());
-        $this->assertTrue(arr(['foo' => 'a', 'baz' => 'b'])->isAssociative());
+        static::assertTrue(arr([0 => 'a', 'foo' => 'b'])->isAssociative());
+        static::assertTrue(arr([0 => 'a', 2 => 'b'])->isAssociative());
+        static::assertTrue(arr(['foo' => 'a', 'baz' => 'b'])->isAssociative());
     }
 
     public function test_remove_with_basic_keys(): void
     {
         $collection = arr([1, 2, 3]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(1)->toArray(),
             [0 => 1, 2 => 3],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove([0, 2])->toArray(),
             [1 => 2],
         );
@@ -1200,12 +1200,12 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove('first_name')->toArray(),
             ['last_name' => 'Doe', 'age' => 42],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(['last_name', 'age'])->toArray(),
             ['first_name' => 'John'],
         );
@@ -1215,7 +1215,7 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = arr([1, 2, 3]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection
                 ->remove(42)
                 ->toArray(),
@@ -1228,7 +1228,7 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection
                 ->remove('foo')
                 ->toArray(),
@@ -1239,7 +1239,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection
                 ->remove(['bar', 'first_name'])
                 ->toArray(),
@@ -1270,15 +1270,15 @@ final class ManipulatesArrayTest extends TestCase
             ->forget('foo')
             ->forget(['bar', 'first_name']);
 
-        $this->assertTrue($first_collection->equals($second_collection));
+        static::assertTrue($first_collection->equals($second_collection));
     }
 
     public function test_shuffle_actually_shuffles(): void
     {
         $array = range('a', 'z');
 
-        $this->assertNotEquals(arr($array)->shuffle()->toArray(), $array);
-        $this->assertNotEquals(arr($array)->shuffle()->toArray(), $array);
+        static::assertNotEquals(arr($array)->shuffle()->toArray(), $array);
+        static::assertNotEquals(arr($array)->shuffle()->toArray(), $array);
     }
 
     public function test_shuffle_keeps_same_values(): void
@@ -1287,7 +1287,7 @@ final class ManipulatesArrayTest extends TestCase
         $shuffled = arr($array)->shuffle()->toArray();
         sort($shuffled);
 
-        $this->assertSame($shuffled, $array);
+        static::assertSame($shuffled, $array);
     }
 
     public function test_sort(): void
@@ -1295,29 +1295,29 @@ final class ManipulatesArrayTest extends TestCase
         $array = arr([1 => 'c', 2 => 'a', 3 => 'b']);
 
         // Test auto-detects key preservation
-        $this->assertSame(
+        static::assertSame(
             ['a', 'b', 'c'],
             arr(['c', 'a', 'b'])->sort()->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             [2 => 'a', 3 => 'b', 1 => 'c'],
             $array->sort()->toArray(),
         );
 
-        $this->assertSame(
+        static::assertSame(
             ['a', 'b', 'c'],
             $array->sort(desc: false, preserveKeys: false)->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             ['c', 'b', 'a'],
             $array->sort(desc: true, preserveKeys: false)->toArray(),
         );
 
-        $this->assertSame(
+        static::assertSame(
             [2 => 'a', 3 => 'b', 1 => 'c'],
             $array->sort(desc: false, preserveKeys: true)->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             [1 => 'c', 3 => 'b', 2 => 'a'],
             $array->sort(desc: true, preserveKeys: true)->toArray(),
         );
@@ -1328,23 +1328,23 @@ final class ManipulatesArrayTest extends TestCase
         $array = arr([1 => 'c', 2 => 'a', 3 => 'b']);
 
         // Test auto-detects key preservation
-        $this->assertSame(
+        static::assertSame(
             ['a', 'b', 'c'],
             arr(['c', 'a', 'b'])->sortByCallback(fn ($a, $b) => $a <=> $b)->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             [2 => 'a', 3 => 'b', 1 => 'c'],
             $array->sortByCallback(fn ($a, $b) => $a <=> $b)->toArray(),
         );
 
-        $this->assertSame(
+        static::assertSame(
             ['a', 'b', 'c'],
             $array->sortByCallback(
                     callback: fn ($a, $b) => $a <=> $b,
                     preserveKeys: false,
                 )->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             [2 => 'a', 3 => 'b', 1 => 'c'],
             $array->sortByCallback(
                     callback: fn ($a, $b) => $a <=> $b,
@@ -1357,11 +1357,11 @@ final class ManipulatesArrayTest extends TestCase
     {
         $array = arr([2 => 'a', 1 => 'c', 3 => 'b']);
 
-        $this->assertSame(
+        static::assertSame(
             [1 => 'c', 2 => 'a', 3 => 'b'],
             $array->sortKeys(desc: false)->toArray(),
         );
-        $this->assertSame(
+        static::assertSame(
             [3 => 'b', 2 => 'a', 1 => 'c'],
             $array->sortKeys(desc: true)->toArray(),
         );
@@ -1371,7 +1371,7 @@ final class ManipulatesArrayTest extends TestCase
     {
         $array = arr([2 => 'a', 1 => 'c', 3 => 'b']);
 
-        $this->assertSame(
+        static::assertSame(
             [1 => 'c', 2 => 'a', 3 => 'b'],
             $array->sortKeysByCallback(fn ($a, $b) => $a <=> $b)->toArray(),
         );
@@ -1379,21 +1379,21 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_flatten(): void
     {
-        $this->assertTrue(arr(['#foo', '#bar', '#baz'])->flatten()->equals(['#foo', '#bar', '#baz']));
-        $this->assertTrue(arr([['#foo', '#bar'], '#baz'])->flatten()->equals(['#foo', '#bar', '#baz']));
-        $this->assertTrue(arr([['#foo', null], '#baz', null])->flatten()->equals(['#foo', null, '#baz', null]));
-        $this->assertTrue(arr([['#foo', '#bar'], ['#baz']])->flatten()->equals(['#foo', '#bar', '#baz']));
-        $this->assertTrue(arr([['#foo', ['#bar']], ['#baz']])->flatten()->equals(['#foo', '#bar', '#baz']));
-        $this->assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten()->equals(['#foo', '#bar', '#baz', '#zap']));
+        static::assertTrue(arr(['#foo', '#bar', '#baz'])->flatten()->equals(['#foo', '#bar', '#baz']));
+        static::assertTrue(arr([['#foo', '#bar'], '#baz'])->flatten()->equals(['#foo', '#bar', '#baz']));
+        static::assertTrue(arr([['#foo', null], '#baz', null])->flatten()->equals(['#foo', null, '#baz', null]));
+        static::assertTrue(arr([['#foo', '#bar'], ['#baz']])->flatten()->equals(['#foo', '#bar', '#baz']));
+        static::assertTrue(arr([['#foo', ['#bar']], ['#baz']])->flatten()->equals(['#foo', '#bar', '#baz']));
+        static::assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten()->equals(['#foo', '#bar', '#baz', '#zap']));
 
-        $this->assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten(depth: 1)->equals(['#foo', ['#bar', ['#baz']], '#zap']));
-        $this->assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten(depth: 2)->equals(['#foo', '#bar', ['#baz'], '#zap']));
+        static::assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten(depth: 1)->equals(['#foo', ['#bar', ['#baz']], '#zap']));
+        static::assertTrue(arr([['#foo', ['#bar', ['#baz']]], '#zap'])->flatten(depth: 2)->equals(['#foo', '#bar', ['#baz'], '#zap']));
     }
 
     public function test_flatmap(): void
     {
         // basic
-        $this->assertTrue(
+        static::assertTrue(
             arr([
                 ['name' => 'Makise', 'hobbies' => ['Science', 'Programming']],
                 ['name' => 'Okabe', 'hobbies' => ['Science', 'Anime']],
@@ -1420,7 +1420,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         ]);
 
-        $this->assertTrue(
+        static::assertTrue(
             $likes
                 ->flatMap(fn (array $person) => $person['likes'], depth: 1)
                 ->equals([
@@ -1431,7 +1431,7 @@ final class ManipulatesArrayTest extends TestCase
                 ]),
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             $likes
                 ->flatMap(fn (array $person) => $person['likes'], depth: INF)
                 ->equals([
@@ -1454,7 +1454,7 @@ final class ManipulatesArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection->reduce(fn ($carry, $value) => $carry . ' ' . $value, 'Hello'),
             'Hello John Doe 42',
         );
@@ -1468,7 +1468,7 @@ final class ManipulatesArrayTest extends TestCase
             [3, 1, 3, 1],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection->reduce('max'),
             [3, 1, 3, 1],
         );
@@ -1476,7 +1476,7 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_empty_array_reduce(): void
     {
-        $this->assertSame(
+        static::assertSame(
             arr()->reduce(fn ($carry, $value) => $carry . ' ' . $value, 'default'),
             'default',
         );
@@ -1486,7 +1486,7 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = arr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->chunk(2, preserveKeys: false)
                 ->map(fn ($chunk) => $chunk->toArray())
@@ -1500,7 +1500,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->chunk(3, preserveKeys: false)
                 ->map(fn ($chunk) => $chunk->toArray())
@@ -1518,7 +1518,7 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = arr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->chunk(2)
                 ->map(fn ($chunk) => $chunk->toArray())
@@ -1532,7 +1532,7 @@ final class ManipulatesArrayTest extends TestCase
             ],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection
                 ->chunk(3)
                 ->map(fn ($chunk) => $chunk->toArray())
@@ -1550,20 +1550,20 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = arr(['apple', 'banana', 'orange']);
 
-        $this->assertSame(1, $collection->findKey('banana'));
-        $this->assertSame(0, $collection->findKey('apple'));
-        $this->assertNull($collection->findKey('grape'));
+        static::assertSame(1, $collection->findKey('banana'));
+        static::assertSame(0, $collection->findKey('apple'));
+        static::assertNull($collection->findKey('grape'));
     }
 
     public function test_find_key_with_strict_comparison(): void
     {
         $collection = arr([1, '1', 2, '2']);
 
-        $this->assertSame(0, $collection->findKey(1, strict: false));
-        $this->assertSame(0, $collection->findKey('1', strict: false));
+        static::assertSame(0, $collection->findKey(1, strict: false));
+        static::assertSame(0, $collection->findKey('1', strict: false));
 
-        $this->assertSame(0, $collection->findKey(1, strict: true));
-        $this->assertSame(1, $collection->findKey('1', strict: true));
+        static::assertSame(0, $collection->findKey(1, strict: true));
+        static::assertSame(1, $collection->findKey('1', strict: true));
     }
 
     public function test_find_key_with_closure(): void
@@ -1575,13 +1575,13 @@ final class ManipulatesArrayTest extends TestCase
         ]);
 
         $result = $collection->findKey(fn ($item) => $item['name'] === 'Jane');
-        $this->assertSame(1, $result);
+        static::assertSame(1, $result);
 
         $result = $collection->findKey(fn ($item, $key) => $key === 2);
-        $this->assertSame(2, $result);
+        static::assertSame(2, $result);
 
         $result = $collection->findKey(fn ($item) => $item['name'] === 'Alice');
-        $this->assertNull($result);
+        static::assertNull($result);
     }
 
     public function test_find_key_with_string_keys(): void
@@ -1592,16 +1592,16 @@ final class ManipulatesArrayTest extends TestCase
             'third' => 'value3',
         ]);
 
-        $this->assertSame('second', $collection->findKey('value2'));
-        $this->assertNull($collection->findKey('value4'));
+        static::assertSame('second', $collection->findKey('value2'));
+        static::assertNull($collection->findKey('value4'));
     }
 
     public function test_find_key_with_null_values(): void
     {
         $collection = arr(['a', null, 'b', '']);
 
-        $this->assertSame(1, $collection->findKey(null));
-        $this->assertSame(1, $collection->findKey(''));
+        static::assertSame(1, $collection->findKey(null));
+        static::assertSame(1, $collection->findKey(''));
     }
 
     public function test_find_key_with_complex_closure(): void
@@ -1616,42 +1616,42 @@ final class ManipulatesArrayTest extends TestCase
             return $item['age'] > 28 && $item['active'] === true;
         });
 
-        $this->assertSame(2, $result);
+        static::assertSame(2, $result);
     }
 
     public function test_find_key_with_empty_array(): void
     {
         $collection = arr([]);
 
-        $this->assertNull($collection->findKey('anything'));
-        $this->assertNull($collection->findKey(fn () => true));
+        static::assertNull($collection->findKey('anything'));
+        static::assertNull($collection->findKey(fn () => true));
     }
 
     public function test_slice(): void
     {
         $collection = arr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection->slice(0, 3)->values()->toArray(),
             [1, 2, 3],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->slice(3)->values()->toArray(),
             [4, 5, 6, 7, 8, 9, 10],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->slice(-3)->values()->toArray(),
             [8, 9, 10],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->slice(-3, 2)->values()->toArray(),
             [8, 9],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->slice(-3, -1)->values()->toArray(),
             [8, 9],
         );
@@ -1659,28 +1659,28 @@ final class ManipulatesArrayTest extends TestCase
 
     public function test_every(): void
     {
-        $this->assertTrue(arr([])->every(fn (int $value) => ($value % 2) === 0));
-        $this->assertTrue(arr([2, 4, 6])->every(fn (int $value) => ($value % 2) === 0));
-        $this->assertFalse(arr([1, 2, 4, 6])->every(fn (int $value) => ($value % 2) === 0));
-        $this->assertTrue(arr([0, 1, true, false, ''])->every());
-        $this->assertFalse(arr([0, 1, true, false, '', null])->every());
+        static::assertTrue(arr([])->every(fn (int $value) => ($value % 2) === 0));
+        static::assertTrue(arr([2, 4, 6])->every(fn (int $value) => ($value % 2) === 0));
+        static::assertFalse(arr([1, 2, 4, 6])->every(fn (int $value) => ($value % 2) === 0));
+        static::assertTrue(arr([0, 1, true, false, ''])->every());
+        static::assertFalse(arr([0, 1, true, false, '', null])->every());
     }
 
     public function test_append(): void
     {
         $collection = arr(['foo', 'bar']);
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->append('foo')->toArray(),
             expected: ['foo', 'bar', 'foo'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->append(1, 'b')->toArray(),
             expected: ['foo', 'bar', 1, 'b'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->append(['a' => 'b'])->toArray(),
             expected: ['foo', 'bar', ['a' => 'b']],
         );
@@ -1690,17 +1690,17 @@ final class ManipulatesArrayTest extends TestCase
     {
         $collection = arr(['foo', 'bar']);
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->prepend('foo')->toArray(),
             expected: ['foo', 'foo', 'bar'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->prepend(1, 'b')->toArray(),
             expected: [1, 'b', 'foo', 'bar'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->prepend(['a' => 'b'])->toArray(),
             expected: [['a' => 'b'], 'foo', 'bar'],
         );
@@ -1715,7 +1715,7 @@ final class ManipulatesArrayTest extends TestCase
             $log[] = $array->first();
         });
 
-        $this->assertSame($collection, $result);
-        $this->assertEquals(['foo'], $log);
+        static::assertSame($collection, $result);
+        static::assertEquals(['foo'], $log);
     }
 }

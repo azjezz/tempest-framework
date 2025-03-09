@@ -16,12 +16,12 @@ final class ImmutableArrayTest extends TestCase
     {
         $collection = new ImmutableArray('a');
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('b')->toArray(),
             ['a', 'b'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('b')->add('c')->toArray(),
             ['a', 'b', 'c'],
         );
@@ -31,37 +31,37 @@ final class ImmutableArrayTest extends TestCase
     {
         $collection = new ImmutableArray();
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(1)->toArray(),
             [1],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(2)->toArray(),
             [2],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('')->toArray(),
             [''],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(null)->toArray(),
             [null],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(false)->toArray(),
             [false],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add([])->toArray(),
             [[]],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->add('name')->toArray(),
             expected: ['name'],
         );
@@ -71,12 +71,12 @@ final class ImmutableArrayTest extends TestCase
     {
         $collection = new ImmutableArray([1, 2, 3]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(1)->toArray(),
             [0 => 1, 2 => 3],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove([0, 2])->toArray(),
             [1 => 2],
         );
@@ -90,12 +90,12 @@ final class ImmutableArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove('first_name')->toArray(),
             ['last_name' => 'Doe', 'age' => 42],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(['last_name', 'age'])->toArray(),
             ['first_name' => 'John'],
         );

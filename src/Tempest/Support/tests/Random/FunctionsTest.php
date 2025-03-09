@@ -19,10 +19,10 @@ final class FunctionsTest extends TestCase
     {
         $random = Random\secure_string(32);
 
-        $this->assertSame(32, mb_strlen($random));
+        static::assertSame(32, mb_strlen($random));
 
         foreach (mb_str_split($random) as $char) {
-            $this->assertTrue(contains('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $char));
+            static::assertTrue(contains('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $char));
         }
     }
 
@@ -30,16 +30,16 @@ final class FunctionsTest extends TestCase
     {
         $random = Random\secure_string(32, 'abc');
 
-        $this->assertSame(32, mb_strlen($random));
+        static::assertSame(32, mb_strlen($random));
 
         foreach (mb_str_split($random) as $char) {
-            $this->assertTrue(contains('abc', $char));
+            static::assertTrue(contains('abc', $char));
         }
     }
 
     public function test_string_early_return_for_zero_length(): void
     {
-        $this->assertSame('', Random\secure_string(0));
+        static::assertSame('', Random\secure_string(0));
     }
 
     public function test_string_alphabet_min(): void

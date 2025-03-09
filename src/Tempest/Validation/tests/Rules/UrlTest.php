@@ -16,31 +16,31 @@ final class UrlTest extends TestCase
     {
         $rule = new Url();
 
-        $this->assertFalse($rule->isValid('this is not a url'));
-        $this->assertFalse($rule->isValid('https://https://example.com'));
-        $this->assertTrue($rule->isValid('https://example.com'));
-        $this->assertTrue($rule->isValid('http://example.com'));
+        static::assertFalse($rule->isValid('this is not a url'));
+        static::assertFalse($rule->isValid('https://https://example.com'));
+        static::assertTrue($rule->isValid('https://example.com'));
+        static::assertTrue($rule->isValid('http://example.com'));
     }
 
     public function test_url_with_restricted_protocols(): void
     {
         $rule = new Url(['https']);
 
-        $this->assertFalse($rule->isValid('http://example.com'));
-        $this->assertTrue($rule->isValid('https://example.com'));
+        static::assertFalse($rule->isValid('http://example.com'));
+        static::assertTrue($rule->isValid('https://example.com'));
     }
 
     public function test_url_with_integer_value(): void
     {
         $rule = new Url();
 
-        $this->assertFalse($rule->isValid(1));
+        static::assertFalse($rule->isValid(1));
     }
 
     public function test_url_message(): void
     {
         $rule = new Url();
 
-        $this->assertSame('Value should be a valid URL', $rule->message());
+        static::assertSame('Value should be a valid URL', $rule->message());
     }
 }

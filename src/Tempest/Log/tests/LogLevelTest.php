@@ -17,7 +17,7 @@ final class LogLevelTest extends TestCase
     #[DataProvider('levelsProvider')]
     public function test_from_monolog(Level $level, LogLevel $expected): void
     {
-        $this->assertSame($expected, LogLevel::fromMonolog($level));
+        static::assertSame($expected, LogLevel::fromMonolog($level));
     }
 
     public static function levelsProvider(): array

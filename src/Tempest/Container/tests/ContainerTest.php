@@ -62,8 +62,8 @@ final class ContainerTest extends TestCase
 
         $b = $container->get(ContainerObjectB::class);
 
-        $this->assertInstanceOf(ContainerObjectB::class, $b);
-        $this->assertInstanceOf(ContainerObjectA::class, $b->a);
+        static::assertInstanceOf(ContainerObjectB::class, $b);
+        static::assertInstanceOf(ContainerObjectA::class, $b->a);
     }
 
     public function test_get_with_definition(): void
@@ -77,7 +77,7 @@ final class ContainerTest extends TestCase
 
         $c = $container->get(ContainerObjectC::class);
 
-        $this->assertEquals('test', $c->prop);
+        static::assertEquals('test', $c->prop);
     }
 
     public function test_get_with_initializer(): void
@@ -88,7 +88,7 @@ final class ContainerTest extends TestCase
 
         $d = $container->get(ContainerObjectD::class);
 
-        $this->assertEquals('test', $d->prop);
+        static::assertEquals('test', $d->prop);
     }
 
     public function test_singleton(): void
@@ -99,11 +99,11 @@ final class ContainerTest extends TestCase
 
         $instance = $container->get(SingletonClass::class);
 
-        $this->assertEquals(1, $instance::$count);
+        static::assertEquals(1, $instance::$count);
 
         $instance = $container->get(SingletonClass::class);
 
-        $this->assertEquals(1, $instance::$count);
+        static::assertEquals(1, $instance::$count);
     }
 
     public function test_initialize_with_can_initializer(): void
@@ -114,7 +114,7 @@ final class ContainerTest extends TestCase
 
         $object = $container->get(ContainerObjectE::class);
 
-        $this->assertInstanceOf(ContainerObjectE::class, $object);
+        static::assertInstanceOf(ContainerObjectE::class, $object);
     }
 
     public function test_call_tries_to_transform_unmatched_values(): void
@@ -125,12 +125,12 @@ final class ContainerTest extends TestCase
         $classToCall = new CallContainerObjectE();
 
         $return = $container->invoke(reflect($classToCall)->getMethod('method'), input: '1');
-        $this->assertInstanceOf(ContainerObjectE::class, $return);
-        $this->assertSame('default', $return->id);
+        static::assertInstanceOf(ContainerObjectE::class, $return);
+        static::assertSame('default', $return->id);
 
         $return = $container->invoke(reflect($classToCall)->getMethod('method'), input: new ContainerObjectE('other'));
-        $this->assertInstanceOf(ContainerObjectE::class, $return);
-        $this->assertSame('other', $return->id);
+        static::assertInstanceOf(ContainerObjectE::class, $return);
+        static::assertSame('other', $return->id);
     }
 
     public function test_arrays_are_automatically_created(): void
@@ -142,7 +142,7 @@ final class ContainerTest extends TestCase
          */
         $class = $container->get(BuiltinArrayClass::class);
 
-        $this->assertEmpty($class->anArray);
+        static::assertEmpty($class->anArray);
     }
 
     public function test_builtin_defaults_are_used(): void
@@ -154,7 +154,7 @@ final class ContainerTest extends TestCase
          */
         $class = $container->get(BuiltinTypesWithDefaultsClass::class);
 
-        $this->assertSame('This is a default value', $class->aString);
+        static::assertSame('This is a default value', $class->aString);
     }
 
     public function test_optional_types_resolve_to_null(): void
@@ -166,7 +166,7 @@ final class ContainerTest extends TestCase
          */
         $class = $container->get(OptionalTypesClass::class);
 
-        $this->assertNull($class->aString);
+        static::assertNull($class->aString);
     }
 
     public function test_union_types_iterate_to_resolution(): void
@@ -176,8 +176,8 @@ final class ContainerTest extends TestCase
         /** @var UnionTypesClass $class */
         $class = $container->get(UnionTypesClass::class);
 
-        $this->assertInstanceOf(UnionTypesClass::class, $class);
-        $this->assertInstanceOf(ContainerObjectA::class, $class->input);
+        static::assertInstanceOf(UnionTypesClass::class, $class);
+        static::assertInstanceOf(ContainerObjectA::class, $class->input);
     }
 
     public function test_singleton_initializers(): void
@@ -187,7 +187,7 @@ final class ContainerTest extends TestCase
 
         $a = $container->get(ContainerObjectE::class);
         $b = $container->get(ContainerObjectE::class);
-        $this->assertSame(spl_object_id($a), spl_object_id($b));
+        static::assertSame(spl_object_id($a), spl_object_id($b));
     }
 
     public function test_union_initializers(): void
@@ -198,8 +198,8 @@ final class ContainerTest extends TestCase
         $a = $container->get(UnionInterfaceA::class);
         $b = $container->get(UnionInterfaceB::class);
 
-        $this->assertInstanceOf(UnionImplementation::class, $a);
-        $this->assertInstanceOf(UnionImplementation::class, $b);
+        static::assertInstanceOf(UnionImplementation::class, $a);
+        static::assertInstanceOf(UnionImplementation::class, $b);
     }
 
     public function test_intersection_initializers(): void
@@ -210,24 +210,24 @@ final class ContainerTest extends TestCase
         $a = $container->get(UnionInterfaceA::class);
         $b = $container->get(UnionInterfaceB::class);
 
-        $this->assertInstanceOf(UnionImplementation::class, $a);
-        $this->assertInstanceOf(UnionImplementation::class, $b);
+        static::assertInstanceOf(UnionImplementation::class, $a);
+        static::assertInstanceOf(UnionImplementation::class, $b);
     }
 
     public function test_circular_with_initializer_log(): void
     {
         $container = new GenericContainer();
         $container->addInitializer(CircularWithInitializerBInitializer::class);
-        $this->assertContains(CircularWithInitializerBInitializer::class, $container->getInitializers());
+        static::assertContains(CircularWithInitializerBInitializer::class, $container->getInitializers());
 
         try {
             $container->get(CircularWithInitializerA::class);
         } catch (CircularDependencyException $circularDependencyException) {
-            $this->assertStringContainsString('CircularWithInitializerA', $circularDependencyException->getMessage());
-            $this->assertStringContainsString('CircularWithInitializerB', $circularDependencyException->getMessage());
-            $this->assertStringContainsString('CircularWithInitializerBInitializer', $circularDependencyException->getMessage());
-            $this->assertStringContainsString('CircularWithInitializerC', $circularDependencyException->getMessage());
-            $this->assertStringContainsString(__FILE__, $circularDependencyException->getMessage());
+            static::assertStringContainsString('CircularWithInitializerA', $circularDependencyException->getMessage());
+            static::assertStringContainsString('CircularWithInitializerB', $circularDependencyException->getMessage());
+            static::assertStringContainsString('CircularWithInitializerBInitializer', $circularDependencyException->getMessage());
+            static::assertStringContainsString('CircularWithInitializerC', $circularDependencyException->getMessage());
+            static::assertStringContainsString(__FILE__, $circularDependencyException->getMessage());
         }
     }
 
@@ -247,8 +247,8 @@ final class ContainerTest extends TestCase
             tag: 'cli',
         );
 
-        $this->assertSame('web', $container->get(TaggedDependency::class, 'web')->name);
-        $this->assertSame('cli', $container->get(TaggedDependency::class, 'cli')->name);
+        static::assertSame('web', $container->get(TaggedDependency::class, 'web')->name);
+        static::assertSame('cli', $container->get(TaggedDependency::class, 'cli')->name);
     }
 
     public function test_tagged_singleton_with_initializer(): void
@@ -257,8 +257,8 @@ final class ContainerTest extends TestCase
         $container->addInitializer(TaggedDependencyWebInitializer::class);
         $container->addInitializer(TaggedDependencyCliInitializer::class);
 
-        $this->assertSame('web', $container->get(TaggedDependency::class, 'web')->name);
-        $this->assertSame('cli', $container->get(TaggedDependency::class, 'cli')->name);
+        static::assertSame('web', $container->get(TaggedDependency::class, 'web')->name);
+        static::assertSame('cli', $container->get(TaggedDependency::class, 'cli')->name);
     }
 
     public function test_tagged_singleton_exception(): void
@@ -276,7 +276,7 @@ final class ContainerTest extends TestCase
         $container->addInitializer(TaggedDependencyWebInitializer::class);
 
         $dependency = $container->get(DependencyWithTaggedDependency::class);
-        $this->assertSame('web', $dependency->dependency->name);
+        static::assertSame('web', $dependency->dependency->name);
     }
 
     public function test_autowired_tagged_dependency_exception(): void
@@ -286,7 +286,7 @@ final class ContainerTest extends TestCase
         try {
             $container->get(DependencyWithTaggedDependency::class);
         } catch (CannotResolveTaggedDependency $cannotResolveTaggedDependency) {
-            $this->assertStringContainsStringIgnoringLineEndings(
+            static::assertStringContainsStringIgnoringLineEndings(
                 <<<'TXT'
                 	┌── DependencyWithTaggedDependency::__construct(TaggedDependency $dependency)
                 	└── Tempest\Container\Tests\Fixtures\TaggedDependency
@@ -306,7 +306,7 @@ final class ContainerTest extends TestCase
 
         $b = $container->get(ClassWithSingletonAttribute::class);
 
-        $this->assertTrue($b->flag);
+        static::assertTrue($b->flag);
     }
 
     public function test_invoke_callable(): void
@@ -314,10 +314,10 @@ final class ContainerTest extends TestCase
         $container = new GenericContainer();
         $container->singleton(SingletonClass::class, fn () => new SingletonClass());
 
-        $this->assertEquals('foo', $container->invoke(InvokableClass::class));
-        $this->assertEquals('foobar', $container->invoke([new InvokableClass(), 'execute']));
-        $this->assertEquals('bar', $container->invoke(InvokableClassWithParameters::class, param: 'bar'));
-        $this->assertInstanceOf(ReflectionClass::class, $container->invoke(fn (SingletonClass $class) => new ReflectionClass($class)));
+        static::assertEquals('foo', $container->invoke(InvokableClass::class));
+        static::assertEquals('foobar', $container->invoke([new InvokableClass(), 'execute']));
+        static::assertEquals('bar', $container->invoke(InvokableClassWithParameters::class, param: 'bar'));
+        static::assertInstanceOf(ReflectionClass::class, $container->invoke(fn (SingletonClass $class) => new ReflectionClass($class)));
     }
 
     public function test_call_function_with_parameters(): void
@@ -330,7 +330,7 @@ final class ContainerTest extends TestCase
             prefix: 'My resolved class is ',
         );
 
-        $this->assertEquals('My resolved class is Tempest\Container\Tests\Fixtures\SingletonClass', $result);
+        static::assertEquals('My resolved class is Tempest\Container\Tests\Fixtures\SingletonClass', $result);
     }
 
     public function test_call_function_with_dependencies_and_parameters(): void
@@ -339,7 +339,7 @@ final class ContainerTest extends TestCase
 
         $result = $container->invoke(fn (string $param) => $param, param: 'foo');
 
-        $this->assertEquals('foo', $result);
+        static::assertEquals('foo', $result);
     }
 
     public function test_call_function_with_unresolvable_parameters(): void
@@ -367,7 +367,7 @@ final class ContainerTest extends TestCase
 
         $result = \Tempest\invoke(fn (SingletonClass $class) => $class::class);
 
-        $this->assertEquals(SingletonClass::class, $result);
+        static::assertEquals(SingletonClass::class, $result);
     }
 
     public function test_builtin_dependency_initializer(): void
@@ -380,9 +380,9 @@ final class ContainerTest extends TestCase
         /** @var DependencyWithBuiltinDependencies $a */
         $a = $container->get(DependencyWithBuiltinDependencies::class);
 
-        $this->assertSame('Hallo dependency!', $a->stringValue);
-        $this->assertSame(['hallo', 'array', 42], $a->arrayValue);
-        $this->assertTrue($a->boolValue);
+        static::assertSame('Hallo dependency!', $a->stringValue);
+        static::assertSame(['hallo', 'array', 42], $a->arrayValue);
+        static::assertTrue($a->boolValue);
     }
 
     public function test_inject(): void
@@ -392,7 +392,7 @@ final class ContainerTest extends TestCase
         /** @var InjectA $a */
         $a = $container->get(InjectA::class);
 
-        $this->assertInstanceOf(InjectB::class, $a->getB());
+        static::assertInstanceOf(InjectB::class, $a->getB());
     }
 
     public function test_unregister(): void
@@ -401,7 +401,7 @@ final class ContainerTest extends TestCase
 
         $container->register(InterfaceA::class, fn () => new ImplementsInterfaceA());
 
-        $this->assertInstanceOf(ImplementsInterfaceA::class, $container->get(InterfaceA::class));
+        static::assertInstanceOf(ImplementsInterfaceA::class, $container->get(InterfaceA::class));
 
         $container->unregister(InterfaceA::class);
 
@@ -416,8 +416,8 @@ final class ContainerTest extends TestCase
 
         $container->singleton(InterfaceA::class, $instance = new ImplementsInterfaceA());
 
-        $this->assertInstanceOf(ImplementsInterfaceA::class, $container->get(InterfaceA::class));
-        $this->assertSame($instance, $container->get(InterfaceA::class));
+        static::assertInstanceOf(ImplementsInterfaceA::class, $container->get(InterfaceA::class));
+        static::assertSame($instance, $container->get(InterfaceA::class));
 
         $container->unregister(InterfaceA::class);
 
@@ -430,29 +430,29 @@ final class ContainerTest extends TestCase
     {
         $container = new GenericContainer();
 
-        $this->assertFalse($container->has(InterfaceA::class));
+        static::assertFalse($container->has(InterfaceA::class));
 
         $container->register(InterfaceA::class, fn () => new ImplementsInterfaceA());
 
-        $this->assertTrue($container->has(InterfaceA::class));
+        static::assertTrue($container->has(InterfaceA::class));
     }
 
     public function test_has_singleton(): void
     {
         $container = new GenericContainer();
 
-        $this->assertFalse($container->has(InterfaceA::class));
+        static::assertFalse($container->has(InterfaceA::class));
 
         $container->singleton(InterfaceA::class, new ImplementsInterfaceA());
 
-        $this->assertTrue($container->has(InterfaceA::class));
+        static::assertTrue($container->has(InterfaceA::class));
     }
 
     public function test_has_tagged_singleton(): void
     {
         $container = new GenericContainer();
 
-        $this->assertFalse($container->has(TaggedDependency::class, 'web'));
+        static::assertFalse($container->has(TaggedDependency::class, 'web'));
 
         $container->singleton(
             TaggedDependency::class,
@@ -460,6 +460,6 @@ final class ContainerTest extends TestCase
             tag: 'web',
         );
 
-        $this->assertTrue($container->has(TaggedDependency::class, 'web'));
+        static::assertTrue($container->has(TaggedDependency::class, 'web'));
     }
 }

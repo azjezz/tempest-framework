@@ -16,13 +16,13 @@ final class OddRuleTest extends TestCase
     {
         $rule = new Odd();
 
-        $this->assertFalse($rule->isValid(4));
-        $this->assertFalse($rule->isValid(2));
-        $this->assertFalse($rule->isValid(0));
+        static::assertFalse($rule->isValid(4));
+        static::assertFalse($rule->isValid(2));
+        static::assertFalse($rule->isValid(0));
 
-        $this->assertTrue($rule->isValid(1));
-        $this->assertTrue($rule->isValid(3));
+        static::assertTrue($rule->isValid(1));
+        static::assertTrue($rule->isValid(3));
 
-        $this->assertSame('Value should be an odd number', $rule->message());
+        static::assertSame('Value should be an odd number', $rule->message());
     }
 }

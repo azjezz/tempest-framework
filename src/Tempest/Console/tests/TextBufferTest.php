@@ -20,8 +20,8 @@ final class TextBufferTest extends TestCase
     {
         $buffer = new TextBuffer($text);
 
-        $this->assertSame($text, $buffer->text);
-        $this->assertSame($cursor, $buffer->cursor);
+        static::assertSame($text, $buffer->text);
+        static::assertSame($cursor, $buffer->cursor);
     }
 
     #[TestWith(['Hello, world!', 'Bye, cruel world!'])]
@@ -34,7 +34,7 @@ final class TextBufferTest extends TestCase
         $buffer = new TextBuffer($initialText);
         $buffer->setText($nextText);
 
-        $this->assertSame($expectedText ?? $nextText, $buffer->text);
+        static::assertSame($expectedText ?? $nextText, $buffer->text);
     }
 
     #[TestWith([5, 6, 'S', 'Leon Kennedy', 'Leon SKennedy'])]
@@ -48,8 +48,8 @@ final class TextBufferTest extends TestCase
         $buffer->cursor = $initialCursor;
         $buffer->input($input);
 
-        $this->assertSame($expectedText, $buffer->text);
-        $this->assertSame($expectedCursor, $buffer->cursor);
+        static::assertSame($expectedText, $buffer->text);
+        static::assertSame($expectedCursor, $buffer->cursor);
     }
 
     #[TestWith([11, 8, 'foo-bar-baz', 'foo-bar-'])]
@@ -68,8 +68,8 @@ final class TextBufferTest extends TestCase
         $buffer->cursor = $initialCursor;
         $buffer->deletePreviousWord();
 
-        $this->assertSame($expectedText, $buffer->text);
-        $this->assertSame($expectedCursor, $buffer->cursor);
+        static::assertSame($expectedText, $buffer->text);
+        static::assertSame($expectedCursor, $buffer->cursor);
     }
 
     #[TestWith([0, 0, 'foo-bar-baz', '-bar-baz'])]
@@ -90,8 +90,8 @@ final class TextBufferTest extends TestCase
         $buffer->cursor = $initialCursor;
         $buffer->deleteNextWord();
 
-        $this->assertSame($expectedText, $buffer->text);
-        $this->assertSame($expectedCursor, $buffer->cursor);
+        static::assertSame($expectedText, $buffer->text);
+        static::assertSame($expectedCursor, $buffer->cursor);
     }
 
     #[TestWith([0, 0, 'abc', 'bc'])]
@@ -107,8 +107,8 @@ final class TextBufferTest extends TestCase
         $buffer->cursor = $initialCursor;
         $buffer->deleteNextCharacter();
 
-        $this->assertSame($expectedText, $buffer->text);
-        $this->assertSame($expectedCursor, $buffer->cursor);
+        static::assertSame($expectedText, $buffer->text);
+        static::assertSame($expectedCursor, $buffer->cursor);
     }
 
     #[TestWith([0, 0, 'abc', 'abc'])]
@@ -124,8 +124,8 @@ final class TextBufferTest extends TestCase
         $buffer->cursor = $initialCursor;
         $buffer->deletePreviousCharacter();
 
-        $this->assertSame($expectedText, $buffer->text);
-        $this->assertSame($expectedCursor, $buffer->cursor);
+        static::assertSame($expectedText, $buffer->text);
+        static::assertSame($expectedCursor, $buffer->cursor);
     }
 
     #[Test]
@@ -134,7 +134,7 @@ final class TextBufferTest extends TestCase
         $buffer = new TextBuffer('Hello, world!');
         $buffer->moveCursorX(14);
         $buffer->moveCursorToStart();
-        $this->assertSame(0, $buffer->cursor);
+        static::assertSame(0, $buffer->cursor);
 
         $buffer = new TextBuffer(<<<TXT
         This is a line
@@ -143,7 +143,7 @@ final class TextBufferTest extends TestCase
         TXT);
         $buffer->moveCursorX(100);
         $buffer->moveCursorToStart();
-        $this->assertSame(0, $buffer->cursor);
+        static::assertSame(0, $buffer->cursor);
     }
 
     #[Test]
@@ -152,7 +152,7 @@ final class TextBufferTest extends TestCase
         $buffer = new TextBuffer('Hello, world!');
         $buffer->setCursorIndex(0);
         $buffer->moveCursorToEnd();
-        $this->assertSame(13, $buffer->cursor);
+        static::assertSame(13, $buffer->cursor);
 
         $buffer = new TextBuffer(<<<TXT
         This is a line
@@ -161,7 +161,7 @@ final class TextBufferTest extends TestCase
         TXT);
         $buffer->setCursorIndex(0);
         $buffer->moveCursorToEnd();
-        $this->assertSame(48, $buffer->cursor);
+        static::assertSame(48, $buffer->cursor);
     }
 
     #[Test]
@@ -170,7 +170,7 @@ final class TextBufferTest extends TestCase
         $buffer = new TextBuffer('Hello, world!');
         $buffer->setCursorIndex(14);
         $buffer->moveCursorToStartOfLine();
-        $this->assertSame(0, $buffer->cursor);
+        static::assertSame(0, $buffer->cursor);
     }
 
     #[Test]
@@ -192,7 +192,7 @@ final class TextBufferTest extends TestCase
 
         $buffer->setCursorIndex($initial);
         $buffer->moveCursorToStartOfLine();
-        $this->assertSame($expected, $buffer->cursor);
+        static::assertSame($expected, $buffer->cursor);
     }
 
     #[Test]
@@ -201,7 +201,7 @@ final class TextBufferTest extends TestCase
         $buffer = new TextBuffer('Hello, world!');
         $buffer->setCursorIndex(0);
         $buffer->moveCursorToEndOfLine();
-        $this->assertSame(13, $buffer->cursor);
+        static::assertSame(13, $buffer->cursor);
     }
 
     #[Test]
@@ -224,7 +224,7 @@ final class TextBufferTest extends TestCase
 
         $buffer->setCursorIndex($initial);
         $buffer->moveCursorToEndOfLine();
-        $this->assertSame($expected, $buffer->cursor);
+        static::assertSame($expected, $buffer->cursor);
     }
 
     #[Test]
@@ -241,7 +241,7 @@ final class TextBufferTest extends TestCase
 
         $buffer->cursor = $initialCursor;
         $buffer->moveCursorX($offsetX);
-        $this->assertSame($expectedPosition, $buffer->cursor);
+        static::assertSame($expectedPosition, $buffer->cursor);
     }
 
     #[Test]
@@ -284,8 +284,8 @@ final class TextBufferTest extends TestCase
 
         $point = $buffer->getRelativeCursorPosition();
 
-        $this->assertSame($expectedPoint[0], $point->x);
-        $this->assertSame($expectedPoint[1], $point->y);
+        static::assertSame($expectedPoint[0], $point->x);
+        static::assertSame($expectedPoint[1], $point->y);
     }
 
     #[TestWith(["different\nline\nlength", 5, 0, [0, 0]])]
@@ -300,7 +300,7 @@ final class TextBufferTest extends TestCase
 
         $point = $buffer->getRelativeCursorPosition($maxLineWidth);
 
-        $this->assertSame($expectedPoint[0], $point->x);
-        $this->assertSame($expectedPoint[1], $point->y);
+        static::assertSame($expectedPoint[0], $point->x);
+        static::assertSame($expectedPoint[1], $point->y);
     }
 }

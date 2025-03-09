@@ -16,12 +16,12 @@ final class UppercaseTest extends TestCase
     {
         $rule = new Uppercase();
 
-        $this->assertSame('Value should be an uppercase string', $rule->message());
+        static::assertSame('Value should be an uppercase string', $rule->message());
 
-        $this->assertTrue($rule->isValid('ABC'));
-        $this->assertTrue($rule->isValid('ÀBÇ'));
-        $this->assertFalse($rule->isValid('abc'));
-        $this->assertFalse($rule->isValid('àbç'));
-        $this->assertFalse($rule->isValid('AbC'));
+        static::assertTrue($rule->isValid('ABC'));
+        static::assertTrue($rule->isValid('ÀBÇ'));
+        static::assertFalse($rule->isValid('abc'));
+        static::assertFalse($rule->isValid('àbç'));
+        static::assertFalse($rule->isValid('AbC'));
     }
 }

@@ -16,16 +16,16 @@ final class RegexTest extends TestCase
     {
         $rule = new RegEx('/^[aA][bB]$/');
 
-        $this->assertSame(
+        static::assertSame(
             'The value must match the regular expression pattern: /^[aA][bB]$/',
             $rule->message(),
         );
 
-        $this->assertFalse($rule->isValid('cd'));
-        $this->assertFalse($rule->isValid('za'));
+        static::assertFalse($rule->isValid('cd'));
+        static::assertFalse($rule->isValid('za'));
 
-        $this->assertTrue($rule->isValid('ab'));
-        $this->assertTrue($rule->isValid('AB'));
-        $this->assertTrue($rule->isValid('Ab'));
+        static::assertTrue($rule->isValid('ab'));
+        static::assertTrue($rule->isValid('AB'));
+        static::assertTrue($rule->isValid('Ab'));
     }
 }

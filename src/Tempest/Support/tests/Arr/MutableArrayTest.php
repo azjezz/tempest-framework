@@ -16,12 +16,12 @@ final class MutableArrayTest extends TestCase
     {
         $collection = new MutableArray('a');
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('b')->toArray(),
             ['a', 'b'],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('b')->add('c')->toArray(),
             ['a', 'b', 'b', 'c'],
         );
@@ -31,37 +31,37 @@ final class MutableArrayTest extends TestCase
     {
         $collection = new MutableArray();
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(1)->toArray(),
             [1],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(2)->toArray(),
             [1, 2],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add('')->toArray(),
             [1, 2, ''],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(null)->toArray(),
             [1, 2, '', null],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add(false)->toArray(),
             [1, 2, '', null, false],
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->add([])->toArray(),
             [1, 2, '', null, false, []],
         );
 
-        $this->assertSame(
+        static::assertSame(
             actual: $collection->add('name')->toArray(),
             expected: [1, 2, '', null, false, [], 'name'],
         );
@@ -71,12 +71,12 @@ final class MutableArrayTest extends TestCase
     {
         $collection = new MutableArray([1, 2, 3]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(1)->toArray(),
             [0 => 1, 2 => 3],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove([0, 2])->toArray(),
             [],
         );
@@ -90,12 +90,12 @@ final class MutableArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove('first_name')->toArray(),
             ['last_name' => 'Doe', 'age' => 42],
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             $collection->remove(['last_name', 'age'])->toArray(),
             [],
         );
@@ -109,12 +109,12 @@ final class MutableArrayTest extends TestCase
             'age' => 42,
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $collection->pull('first_name'),
             'John',
         );
 
-        $this->assertSame(
+        static::assertSame(
             $collection->toArray(),
             ['last_name' => 'Doe', 'age' => 42],
         );

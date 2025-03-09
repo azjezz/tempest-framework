@@ -58,8 +58,8 @@ final class ValidatorTest extends TestCase
         } catch (InvalidValueException $invalidValueException) {
             $messages = arr($invalidValueException->failingRules)->map(fn (Rule $rule) => $rule->message());
 
-            $this->assertCount(1, $messages);
-            $this->assertContains('I expected b', $messages);
+            static::assertCount(1, $messages);
+            static::assertContains('I expected b', $messages);
         }
     }
 

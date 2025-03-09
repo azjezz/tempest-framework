@@ -21,30 +21,30 @@ final class WrapTest extends TestCase
     {
         $input = ['a' => 1, 'b' => 2, 'c' => 3];
 
-        $this->assertSame($input, wrap($input));
+        static::assertSame($input, wrap($input));
     }
 
     public function test_null_returns_empty_array(): void
     {
-        $this->assertEquals([], wrap(null));
+        static::assertEquals([], wrap(null));
     }
 
     public function test_scalar_values_are_wrapped_in_array(): void
     {
         $foo = new ImmutableString('foo');
-        $this->assertSame([$foo], wrap($foo));
+        static::assertSame([$foo], wrap($foo));
 
-        $this->assertEquals([42], wrap(42));
-        $this->assertEquals(['test'], wrap('test'));
-        $this->assertEquals([true], wrap(true));
-        $this->assertEquals([3.14], wrap(3.14));
+        static::assertEquals([42], wrap(42));
+        static::assertEquals(['test'], wrap('test'));
+        static::assertEquals([true], wrap(true));
+        static::assertEquals([3.14], wrap(3.14));
     }
 
     public function test_traversable_objects_are_not_converted_to_arrays(): void
     {
         $iterator = new ArrayIterator(['a' => 1, 'b' => 2, 'c' => 3]);
 
-        $this->assertEquals([$iterator], wrap($iterator));
+        static::assertEquals([$iterator], wrap($iterator));
     }
 
     public function test_array_access_and_countable_objects_are_not_converted_to_arrays(): void
@@ -91,6 +91,6 @@ final class WrapTest extends TestCase
             }
         };
 
-        $this->assertEquals([$object], wrap($object));
+        static::assertEquals([$object], wrap($object));
     }
 }

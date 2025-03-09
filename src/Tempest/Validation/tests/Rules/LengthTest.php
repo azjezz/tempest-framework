@@ -17,7 +17,7 @@ final class LengthTest extends TestCase
     #[DataProvider('provide_length_cases')]
     public function test_length(Length $rule, string $stringToTest, bool $expected): void
     {
-        $this->assertEquals($expected, $rule->isValid($stringToTest));
+        static::assertEquals($expected, $rule->isValid($stringToTest));
     }
 
     #[DataProvider('provide_returns_the_proper_message_based_on_min_and_max_arguments_cases')]
@@ -25,7 +25,7 @@ final class LengthTest extends TestCase
         Length $rule,
         string $expectedMessage,
     ): void {
-        $this->assertEquals($expectedMessage, $rule->message());
+        static::assertEquals($expectedMessage, $rule->message());
     }
 
     public function test_throws_an_exception_if_neither_min_or_max_is_supplied(): void

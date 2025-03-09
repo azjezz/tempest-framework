@@ -32,9 +32,9 @@ final class HasOneRelationTest extends TestCase
         $autoResolvedRelation = $definition->getRelations('relatedModel');
         $namedRelation = $definition->getRelations('otherRelatedModel');
 
-        $this->assertCount(1, $autoResolvedRelation);
-        $this->assertCount(1, $namedRelation);
-        $this->assertSame('has_one_parent_model.relatedModel', $autoResolvedRelation[0]->getRelationName());
-        $this->assertSame('has_one_parent_model.otherRelatedModel', $namedRelation[0]->getRelationName());
+        static::assertCount(1, $autoResolvedRelation);
+        static::assertCount(1, $namedRelation);
+        static::assertSame('has_one_parent_model.relatedModel', $autoResolvedRelation[0]->getRelationName());
+        static::assertSame('has_one_parent_model.otherRelatedModel', $namedRelation[0]->getRelationName());
     }
 }

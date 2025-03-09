@@ -19,11 +19,11 @@ final class BeforeDateTest extends TestCase
         $date = new DateTimeImmutable();
         $rule = new BeforeDate($date);
 
-        $this->assertSame('Value must be a date before ' . $date->format('Y-m-d H:i:s'), $rule->message());
+        static::assertSame('Value must be a date before ' . $date->format('Y-m-d H:i:s'), $rule->message());
 
-        $this->assertFalse($rule->isValid($date->modify('+1 minute')));
-        $this->assertTrue($rule->isValid($date->modify('-1 second')));
-        $this->assertTrue($rule->isValid($date));
+        static::assertFalse($rule->isValid($date->modify('+1 minute')));
+        static::assertTrue($rule->isValid($date->modify('-1 second')));
+        static::assertTrue($rule->isValid($date));
     }
 
     public function test_it_works_with_inclusive_param(): void
@@ -31,11 +31,11 @@ final class BeforeDateTest extends TestCase
         $date = new DateTimeImmutable();
         $rule = new BeforeDate($date, inclusive: true);
 
-        $this->assertSame('Value must be a date before or equal to ' . $date->format('Y-m-d H:i:s'), $rule->message());
+        static::assertSame('Value must be a date before or equal to ' . $date->format('Y-m-d H:i:s'), $rule->message());
 
-        $this->assertFalse($rule->isValid($date->modify('+1 minute')));
-        $this->assertTrue($rule->isValid($date->modify('-1 second')));
-        $this->assertFalse($rule->isValid($date));
+        static::assertFalse($rule->isValid($date->modify('+1 minute')));
+        static::assertTrue($rule->isValid($date->modify('-1 second')));
+        static::assertFalse($rule->isValid($date));
     }
 
     public function test_it_works_with_timezones(): void
@@ -48,8 +48,8 @@ final class BeforeDateTest extends TestCase
 
         // when we validate the date, it doesn't matter that timezones are different,
         // it'll compare the UTC timestamps
-        $this->assertTrue($utcDate->format('Y-m-d H:i:s') > $date->format('Y-m-d H:i:s'));
-        $this->assertFalse($rule->isValid($utcDate->modify('+1 minute')));
-        $this->assertTrue($rule->isValid($utcDate->modify('-1 minute')));
+        static::assertTrue($utcDate->format('Y-m-d H:i:s') > $date->format('Y-m-d H:i:s'));
+        static::assertFalse($rule->isValid($utcDate->modify('+1 minute')));
+        static::assertTrue($rule->isValid($utcDate->modify('-1 minute')));
     }
 }

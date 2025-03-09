@@ -16,12 +16,12 @@ final class LowercaseTest extends TestCase
     {
         $rule = new Lowercase();
 
-        $this->assertSame('Value should be a lowercase string', $rule->message());
+        static::assertSame('Value should be a lowercase string', $rule->message());
 
-        $this->assertTrue($rule->isValid('abc'));
-        $this->assertTrue($rule->isValid('àbç'));
-        $this->assertFalse($rule->isValid('ABC'));
-        $this->assertFalse($rule->isValid('ÀBÇ'));
-        $this->assertFalse($rule->isValid('AbC'));
+        static::assertTrue($rule->isValid('abc'));
+        static::assertTrue($rule->isValid('àbç'));
+        static::assertFalse($rule->isValid('ABC'));
+        static::assertFalse($rule->isValid('ÀBÇ'));
+        static::assertFalse($rule->isValid('AbC'));
     }
 }

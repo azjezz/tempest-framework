@@ -24,7 +24,7 @@ final class CircularDependencyExceptionTest extends TestCase
 
             $container->get(CircularA::class);
         } catch (CircularDependencyException $circularDependencyException) {
-            $this->assertStringContainsString(
+            static::assertStringContainsString(
                 'Cannot autowire ' . CircularA::class . '::__construct because it has a circular dependency on ' . CircularA::class . '::__construct',
                 $circularDependencyException->getMessage(),
             );
@@ -36,9 +36,9 @@ final class CircularDependencyExceptionTest extends TestCase
             	└───────────────────────────────────────────────────▒▒▒▒▒▒▒▒▒▒▒▒
             TXT;
 
-            $this->assertStringContainsStringIgnoringLineEndings($expected, $circularDependencyException->getMessage());
+            static::assertStringContainsStringIgnoringLineEndings($expected, $circularDependencyException->getMessage());
 
-            $this->assertStringContainsString('CircularDependencyExceptionTest.php:', $circularDependencyException->getMessage());
+            static::assertStringContainsString('CircularDependencyExceptionTest.php:', $circularDependencyException->getMessage());
 
             throw $circularDependencyException;
         }
@@ -53,7 +53,7 @@ final class CircularDependencyExceptionTest extends TestCase
 
             $container->get(CircularZ::class);
         } catch (CircularDependencyException $circularDependencyException) {
-            $this->assertStringContainsString(
+            static::assertStringContainsString(
                 'Cannot autowire ' . CircularZ::class . '::__construct because it has a circular dependency on ' . CircularA::class . '::__construct:',
                 $circularDependencyException->getMessage(),
             );
@@ -66,7 +66,7 @@ final class CircularDependencyExceptionTest extends TestCase
             	└───────────────────────────────────────────────────▒▒▒▒▒▒▒▒▒▒▒▒
             TXT;
 
-            $this->assertStringContainsStringIgnoringLineEndings($expected, $circularDependencyException->getMessage());
+            static::assertStringContainsStringIgnoringLineEndings($expected, $circularDependencyException->getMessage());
 
             throw $circularDependencyException;
         }

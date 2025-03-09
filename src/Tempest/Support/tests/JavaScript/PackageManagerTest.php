@@ -22,7 +22,7 @@ final class PackageManagerTest extends TestCase
     #[TestWith(['empty', null])]
     public function test_can_detect_package_manager(string $fixture, ?PackageManager $expectedPackageManager): void
     {
-        $this->assertSame(
+        static::assertSame(
             expected: $expectedPackageManager,
             actual: PackageManager::detect(cwd: __DIR__ . "/Fixtures/{$fixture}"),
         );

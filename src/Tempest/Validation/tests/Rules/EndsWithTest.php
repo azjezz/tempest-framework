@@ -16,11 +16,11 @@ final class EndsWithTest extends TestCase
     {
         $rule = new EndsWith(needle: 'ab');
 
-        $this->assertSame('Value should end with ab', $rule->message());
+        static::assertSame('Value should end with ab', $rule->message());
 
-        $this->assertTrue($rule->isValid('ab'));
-        $this->assertTrue($rule->isValid('cab'));
-        $this->assertFalse($rule->isValid('b'));
-        $this->assertFalse($rule->isValid('3434'));
+        static::assertTrue($rule->isValid('ab'));
+        static::assertTrue($rule->isValid('cab'));
+        static::assertFalse($rule->isValid('b'));
+        static::assertFalse($rule->isValid('3434'));
     }
 }

@@ -38,7 +38,7 @@ final class GenericDatabaseTest extends TestCase
             return true;
         });
 
-        $this->assertTrue($result);
+        static::assertTrue($result);
     }
 
     public function test_it_rolls_back_transactions_on_failure(): void
@@ -64,6 +64,6 @@ final class GenericDatabaseTest extends TestCase
             throw new Exception();
         });
 
-        $this->assertFalse($result);
+        static::assertFalse($result);
     }
 }

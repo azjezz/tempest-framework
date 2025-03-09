@@ -16,13 +16,13 @@ final class NotInTest extends TestCase
     {
         $rule = new NotIn([4, 2, 0]);
 
-        $this->assertFalse($rule->isValid(4));
-        $this->assertFalse($rule->isValid(2));
-        $this->assertFalse($rule->isValid(0));
+        static::assertFalse($rule->isValid(4));
+        static::assertFalse($rule->isValid(2));
+        static::assertFalse($rule->isValid(0));
 
-        $this->assertTrue($rule->isValid(1));
-        $this->assertTrue($rule->isValid(3));
+        static::assertTrue($rule->isValid(1));
+        static::assertTrue($rule->isValid(3));
 
-        $this->assertSame('Value cannot be any of: 4, 2, 0', $rule->message());
+        static::assertSame('Value cannot be any of: 4, 2, 0', $rule->message());
     }
 }

@@ -16,23 +16,23 @@ final class BooleanTest extends TestCase
     {
         $rule = new Boolean();
 
-        $this->assertTrue($rule->isValid(true));
-        $this->assertTrue($rule->isValid('true'));
-        $this->assertTrue($rule->isValid(1));
-        $this->assertTrue($rule->isValid('1'));
-        $this->assertTrue($rule->isValid(false));
-        $this->assertTrue($rule->isValid('false'));
-        $this->assertTrue($rule->isValid(0));
-        $this->assertTrue($rule->isValid('0'));
-        $this->assertFalse($rule->isValid(5));
-        $this->assertFalse($rule->isValid(2.5));
-        $this->assertFalse($rule->isValid('string'));
+        static::assertTrue($rule->isValid(true));
+        static::assertTrue($rule->isValid('true'));
+        static::assertTrue($rule->isValid(1));
+        static::assertTrue($rule->isValid('1'));
+        static::assertTrue($rule->isValid(false));
+        static::assertTrue($rule->isValid('false'));
+        static::assertTrue($rule->isValid(0));
+        static::assertTrue($rule->isValid('0'));
+        static::assertFalse($rule->isValid(5));
+        static::assertFalse($rule->isValid(2.5));
+        static::assertFalse($rule->isValid('string'));
     }
 
     public function test_boolean_message(): void
     {
         $rule = new Boolean();
 
-        $this->assertSame('Value should represent a boolean value', $rule->message());
+        static::assertSame('Value should represent a boolean value', $rule->message());
     }
 }

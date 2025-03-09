@@ -18,6 +18,7 @@ final class RouteConfiguratorTest extends TestCase
 {
     private RouteConfigurator $subject;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,7 +28,7 @@ final class RouteConfiguratorTest extends TestCase
 
     public function test_empty(): void
     {
-        $this->assertEquals(new RouteConfig(), $this->subject->toRouteConfig());
+        static::assertEquals(new RouteConfig(), $this->subject->toRouteConfig());
     }
 
     public function test_adding_static_routes(): void
@@ -49,7 +50,7 @@ final class RouteConfiguratorTest extends TestCase
 
         $config = $this->subject->toRouteConfig();
 
-        $this->assertEquals([
+        static::assertEquals([
             'GET' => [
                 '/1' => $routes[0],
                 '/1/' => $routes[0],
@@ -73,8 +74,8 @@ final class RouteConfiguratorTest extends TestCase
                 '/6/' => $routes[5],
             ],
         ], $config->staticRoutes);
-        $this->assertEquals([], $config->dynamicRoutes);
-        $this->assertEquals([], $config->matchingRegexes);
+        static::assertEquals([], $config->dynamicRoutes);
+        static::assertEquals([], $config->matchingRegexes);
     }
 
     public function test_adding_dynamic_routes(): void
@@ -96,8 +97,8 @@ final class RouteConfiguratorTest extends TestCase
 
         $config = $this->subject->toRouteConfig();
 
-        $this->assertEquals([], $config->staticRoutes);
-        $this->assertEquals([
+        static::assertEquals([], $config->staticRoutes);
+        static::assertEquals([
             'GET' => [
                 'b' => $routes[0],
                 'd' => $routes[2],
@@ -114,7 +115,7 @@ final class RouteConfiguratorTest extends TestCase
             ],
         ], $config->dynamicRoutes);
 
-        $this->assertEquals([
+        static::assertEquals([
             'GET' => new MatchingRegex([
                 '#^(?|/dynamic(?|/([^/]++)(?|\/?$(*MARK:b)|/view\/?$(*MARK:d)|/([^/]++)(?|/([^/]++)(?|/([^/]++)\/?$(*MARK:e))))))#',
             ]),

@@ -54,8 +54,8 @@ final class EventBusTest extends TestCase
 
         $eventBus->dispatch(new ItHappened());
 
-        $this->assertTrue(MyEventHandler::$itHappened);
-        $this->assertSame(1, MyEventBusMiddleware::$hits);
+        static::assertTrue(MyEventHandler::$itHappened);
+        static::assertSame(1, MyEventBusMiddleware::$hits);
     }
 
     public function test_middleware_is_only_triggered_once_per_event_dispatch(): void
@@ -83,7 +83,7 @@ final class EventBusTest extends TestCase
 
         $eventBus->dispatch(new ItHappened());
 
-        $this->assertSame(1, MyEventBusMiddleware::$hits);
+        static::assertSame(1, MyEventBusMiddleware::$hits);
     }
 
     public function test_closure_based_handlers(): void
@@ -112,8 +112,8 @@ final class EventBusTest extends TestCase
 
         $eventBus->dispatch(new ItHappened());
 
-        $this->assertSame('bar', $called);
-        $this->assertSame(1, MyEventBusMiddleware::$hits);
+        static::assertSame('bar', $called);
+        static::assertSame(1, MyEventBusMiddleware::$hits);
     }
 
     public function test_closure_based_handlers_using_listen_method(): void
@@ -129,7 +129,7 @@ final class EventBusTest extends TestCase
 
         $eventBus->dispatch('my-event');
 
-        $this->assertTrue($hasHappened);
+        static::assertTrue($hasHappened);
     }
 
     public function test_closure_based_handlers_using_function(): void
@@ -147,7 +147,7 @@ final class EventBusTest extends TestCase
 
         get(EventBus::class)->dispatch('my-event');
 
-        $this->assertTrue($hasHappened);
+        static::assertTrue($hasHappened);
     }
 
     public function test_interface_handlers(): void
@@ -171,6 +171,6 @@ final class EventBusTest extends TestCase
 
         $eventBus->dispatch(new EventInterfaceImplementation());
 
-        $this->assertTrue(EventInterfaceHandler::$itHappened);
+        static::assertTrue(EventInterfaceHandler::$itHappened);
     }
 }

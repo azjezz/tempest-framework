@@ -18,7 +18,7 @@ final class MockClockTest extends TestCase
         $time = new DateTimeImmutable('2024-09-11 13:54:23');
         $clock = new MockClock($time);
 
-        $this->assertEquals($time, $clock->now());
+        static::assertEquals($time, $clock->now());
     }
 
     public function test_mock_clock_defaults_to_now(): void
@@ -31,8 +31,8 @@ final class MockClockTest extends TestCase
         $clockDateTime = $clock->now();
         $afterDateTime = new DateTimeImmutable('now');
 
-        $this->assertGreaterThanOrEqual($beforeDateTime->getTimestamp(), $clockDateTime->getTimestamp());
-        $this->assertLessThanOrEqual($afterDateTime->getTimestamp(), $clockDateTime->getTimestamp());
+        static::assertGreaterThanOrEqual($beforeDateTime->getTimestamp(), $clockDateTime->getTimestamp());
+        static::assertLessThanOrEqual($afterDateTime->getTimestamp(), $clockDateTime->getTimestamp());
     }
 
     public function test_mock_clock_returns_the_time_we_want(): void
@@ -40,7 +40,7 @@ final class MockClockTest extends TestCase
         $time = new DateTimeImmutable('2024-09-11 13:54:23');
         $clock = new MockClock($time);
 
-        $this->assertEquals($time->getTimestamp(), $clock->time());
+        static::assertEquals($time->getTimestamp(), $clock->time());
     }
 
     public function test_mock_clock_sleeps_time(): void
@@ -51,7 +51,7 @@ final class MockClockTest extends TestCase
         $clock = new MockClock($oldTime);
         $clock->sleep(2);
 
-        $this->assertSame($expectedTime->getTimestamp(), $clock->time());
+        static::assertSame($expectedTime->getTimestamp(), $clock->time());
     }
 
     public function test_mock_clock_can_change_time(): void
@@ -63,12 +63,12 @@ final class MockClockTest extends TestCase
 
         $clock->changeTime(-2);
 
-        $this->assertEquals($subtractedTime, $clock->now());
-        $this->assertEquals($subtractedTime->getTimestamp(), $clock->time());
+        static::assertEquals($subtractedTime, $clock->now());
+        static::assertEquals($subtractedTime->getTimestamp(), $clock->time());
 
         $clock->changeTime(4);
 
-        $this->assertEquals($addedTime, $clock->now());
-        $this->assertEquals($addedTime->getTimestamp(), $clock->time());
+        static::assertEquals($addedTime, $clock->now());
+        static::assertEquals($addedTime->getTimestamp(), $clock->time());
     }
 }

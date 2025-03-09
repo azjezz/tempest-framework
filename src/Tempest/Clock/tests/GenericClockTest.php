@@ -24,8 +24,8 @@ final class GenericClockTest extends TestCase
         $clockDateTime = $clock->now();
         $dateTimeAfter = new DateTimeImmutable('now');
 
-        $this->assertGreaterThanOrEqual($dateTimeBefore->getTimestamp(), $clockDateTime->getTimestamp());
-        $this->assertLessThanOrEqual($dateTimeAfter->getTimestamp(), $clockDateTime->getTimestamp());
+        static::assertGreaterThanOrEqual($dateTimeBefore->getTimestamp(), $clockDateTime->getTimestamp());
+        static::assertLessThanOrEqual($dateTimeAfter->getTimestamp(), $clockDateTime->getTimestamp());
     }
 
     public function test_that_generic_clock_returns_the_current_time(): void
@@ -39,8 +39,8 @@ final class GenericClockTest extends TestCase
         $clockTime = $clock->time();
         $timeAfter = hrtime(true);
 
-        $this->assertGreaterThanOrEqual($timeBefore, $clockTime);
-        $this->assertLessThanOrEqual($timeAfter, $clockTime);
+        static::assertGreaterThanOrEqual($timeBefore, $clockTime);
+        static::assertLessThanOrEqual($timeAfter, $clockTime);
     }
 
     public function test_that_generic_clock_sleeps(): void
@@ -51,6 +51,6 @@ final class GenericClockTest extends TestCase
 
         $timeAfter = time();
 
-        $this->assertGreaterThanOrEqual($timeBefore + 1, $timeAfter);
+        static::assertGreaterThanOrEqual($timeBefore + 1, $timeAfter);
     }
 }

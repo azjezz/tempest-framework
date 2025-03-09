@@ -19,7 +19,7 @@ final class RoutingTreeTest extends TestCase
     public function test_empty_tree(): void
     {
         $subject = new RoutingTree();
-        $this->assertEquals([], $subject->toMatchingRegexes());
+        static::assertEquals([], $subject->toMatchingRegexes());
     }
 
     public function test_add_throws_on_duplicated_routes(): void
@@ -45,7 +45,7 @@ final class RoutingTreeTest extends TestCase
         $subject->add($routeBuilder->withUri('/{greeting}/{name}')->asMarkedRoute('d'));
         $subject->add($routeBuilder->withUri('/{greeting}/brent')->asMarkedRoute('e'));
 
-        $this->assertEquals([
+        static::assertEquals([
             'GET' => new MatchingRegex([
                 '#^(?|\/?$(*MARK:a)|/([^/]++)(?|/brent\/?$(*MARK:e)|/hello(?|/brent\/?$(*MARK:c)|/([^/]++)\/?$(*MARK:b))|/([^/]++)\/?$(*MARK:d)))#',
             ]),
@@ -67,10 +67,10 @@ final class RoutingTreeTest extends TestCase
         }
 
         $matchingRegexes = $subject->toMatchingRegexes()['GET'];
-        $this->assertGreaterThan(1, count($matchingRegexes->patterns));
+        static::assertGreaterThan(1, count($matchingRegexes->patterns));
 
-        $this->assertNotNull($matchingRegexes->match('/test/0/route_0'));
-        $this->assertNotNull($matchingRegexes->match('/test/1000/route_1000'));
+        static::assertNotNull($matchingRegexes->match('/test/0/route_0'));
+        static::assertNotNull($matchingRegexes->match('/test/1000/route_1000'));
     }
 
     public function test_multiple_http_methods(): void
@@ -81,7 +81,7 @@ final class RoutingTreeTest extends TestCase
         $subject->add($routeBuilder->asMarkedRoute('a'));
         $subject->add($routeBuilder->withMethod(Method::POST)->asMarkedRoute('b'));
 
-        $this->assertEquals([
+        static::assertEquals([
             'GET' => new MatchingRegex(['#^\/?$(*MARK:a)#']),
             'POST' => new MatchingRegex(['#^\/?$(*MARK:b)#']),
         ], $subject->toMatchingRegexes());

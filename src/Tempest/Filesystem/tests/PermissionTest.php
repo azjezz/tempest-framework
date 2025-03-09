@@ -20,7 +20,7 @@ final class PermissionTest extends TestCase
             $actual = $actual->value;
         }
 
-        $this->assertSame(decoct($expected), decoct($actual));
+        static::assertSame(decoct($expected), decoct($actual));
     }
 
     public function test_combining_permissions(): void
@@ -32,7 +32,7 @@ final class PermissionTest extends TestCase
             Permission::GROUP_READ,
         );
 
-        $this->assertSame(decoct(0o740), decoct($permissions));
+        static::assertSame(decoct(0o740), decoct($permissions));
     }
 
     public function test_permissions_with_other_permissions(): void
@@ -42,27 +42,27 @@ final class PermissionTest extends TestCase
             Permission::OWNER_EXECUTE,
         );
 
-        $this->assertSame(decoct(0o700), decoct($permissions));
+        static::assertSame(decoct(0o700), decoct($permissions));
     }
 
     public function test_permissions_without_other_permissions(): void
     {
         $permissions = Permission::OWNER_ALL->without(Permission::OWNER_READ);
 
-        $this->assertSame(decoct(0o300), decoct($permissions));
+        static::assertSame(decoct(0o300), decoct($permissions));
     }
 
     public function test_checking_whether_permission_has_other_permission(): void
     {
         $permissions = 0o755;
 
-        $this->assertFalse(Permission::has($permissions, Permission::GROUP_WRITE));
-        $this->assertTrue(Permission::has($permissions, Permission::GROUP_READ_EXECUTE));
+        static::assertFalse(Permission::has($permissions, Permission::GROUP_WRITE));
+        static::assertTrue(Permission::has($permissions, Permission::GROUP_READ_EXECUTE));
     }
 
     public function test_empty_allow_returns_zero(): void
     {
-        $this->assertSame(0, Permission::allow());
+        static::assertSame(0, Permission::allow());
     }
 
     public static function permissionDataProvider(): array

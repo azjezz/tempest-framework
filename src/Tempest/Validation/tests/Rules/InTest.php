@@ -16,13 +16,13 @@ final class InTest extends TestCase
     {
         $rule = new In([4, 2, 0]);
 
-        $this->assertTrue($rule->isValid(4));
-        $this->assertTrue($rule->isValid(2));
-        $this->assertTrue($rule->isValid(0));
+        static::assertTrue($rule->isValid(4));
+        static::assertTrue($rule->isValid(2));
+        static::assertTrue($rule->isValid(0));
 
-        $this->assertFalse($rule->isValid(1));
-        $this->assertFalse($rule->isValid(3));
+        static::assertFalse($rule->isValid(1));
+        static::assertFalse($rule->isValid(3));
 
-        $this->assertSame('Value should be one of: 4, 2, 0', $rule->message());
+        static::assertSame('Value should be one of: 4, 2, 0', $rule->message());
     }
 }

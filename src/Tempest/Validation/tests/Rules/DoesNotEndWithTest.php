@@ -18,9 +18,9 @@ final class DoesNotEndWithTest extends TestCase
     {
         $rule = new DoesNotEndWith($needle);
 
-        $this->assertSame('Value should not end with ' . $needle, $rule->message());
+        static::assertSame('Value should not end with ' . $needle, $rule->message());
 
-        $this->assertEquals($expected, $rule->isValid($stringToTest));
+        static::assertEquals($expected, $rule->isValid($stringToTest));
     }
 
     public static function provide_rule_cases(): iterable

@@ -19,6 +19,7 @@ final class ViewCachePoolTest extends TestCase
 
     private ViewCachePool $pool;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -28,6 +29,7 @@ final class ViewCachePoolTest extends TestCase
         );
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $directory = path(self::DIRECTORY);
@@ -49,8 +51,8 @@ final class ViewCachePoolTest extends TestCase
 
         $this->pool->save($item);
 
-        $this->assertFileExists(path(self::DIRECTORY, 'test.php')->toString());
-        $this->assertEquals('hi', file_get_contents(path(self::DIRECTORY, 'test.php')->toString()));
+        static::assertFileExists(path(self::DIRECTORY, 'test.php')->toString());
+        static::assertEquals('hi', file_get_contents(path(self::DIRECTORY, 'test.php')->toString()));
     }
 
     public function test_has_item(): void
@@ -60,26 +62,26 @@ final class ViewCachePoolTest extends TestCase
 
         $this->pool->save($item);
 
-        $this->assertTrue($this->pool->hasItem('test'));
-        $this->assertFalse($this->pool->hasItem('test-1'));
+        static::assertTrue($this->pool->hasItem('test'));
+        static::assertFalse($this->pool->hasItem('test-1'));
     }
 
     public function test_get_items(): void
     {
         $items = $this->pool->getItems(['a', 'b']);
 
-        $this->assertCount(2, $items);
+        static::assertCount(2, $items);
 
-        $this->assertFalse($items[0]->isHit());
-        $this->assertFalse($items[1]->isHit());
+        static::assertFalse($items[0]->isHit());
+        static::assertFalse($items[1]->isHit());
 
         $items[0]->set('hi');
         $this->pool->save($items[0]);
 
         $items = $this->pool->getItems(['a', 'b']);
 
-        $this->assertTrue($items[0]->isHit());
-        $this->assertFalse($items[1]->isHit());
+        static::assertTrue($items[0]->isHit());
+        static::assertFalse($items[1]->isHit());
     }
 
     public function test_delete_item(): void
@@ -90,7 +92,7 @@ final class ViewCachePoolTest extends TestCase
         $this->pool->save($item);
         $this->pool->deleteItem('test');
 
-        $this->assertFileDoesNotExist(path(self::DIRECTORY, 'test.php')->toString());
+        static::assertFileDoesNotExist(path(self::DIRECTORY, 'test.php')->toString());
     }
 
     public function test_delete_items(): void
@@ -103,13 +105,13 @@ final class ViewCachePoolTest extends TestCase
         $items[1]->set('hi');
         $this->pool->save($items[1]);
 
-        $this->assertFileExists(path(self::DIRECTORY, 'a.php')->toString());
-        $this->assertFileExists(path(self::DIRECTORY, 'b.php')->toString());
+        static::assertFileExists(path(self::DIRECTORY, 'a.php')->toString());
+        static::assertFileExists(path(self::DIRECTORY, 'b.php')->toString());
 
         $this->pool->deleteItems(['a', 'b']);
 
-        $this->assertFileDoesNotExist(path(self::DIRECTORY, 'a.php')->toString());
-        $this->assertFileDoesNotExist(path(self::DIRECTORY, 'b.php')->toString());
+        static::assertFileDoesNotExist(path(self::DIRECTORY, 'a.php')->toString());
+        static::assertFileDoesNotExist(path(self::DIRECTORY, 'b.php')->toString());
     }
 
     public function test_clear_pool(): void
@@ -120,8 +122,8 @@ final class ViewCachePoolTest extends TestCase
         $this->pool->save($item);
         $this->pool->clear();
 
-        $this->assertFileDoesNotExist(path(self::DIRECTORY, 'test.php')->toString());
-        $this->assertDirectoryDoesNotExist(path(self::DIRECTORY)->toString());
+        static::assertFileDoesNotExist(path(self::DIRECTORY, 'test.php')->toString());
+        static::assertDirectoryDoesNotExist(path(self::DIRECTORY)->toString());
     }
 
     public function test_save_deferred(): void

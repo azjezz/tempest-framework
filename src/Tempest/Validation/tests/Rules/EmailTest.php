@@ -16,8 +16,8 @@ final class EmailTest extends TestCase
     {
         $rule = new Email();
 
-        $this->assertSame('Value should be a valid email address', $rule->message());
-        $this->assertFalse($rule->isValid('this is not an email'));
-        $this->assertTrue($rule->isValid('jim.halpert@dundermifflinpaper.biz'));
+        static::assertSame('Value should be a valid email address', $rule->message());
+        static::assertFalse($rule->isValid('this is not an email'));
+        static::assertTrue($rule->isValid('jim.halpert@dundermifflinpaper.biz'));
     }
 }

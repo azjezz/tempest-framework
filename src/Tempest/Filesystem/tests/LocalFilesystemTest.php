@@ -34,7 +34,7 @@ final class LocalFilesystemTest extends TestCase
 
         $text = new LocalFilesystem()->read($filePath);
 
-        $this->assertSame('Hello world!', $text);
+        static::assertSame('Hello world!', $text);
     }
 
     public function test_exception_is_thrown_when_reading_a_file_that_doesnt_exist(): void
@@ -68,7 +68,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->write($filePath, 'Hello world!');
 
-        $this->assertStringEqualsFile($filePath, 'Hello world!');
+        static::assertStringEqualsFile($filePath, 'Hello world!');
 
         unlink($filePath);
     }
@@ -79,7 +79,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->write($filePath, 'Hello world!');
 
-        $this->assertStringEqualsFile($filePath, 'Hello world!');
+        static::assertStringEqualsFile($filePath, 'Hello world!');
 
         unlink($filePath);
         rmdir(__DIR__ . '/testing');
@@ -108,7 +108,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->append($filePath, 'Line 2' . PHP_EOL);
 
-        $this->assertStringEqualsFile($filePath, 'Line 1' . PHP_EOL . 'Line 2' . PHP_EOL);
+        static::assertStringEqualsFile($filePath, 'Line 1' . PHP_EOL . 'Line 2' . PHP_EOL);
     }
 
     public function test_exception_is_thrown_when_there_is_an_error_appending_to_a_file(): void
@@ -130,7 +130,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->delete($filePath);
 
-        $this->assertFileDoesNotExist($filePath);
+        static::assertFileDoesNotExist($filePath);
     }
 
     public function test_exception_is_thrown_when_there_is_an_error_deleting_a_file(): void
@@ -154,21 +154,21 @@ final class LocalFilesystemTest extends TestCase
         $directoryPath = vfsStream::url('root/test-directory');
         $filePath = vfsStream::url('root/test.txt');
 
-        $this->assertFalse($filesystem->isFile($directoryPath));
-        $this->assertTrue($filesystem->isFile($filePath));
+        static::assertFalse($filesystem->isFile($directoryPath));
+        static::assertTrue($filesystem->isFile($filePath));
     }
 
     public function test_checking_file_existence(): void
     {
         $filePath = vfsStream::url('root/some-file.txt');
 
-        $this->assertFalse(
+        static::assertFalse(
             new LocalFilesystem()->exists($filePath),
         );
 
         file_put_contents($filePath, 'Hello world!');
 
-        $this->assertTrue(
+        static::assertTrue(
             new LocalFilesystem()->exists($filePath),
         );
     }
@@ -180,7 +180,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->copy($filePath1, $filePath2);
 
-        $this->assertFileEquals($filePath2, $filePath1);
+        static::assertFileEquals($filePath2, $filePath1);
     }
 
     public function test_exception_is_thrown_if_source_file_doesnt_exist_when_copying(): void
@@ -214,8 +214,8 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->move($filePath1, $filePath2);
 
-        $this->assertFileDoesNotExist($filePath1);
-        $this->assertStringEqualsFile($filePath2, 'Hello world!');
+        static::assertFileDoesNotExist($filePath1);
+        static::assertStringEqualsFile($filePath2, 'Hello world!');
     }
 
     public function test_creating_a_directory(): void
@@ -224,7 +224,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->createDirectory($directoryPath);
 
-        $this->assertDirectoryExists($directoryPath);
+        static::assertDirectoryExists($directoryPath);
     }
 
     public function test_creating_a_directory_recursively(): void
@@ -233,7 +233,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->createDirectory($directoryPath);
 
-        $this->assertDirectoryExists($directoryPath);
+        static::assertDirectoryExists($directoryPath);
     }
 
     public function test_creating_a_directory_recursively_without_recursive_enabled_fails(): void
@@ -255,7 +255,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->ensureDirectoryExists($directoryPath);
 
-        $this->assertDirectoryExists($directoryPath);
+        static::assertDirectoryExists($directoryPath);
     }
 
     public function test_deleting_a_directory(): void
@@ -264,7 +264,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->deleteDirectory($directory);
 
-        $this->assertDirectoryDoesNotExist($directory);
+        static::assertDirectoryDoesNotExist($directory);
     }
 
     public function test_nothing_happens_when_deleting_a_directory_that_doesnt_exist(): void
@@ -273,7 +273,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->deleteDirectory($directory);
 
-        $this->assertDirectoryDoesNotExist($directory);
+        static::assertDirectoryDoesNotExist($directory);
     }
 
     public function test_an_exception_is_thrown_when_there_is_an_error_deleting_a_directory(): void
@@ -297,7 +297,7 @@ final class LocalFilesystemTest extends TestCase
 
         new LocalFilesystem()->deleteDirectory($directory);
 
-        $this->assertDirectoryDoesNotExist($directory);
+        static::assertDirectoryDoesNotExist($directory);
     }
 
     public function test_an_exception_is_thrown_when_attempting_to_delete_a_directory_with_contents_not_recursively(): void
@@ -316,11 +316,11 @@ final class LocalFilesystemTest extends TestCase
         $filesystem = new LocalFilesystem();
         $directory = vfsStream::url('root/test-directory/nested-test-directory');
 
-        $this->assertFalse($filesystem->isDirectory($directory));
+        static::assertFalse($filesystem->isDirectory($directory));
 
         $filesystem->createDirectory($directory);
 
-        $this->assertTrue($filesystem->isDirectory($directory));
+        static::assertTrue($filesystem->isDirectory($directory));
     }
 
     public function test_deleting_path(): void
@@ -333,10 +333,11 @@ final class LocalFilesystemTest extends TestCase
         $filesystem->delete($directory);
         $filesystem->delete($file);
 
-        $this->assertDirectoryDoesNotExist($directory);
-        $this->assertFileDoesNotExist($file);
+        static::assertDirectoryDoesNotExist($directory);
+        static::assertFileDoesNotExist($file);
     }
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

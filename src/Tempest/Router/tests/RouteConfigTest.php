@@ -34,6 +34,6 @@ final class RouteConfigTest extends TestCase
         /** @var RouteConfig $deserialized */
         $deserialized = unserialize($serialized);
 
-        $this->assertEquals($original, $deserialized);
+        static::assertEquals($original, $deserialized);
     }
 }

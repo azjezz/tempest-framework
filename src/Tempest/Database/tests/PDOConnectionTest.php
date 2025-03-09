@@ -54,8 +54,8 @@ final class PDOConnectionTest extends TestCase
         $connection = new PDOConnection(new SQLiteConfig(self::PATH));
         $connection->connect();
 
-        $this->assertTrue($connection->beginTransaction());
-        $this->assertTrue($connection->commit());
+        static::assertTrue($connection->beginTransaction());
+        static::assertTrue($connection->commit());
     }
 
     public function test_rollback(): void
@@ -63,8 +63,8 @@ final class PDOConnectionTest extends TestCase
         $connection = new PDOConnection(new SQLiteConfig(self::PATH));
         $connection->connect();
 
-        $this->assertTrue($connection->beginTransaction());
-        $this->assertTrue($connection->rollback());
+        static::assertTrue($connection->beginTransaction());
+        static::assertTrue($connection->rollback());
     }
 
     public function test_last_insert_id(): void
@@ -72,7 +72,7 @@ final class PDOConnectionTest extends TestCase
         $connection = new PDOConnection(new SQLiteConfig(self::PATH));
         $connection->connect();
 
-        $this->assertSame('0', $connection->lastInsertId());
+        static::assertSame('0', $connection->lastInsertId());
     }
 
     public function test_prepare(): void
@@ -80,6 +80,6 @@ final class PDOConnectionTest extends TestCase
         $connection = new PDOConnection(new SQLiteConfig(self::PATH));
         $connection->connect();
 
-        $this->assertNotFalse($connection->prepare('select 1'));
+        static::assertNotFalse($connection->prepare('select 1'));
     }
 }

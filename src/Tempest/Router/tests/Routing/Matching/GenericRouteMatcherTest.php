@@ -21,6 +21,7 @@ final class GenericRouteMatcherTest extends TestCase
 
     private GenericRouteMatcher $subject;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -63,9 +64,9 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertEquals([], $matchedRoute->params);
-        $this->assertFalse($matchedRoute->route->isDynamic);
-        $this->assertEquals('/static', $matchedRoute->route->uri);
+        static::assertEquals([], $matchedRoute->params);
+        static::assertFalse($matchedRoute->route->isDynamic);
+        static::assertEquals('/static', $matchedRoute->route->uri);
     }
 
     public function test_match_returns_null_on_unknown_route(): void
@@ -74,7 +75,7 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertNull($matchedRoute);
+        static::assertNull($matchedRoute);
     }
 
     public function test_match_returns_null_on_unconfigured_method(): void
@@ -83,7 +84,7 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertNull($matchedRoute);
+        static::assertNull($matchedRoute);
     }
 
     public function test_match_on_dynamic_route(): void
@@ -92,9 +93,9 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertEquals(['id' => '5'], $matchedRoute->params);
-        $this->assertTrue($matchedRoute->route->isDynamic);
-        $this->assertEquals('/dynamic/{id}', $matchedRoute->route->uri);
+        static::assertEquals(['id' => '5'], $matchedRoute->params);
+        static::assertTrue($matchedRoute->route->isDynamic);
+        static::assertEquals('/dynamic/{id}', $matchedRoute->route->uri);
     }
 
     public function test_match_on_dynamic_route_with_many_parameters(): void
@@ -103,8 +104,8 @@ final class GenericRouteMatcherTest extends TestCase
 
         $matchedRoute = $this->subject->match($request);
 
-        $this->assertEquals(['id' => '6', 'tag' => 'brendt', 'name' => 'brent'], $matchedRoute->params);
-        $this->assertTrue($matchedRoute->route->isDynamic);
-        $this->assertEquals('/dynamic/{id}/{tag}/{name}/{id}', $matchedRoute->route->uri);
+        static::assertEquals(['id' => '6', 'tag' => 'brendt', 'name' => 'brent'], $matchedRoute->params);
+        static::assertTrue($matchedRoute->route->isDynamic);
+        static::assertEquals('/dynamic/{id}/{tag}/{name}/{id}', $matchedRoute->route->uri);
     }
 }

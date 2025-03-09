@@ -23,7 +23,7 @@ final class CannotAutowireExceptionTest extends TestCase
 
             $container->get(AutowireA::class);
         } catch (CannotAutowireException $cannotAutowireException) {
-            $this->assertStringContainsString(
+            static::assertStringContainsString(
                 'Cannot autowire ' . AutowireA::class . '::__construct because string cannot be resolved',
                 $cannotAutowireException->getMessage(),
             );
@@ -35,8 +35,8 @@ final class CannotAutowireExceptionTest extends TestCase
             	                                                    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
             TXT;
 
-            $this->assertStringContainsStringIgnoringLineEndings($expected, $cannotAutowireException->getMessage());
-            $this->assertStringContainsString('CannotAutowireExceptionTest.php:24', $cannotAutowireException->getMessage());
+            static::assertStringContainsStringIgnoringLineEndings($expected, $cannotAutowireException->getMessage());
+            static::assertStringContainsString('CannotAutowireExceptionTest.php:24', $cannotAutowireException->getMessage());
 
             throw $cannotAutowireException;
         }

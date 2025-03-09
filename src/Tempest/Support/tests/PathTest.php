@@ -24,7 +24,7 @@ final class PathTest extends TestCase
         $output = path(...$paths)->toString();
 
         // Assert
-        $this->assertSame($expected, $output);
+        static::assertSame($expected, $output);
     }
 
     public static function paths(): Generator

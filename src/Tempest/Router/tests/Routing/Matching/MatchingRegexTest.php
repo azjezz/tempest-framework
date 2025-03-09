@@ -15,6 +15,7 @@ final class MatchingRegexTest extends TestCase
 {
     private MatchingRegex $subject;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,7 +31,7 @@ final class MatchingRegexTest extends TestCase
     {
         $subject = new MatchingRegex([]);
 
-        $this->assertNull($subject->match(''));
+        static::assertNull($subject->match(''));
     }
 
     #[TestWith(['a'])]
@@ -40,9 +41,9 @@ final class MatchingRegexTest extends TestCase
     {
         $match = $this->subject->match($expectedMatch);
 
-        $this->assertNotNull($match);
-        $this->assertEquals($expectedMatch, $match->mark);
-        $this->assertEquals($expectedMatch, $match->matches[1]);
+        static::assertNotNull($match);
+        static::assertEquals($expectedMatch, $match->mark);
+        static::assertEquals($expectedMatch, $match->matches[1]);
     }
 
     #[TestWith([''])]
@@ -51,6 +52,6 @@ final class MatchingRegexTest extends TestCase
     {
         $match = $this->subject->match($expectedNonMatch);
 
-        $this->assertNull($match);
+        static::assertNull($match);
     }
 }
